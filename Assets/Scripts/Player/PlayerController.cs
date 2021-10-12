@@ -17,11 +17,14 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float walkSpeed = 6.0f;
     [SerializeField][Range(0.0f, 0.5f)] private float moveSmoothTime = 0.05f;
     [SerializeField] float gravity = -13.0f;
-    [SerializeField] private float jumpForce;
-    [SerializeField] private float jumpMultiplier;
+    [SerializeField] private float jumpHeight;
 
+    [Header("Ground Check")]
+    [SerializeField] private Transform groundCheck;
+    [SerializeField] private float groundDistance = 0.4f;
+    [SerializeField] private LayerMask groundMask;
 
-    private bool isJumping;
+    public bool isGrounded;
 
     private float cameraPitch = 0f;
     private float velocityY = 0.0f;
@@ -46,8 +49,13 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         UpdateMouseLook();
+        Grounded();
         UpdateMovement();
-        JumpInput();
+    }
+    private void Grounded()
+    {
+        //Check every frame if the player stands on the ground
+        isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
     }
     private void UpdateMouseLook()
     {
@@ -64,30 +72,32 @@ public class PlayerController : MonoBehaviour
     }
     private void UpdateMovement()
     {
+
+        //Jump
+        if (Input.GetButtonDown("Jump") && isGrounded)
+        {
+            Debug.Log("Jump");
+            velocityY += Mathf.Sqrt(jumpHeight * -2f * gravity);
+        }
+
+        //Grounded
+        
+        if (isGrounded)
+            velocityY = 0.0f;
+        
+         velocityY += gravity * Time.deltaTime;
+
+
         Vector2 targetDir = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")); //Get Inputs
         targetDir.Normalize(); //Damit schräg laufen nicht schneller ist
 
         currentDir = Vector2.SmoothDamp(currentDir, targetDir, ref currentDirVelocity, moveSmoothTime); //Smooth movement change
 
-        if (controller.isGrounded)
-            velocityY = 0.0f;
 
-        velocityY += gravity * Time.deltaTime;
-
-        Vector3 velocity = (transform.forward * currentDir.y + transform.right * currentDir.x) * walkSpeed + Vector3.up * velocityY;
+        Vector3 velocity = (transform.forward * currentDir.y + transform.right * currentDir.x) * walkSpeed + (Vector3.up * velocityY);
 
         controller.Move(velocity * Time.deltaTime);
 
     }
-    private void JumpInput()
-    {
-        Debug.Log(controller.isGrounded);
-        if (Input.GetButtonDown("Jump") && controller.isGrounded)
-        {
-            isJumping = true;
-            controller.Move(Vector3.up * jumpForce * jumpMultiplier * Time.deltaTime);
-        }
-    }
-
   
 }
