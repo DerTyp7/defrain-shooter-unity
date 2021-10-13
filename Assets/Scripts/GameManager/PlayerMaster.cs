@@ -5,20 +5,51 @@ using UnityEngine;
 JOIN
 1. Wenn ein Spieler joined wird sichergestellt, dass er nicht in der Liste ist (fürs error handling).
 2. Dann wird er in die Liste "Players" eingetragen.
+3. Player bekommt einen Eintrag in die Health-Liste (Der Schlüssel ist hier, dass der Index bei beiden Listen für den gleichen Spieler stehen)
 
 LEAVE
 1. Index von dem Spieler, in der Liste, wird gesucht
 2. Spieler wird aus der Liste entfernt
+3. Player wird aus der Health liste ausgetragen
+
+
+HEALTH
+ - Set Health of a player
+ - Subtract Health from a player
+ - Add Health to a player
+
+DEAD
+ - Player Dies
+ - Another Player gets a kill
 
 */
 public class PlayerMaster : MonoBehaviour
 {
     [SerializeField] private List<GameObject> Players = new List<GameObject>(); //Contains All Players which are currently connected/in-game
     [SerializeField] private List<int> Health = new List<int>();
+    [SerializeField] private int defaultHp = 100;
+
+    //JUST FOR DEBUG
+    [SerializeField] private GameObject TestPlayer;
+
+    private void Update()
+    {
+        //JUST FOR DEBUG
+        /*Debug.Log(GetHealthOfPlayer(TestPlayer));
+        SubstractHealthFromPlayer(TestPlayer, 1);*/
+    }
+
 
     private void Start()
     {
         Players.AddRange(GameObject.FindGameObjectsWithTag("Player")); //Add All Player-GameObjects into a List
+
+        //Init Health List
+        foreach(GameObject player in Players)
+        {
+            Health.Add(defaultHp);
+        }
+
     }
 
     //Join
@@ -28,6 +59,7 @@ public class PlayerMaster : MonoBehaviour
         if (!Players.Contains(player)) //If the Player is NOT in the "Players-List" (For Error Handling)
         {
             Players.Add(player); //Add New Player To List
+            Health.Add(defaultHp); //Add New Health to the END of the list
             Debug.Log("Player added to list"); //Feedback
         }
         else
@@ -43,10 +75,52 @@ public class PlayerMaster : MonoBehaviour
         if (Players.Contains(player))//If the Player IS in the "Players-List" (For Error Handling)
         {
             Players.Remove(player); //Remove the Player from List
+            Health.Remove(Players.IndexOf(player)); //Remove the specific Health of the Player
         }
         else
         {
             Debug.LogError("Player not found in Players-list"); //Error, because the Player is NOT in the list -> !critical Anomaly!
         }
+    }
+
+    //Health
+    private void CheckIfPlayerAlive(GameObject player)//Is a Player dead?
+    {
+        if (GetHealthOfPlayer(player) <= 0)
+        {
+            Death(player);
+        }
+    }
+    public int GetHealthOfPlayer(GameObject player) //Get The Health value of a player
+    {
+        return Health[Players.IndexOf(player)];
+    }
+    public void SetHealthOfPlayer(GameObject player, int value) //z.B. wenn ein spieler getroffen wird und dmg bekommt
+    {
+        Health[Players.IndexOf(player)] = value;
+        CheckIfPlayerAlive(player);
+    }
+
+    public void SubstractHealthFromPlayer(GameObject player, int value) //z.B. wenn ein spieler getroffen wird und dmg bekommt
+    {
+        Health[Players.IndexOf(player)] -= value;
+        CheckIfPlayerAlive(player);
+    }
+
+    public void AddHealthToPlayer(GameObject player, int value) //z.B. wenn ein spieler geheilt wird
+    {
+        Health[Players.IndexOf(player)] += value;
+    }
+
+    //Death
+    public void Death(GameObject deadPlayer, GameObject killerPlayer = null) //Player dies and and MAYBE another player gets a kill
+    {
+        if(killerPlayer != null)
+        {
+            //Add kill to killer
+        }
+
+        //Add Death to deadPlayer
+        //Deactivate deadPlayer
     }
 }
