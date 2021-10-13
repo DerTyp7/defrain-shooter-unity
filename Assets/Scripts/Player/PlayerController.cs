@@ -72,6 +72,10 @@ public class PlayerController : MonoBehaviour
     }
     private void UpdateMovement()
     {
+        //Grounded
+        velocityY += gravity * Time.deltaTime;
+        if (isGrounded && velocityY < 0)
+            velocityY = 0.0f;
 
         //Jump
         if (Input.GetButtonDown("Jump") && isGrounded)
@@ -79,14 +83,6 @@ public class PlayerController : MonoBehaviour
             Debug.Log("Jump");
             velocityY += Mathf.Sqrt(jumpHeight * -2f * gravity);
         }
-
-        //Grounded
-        
-        if (isGrounded)
-            velocityY = 0.0f;
-        
-         velocityY += gravity * Time.deltaTime;
-
 
         Vector2 targetDir = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")); //Get Inputs
         targetDir.Normalize(); //Damit schräg laufen nicht schneller ist
