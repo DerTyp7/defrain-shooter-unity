@@ -331,7 +331,7 @@ GameObject:
   - component: {fileID: 340159598}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -993,6 +993,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb5ee5f3d2923ee4faeaf50ed35ab2f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Players: []
+  Health: 
 --- !u!1 &1111479331 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2550463727306718371, guid: 823e8b39d52b71b4eb5a91dbc8d6d59e, type: 3}
