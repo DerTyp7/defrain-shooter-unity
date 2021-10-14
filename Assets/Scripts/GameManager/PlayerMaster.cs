@@ -27,6 +27,8 @@ public class PlayerMaster : MonoBehaviour
 {
     [SerializeField] private List<GameObject> Players = new List<GameObject>(); //Contains All Players which are currently connected/in-game
     [SerializeField] private List<int> Health = new List<int>();
+    [SerializeField] private List<int> Kills = new List<int>();
+    [SerializeField] private List<int> Deaths = new List<int>();
     [SerializeField] private int defaultHp = 100;
 
     //JUST FOR DEBUG
@@ -48,6 +50,8 @@ public class PlayerMaster : MonoBehaviour
         foreach(GameObject player in Players)
         {
             Health.Add(defaultHp);
+            Kills.Add(0);
+            Deaths.Add(0);
         }
 
     }
@@ -60,6 +64,8 @@ public class PlayerMaster : MonoBehaviour
         {
             Players.Add(player); //Add New Player To List
             Health.Add(defaultHp); //Add New Health to the END of the list
+            Kills.Add(0);
+            Deaths.Add(0);
             Debug.Log("Player added to list"); //Feedback
         }
         else
@@ -76,6 +82,8 @@ public class PlayerMaster : MonoBehaviour
         {
             Players.Remove(player); //Remove the Player from List
             Health.Remove(Players.IndexOf(player)); //Remove the specific Health of the Player
+            Kills.Remove(Players.IndexOf(player));
+            Deaths.Remove(Players.IndexOf(player));
         }
         else
         {
@@ -112,15 +120,56 @@ public class PlayerMaster : MonoBehaviour
         Health[Players.IndexOf(player)] += value;
     }
 
+    //Kills
+    public int GetKillsOfPlayer(GameObject player)
+    {
+        return Kills[Players.IndexOf(player)];
+    }
+
+    public void AddKillsToPlayer(GameObject player, int value = 1)
+    {
+        Kills[Players.IndexOf(player)] += value;
+    }
+
+    public void SubstractKillsFromPlayer(GameObject player, int value = 1)
+    {
+        Kills[Players.IndexOf(player)] -= value;
+    }
+
+    public void SetKillsOfPlayer(GameObject player, int value = 1)
+    {
+        Kills[Players.IndexOf(player)] = value;
+    }
+
     //Death
-    public void Death(GameObject deadPlayer, GameObject killerPlayer = null) //Player dies and and MAYBE another player gets a kill
+    private void Death(GameObject deadPlayer, GameObject killerPlayer = null) //Player dies and and MAYBE another player gets a kill
     {
         if(killerPlayer != null)
         {
             //Add kill to killer
+            Kills[Players.IndexOf(killerPlayer)] += 1;
         }
-
-        //Add Death to deadPlayer
+        Deaths[Players.IndexOf(deadPlayer)] += 1;
         //Deactivate deadPlayer
+    }
+
+    public int GetDeathsOfPlayer(GameObject player)
+    {
+        return Deaths[Players.IndexOf(player)];
+    }
+
+    public void AddDeathsToPlayer(GameObject player, int value = 1)
+    {
+        Deaths[Players.IndexOf(player)] += value;
+    }
+
+    public void SubstractDeathsFromPlayer(GameObject player, int value = 1)
+    {
+        Deaths[Players.IndexOf(player)] -= value;
+    }
+
+    public void SetDeathsOfPlayer(GameObject player, int value = 1)
+    {
+        Deaths[Players.IndexOf(player)] = value;
     }
 }
