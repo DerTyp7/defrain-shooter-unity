@@ -411,6 +411,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 100
   SyncIntervalSeconds: 5
+  GameManager: {fileID: 1067101116}
 --- !u!1 &450235891 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -466329591000292508, guid: 823e8b39d52b71b4eb5a91dbc8d6d59e, type: 3}
