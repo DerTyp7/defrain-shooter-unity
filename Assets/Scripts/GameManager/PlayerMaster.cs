@@ -25,6 +25,7 @@ DEAD
 */
 public class PlayerMaster : MonoBehaviour
 {
+    [Header("PlayerMaster")]
     [SerializeField] private List<GameObject> Players = new List<GameObject>(); //Contains All Players which are currently connected/in-game
     [SerializeField] private List<int> Health = new List<int>();
     [SerializeField] private List<int> Kills = new List<int>();
