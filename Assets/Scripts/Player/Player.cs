@@ -20,7 +20,7 @@ public class Player : MonoBehaviour
     private void Sync()
     {
         Debug.Log("Sync");
-        health = playerMaster.GetHealthOfPlayer(gameObject);
+        health = playerMaster.SyncHealth(gameObject);
     }
 
     public void SubstractHealth(int value)
