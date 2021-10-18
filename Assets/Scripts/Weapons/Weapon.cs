@@ -20,6 +20,22 @@ public class Weapon : MonoBehaviour
     private bool allowShoot = true, isShooting = false;
     Animator anim;
 
+
+
+    /*
+     * 
+     * + Weapon Pickup
+     * + Weapon Manage
+     * + Weapon Inventory
+     * + Weapon Drop
+     * 
+     * 
+     */
+
+
+
+
+
     private void Start()
     {
         anim = GetComponent<Animator>();
@@ -46,6 +62,21 @@ public class Weapon : MonoBehaviour
         if (Input.GetButton("Reload"))
         {
             currentAmmunition = totalAmmunition;
+        }
+        if (Input.GetButton("Aim")) // Not working properly, maybe Animations are not correct to use
+        {
+            anim.Play("USP_Aim");
+        }
+        if (Input.GetButton("Interact"))
+        {
+            if(Physics.Raycast(camera.transform.position, camera.transform.forward, out RaycastHit hit))
+            {
+                Debug.DrawLine(camera.transform.position, hit.point);
+                if (hit.collider.transform.name == transform.name)
+                {
+                    Debug.Log("Hit me!");
+                }
+            }
         }
         
     }
