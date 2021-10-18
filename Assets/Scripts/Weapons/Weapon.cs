@@ -33,7 +33,7 @@ public class Weapon : MonoBehaviour
     {
         if (Input.GetButton("Fire") && allowShoot && currentAmmunition > 0)
         {
-            anim.Play("USP");
+            anim.Play("USP_Shooting");
             isShooting = true;
             StartCoroutine(fireRate());
             fire();
