@@ -6,18 +6,20 @@ public class ServerPlayer
 {
     public GameObject Player;
     public bool isAlive;
+    public Team team;
     private int health;
     private int kills;
     private int deaths;
     private const int defaultHp = 100;
 
-    public ServerPlayer(GameObject _Player, bool _isAlive = true, int _health = defaultHp, int _kills = 0, int _deaths = 0)
+    public ServerPlayer(GameObject _Player, bool _isAlive = true, int _health = defaultHp, int _kills = 0, int _deaths = 0, Team _team = null)
     {
         Player = _Player;
         isAlive = _isAlive;
         health = _health;
         kills = _kills;
         deaths = _deaths;
+        team = _team;
     }
 
     public void Respawn()
