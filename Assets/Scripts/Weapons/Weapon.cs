@@ -4,43 +4,36 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
+    public enum weaponKinds
+    {
+        Rifle, Pistole, Knife, Granade
+    }
+    [SerializeField] weaponKinds weaponKind;
     [SerializeField] bool active = false;
     [SerializeField] float damage = 0;
     [SerializeField] float firerate = 0;
     [SerializeField] float recoilStrength = 0;
     [SerializeField] int currentAmmunition = 0;
+    [SerializeField] int magazinSize = 0;
     [SerializeField] int totalAmmunition = 0;
     [SerializeField] ParticleSystem flash;
     [SerializeField] ParticleSystem smoke;
     [SerializeField] GameObject bulletExit;
-    [SerializeField] GameObject camera;
-    
+    [SerializeField] GameObject cam;
+    [SerializeField] GameObject model;
+
+    private bool allowShoot = true, isReloading = false;
+
     public bool Active { get => active; set => active = value; }
-
-    private bool allowShoot = true, isShooting = false;
-    Animator anim;
-
-
-
-    /*
-     * 
-     * + Weapon Pickup
-     * + Weapon Manage
-     * + Weapon Inventory
-     * + Weapon Drop
-     * 
-     * 
-     */
-
-
-
-
+    public weaponKinds WeaponKind { get => weaponKind; set => weaponKind = value; }
+   
+    //Animator anim;
 
     private void Start()
     {
-        anim = GetComponent<Animator>();
-
-        if (Physics.Raycast(camera.transform.position, camera.transform.forward, out RaycastHit hit))
+        //anim = GetComponent<Animator>();
+        currentAmmunition = magazinSize;
+        if (Physics.Raycast(cam.transform.position, cam.transform.forward, out RaycastHit hit)) // Not Working
         {
             transform.rotation = Quaternion.Euler(0f, hit.point.y, 0f);
         }
@@ -49,34 +42,32 @@ public class Weapon : MonoBehaviour
     {
         if (Input.GetButton("Fire") && allowShoot && currentAmmunition > 0)
         {
-            anim.Play("USP_Shooting");
-            isShooting = true;
+            //anim.Play("USP_Shooting");
             StartCoroutine(fireRate());
             fire();
             currentAmmunition--;
         }
-        else
-        {
-            isShooting = false;
-        }
         if (Input.GetButton("Reload"))
         {
-            currentAmmunition = totalAmmunition;
+            if (isReloading == false && totalAmmunition > 0)
+            {
+                isReloading = true;
+                int dif = magazinSize - currentAmmunition; 
+
+                if(totalAmmunition >= dif) {
+                    currentAmmunition += dif;
+                    totalAmmunition -= dif;
+                }
+                else{
+                    currentAmmunition += totalAmmunition;
+                    totalAmmunition = 0;
+                }
+                isReloading = false;
+            }
         }
         if (Input.GetButton("Aim")) // Not working properly, maybe Animations are not correct to use
         {
-            anim.Play("USP_Aim");
-        }
-        if (Input.GetButton("Interact"))
-        {
-            if(Physics.Raycast(camera.transform.position, camera.transform.forward, out RaycastHit hit))
-            {
-                Debug.DrawLine(camera.transform.position, hit.point);
-                if (hit.collider.transform.name == transform.name)
-                {
-                    Debug.Log("Hit me!");
-                }
-            }
+            //anim.Play("USP_Aim");
         }
         
     }
