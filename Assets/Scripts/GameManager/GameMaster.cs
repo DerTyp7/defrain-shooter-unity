@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class GameMaster : MonoBehaviour
 {
     [Header("GameMaster")]
     [SerializeField] private List<Team> teams = new List<Team>();
     private void Start()
     {
+        
         CreateTeam("Orange");
         CreateTeam("Blue");
     }
