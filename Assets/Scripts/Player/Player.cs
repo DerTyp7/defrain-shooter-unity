@@ -12,8 +12,10 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
+        GameManager = GameObject.Find("GameManager");
         playerMaster = GameManager.GetComponent<PlayerMaster>();
-        InvokeRepeating("Sync", 3.0f, SyncIntervalSeconds);
+        
+        //InvokeRepeating("Sync", 3.0f, SyncIntervalSeconds);
     }
 
 
