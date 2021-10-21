@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using MLAPI;
 
 // https://youtu.be/PmIPqGqp8UY
 // https://youtu.be/n-KX8AeGK7E?t=997
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : NetworkBehaviour
 {
     [Header("Mouse Look")]
     [SerializeField] private Transform playerCamera = null;
@@ -47,18 +48,34 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-        controller = GetComponent<CharacterController>();
-        if (lockCursor)
+        if (IsLocalPlayer)
         {
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
+            controller = GetComponent<CharacterController>();
+            if (lockCursor)
+            {
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
+            }
         }
+        else
+        {
+            playerCamera.gameObject.SetActive(false);
+        }
+        
     }
     private void Update()
     {
-        UpdateMouseLook();
-        Grounded();
-        UpdateMovement();
+        if (IsLocalPlayer)
+        {
+            UpdateMouseLook();
+            Grounded();
+            UpdateMovement();
+        }
+        else
+        {
+            playerCamera.gameObject.SetActive(false);
+        }
+        
     }
     private void Grounded()
     {
@@ -72,10 +89,6 @@ public class PlayerController : MonoBehaviour
         currentMouseDelta = Vector2.SmoothDamp(currentMouseDelta, targetMouseDelta, ref currentMouseDeltaVelocity, mouseSmoothTime);
         fullPitch -= currentMouseDelta.y * mouseSensitivity;
         fullPitch = Mathf.Clamp(fullPitch,-maxCameraAngle,-minCameraAngle);
-        //cameraPitch = Mathf.Clamp(fullPitch, -90, 45);
-
-        //neckPitch = Mathf.Clamp(fullPitch, 45, 90);
-        Debug.Log("fullPitch: " + fullPitch);
 
         if (fullPitch >= neckStartAngle) {
             playerNeck.localEulerAngles = Vector3.right * (fullPitch - neckStartAngle);
@@ -88,13 +101,7 @@ public class PlayerController : MonoBehaviour
         }
         playerCamera.position = playerNeck.position;
         playerCamera.position += playerNeck.up * neckLength;
-        /*
-                playerNeck.localEulerAngles = Vector3.right * neckPitch;
-                playerCamera.localEulerAngles = Vector3.right * cameraPitch;
-                playerCamera.position = playerNeck.position;
-                playerCamera.position += playerNeck.up * neckLength;*/
-        //playerCamera.RotateAround(playerNeck.position, Vector3.right, cameraPitch* Mathf.Deg2Rad - playerCamera.transform.rotation.x);
-
+        
         transform.Rotate(Vector3.up * currentMouseDelta.x * mouseSensitivity); //Rotate the hole player if looked sideways (Rotates the player left and right)
     }
     private void UpdateMovement()

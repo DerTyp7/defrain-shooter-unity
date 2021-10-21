@@ -12,6 +12,8 @@ public class GameMaster : MonoBehaviour
         
         CreateTeam("Orange");
         CreateTeam("Blue");
+
+        MLAPI.NetworkManager.Singleton.StartHost();
     }
 
     private void CreateTeam(string name, int score = 0)

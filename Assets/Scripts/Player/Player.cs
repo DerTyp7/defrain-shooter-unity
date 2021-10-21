@@ -7,6 +7,7 @@ public class Player : MonoBehaviour
     [SerializeField] int health;
     [SerializeField] float SyncIntervalSeconds = 5.0f;
     [SerializeField] GameObject GameManager;
+    
 
     private PlayerMaster playerMaster;
 
