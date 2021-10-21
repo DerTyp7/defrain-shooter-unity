@@ -3,27 +3,60 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using MLAPI;
+using MLAPI.Transports.UNET;
+
 public class DebugCanvas : MonoBehaviour
 {
     public TextMeshProUGUI DebugTextGrounded;
+    public TextMeshProUGUI DebugTextClientServer;
     public GameObject Player;
+    public GameObject GameManager;
     public TextMeshProUGUI fpsText;
     public float deltaTime;
 
+    private void Start()
+    {
+        GameManager = GameObject.Find("GameManager");
+    }
     private void Update()
-    {/*
+    {
         if(Player == null)
         {
-            Player = GameObject.FindGameObjectWithTag("Player").gameObject;
+            try
+            {
+                Player = GameObject.FindGameObjectWithTag("Player").gameObject;
+            }
+            catch
+            {
+                Debug.Log("DEBUG CANVAS PLAYER NOT YET FOUND");
+            }
+            
         }
         else
         {
             DebugTextGrounded.text = "isGrounded: " + Player.GetComponent<PlayerController>().isGrounded.ToString();
 
+            if (GameManager.GetComponent<NetworkManager>().IsHost)
+            {
+                DebugTextClientServer.text = "Host";
+                DebugTextClientServer.text += "\n127.0.0.1";
+            }
+            else if(GameManager.GetComponent<NetworkManager>().IsClient)
+            {
+                DebugTextClientServer.text = "Client";
+                DebugTextClientServer.text += "\n" + GameManager.GetComponent<UNetTransport>().ConnectAddress;
+            }
+            else
+            {
+                DebugTextClientServer.text = "Server";
+            }
+
+
             deltaTime += (Time.deltaTime - deltaTime) * 0.1f;
             float fps = 1.0f / deltaTime;
             fpsText.text = Mathf.Ceil(fps).ToString() + "FPS";
         }
-        */
+        
     }
 }
