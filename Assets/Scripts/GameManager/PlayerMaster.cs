@@ -13,7 +13,7 @@ public class PlayerMaster : MonoBehaviour
     private void Update()
     {
         //JUST FOR DEBUG
-        Players[0].AddKills(1);
+        //Players[0].AddKills(1);
     }
 
 
@@ -30,7 +30,7 @@ public class PlayerMaster : MonoBehaviour
 
     public void TestDamage()
     {
-        Players[0].RemoveHealth(10);
+        //Players[0].RemoveHealth(10);
     }
     //Join
     public void OnPlayerJoin(GameObject player) //When a Player joins
