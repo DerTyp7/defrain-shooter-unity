@@ -12,9 +12,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Transform playerNeck = null;
     [SerializeField] private float mouseSensitivity = 4.0f;
 
-    [SerializeField] private float maxCameraAngle = -90f;
     [SerializeField] private float neckStartAngle = 0f;
-    [SerializeField] private float minCameraAngle = 90f;
+    [SerializeField] private float maxCameraAngle = 90f;
+    [SerializeField] private float minCameraAngle = -90f;
 
     [SerializeField] private float neckLength = 0.2f;
     [SerializeField] [Range(0.0f, 0.5f)] private float mouseSmoothTime = 0.001f;
@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviour
 
     [Header("Movement")]
     [SerializeField] private float walkSpeed = 6.0f;
+    [SerializeField] private float sprintSpeed = 10.0f;
     [SerializeField][Range(0.0f, 0.5f)] private float moveSmoothTime = 0.05f;
     [SerializeField] float gravity = -13.0f;
     [SerializeField] private float jumpHeight;
@@ -32,9 +33,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private LayerMask groundMask;
 
     public bool isGrounded;
-    private float fullPitch = 0f;
-    private float cameraPitch = 0f;
-    private float neckPitch = 0f;
+    private float viewPitch = 0f;
     private float velocityY = 0.0f;
     private CharacterController controller;
 
@@ -53,6 +52,10 @@ public class PlayerController : MonoBehaviour
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
         }
+
+        //Position the camera at the height of the neck (set by the neckLength)
+        playerCamera.position = playerNeck.position;
+        playerCamera.position += playerNeck.up * neckLength;
     }
     private void Update()
     {
@@ -70,30 +73,19 @@ public class PlayerController : MonoBehaviour
         Vector2 targetMouseDelta = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y")); //Get the axis of the mouse
 
         currentMouseDelta = Vector2.SmoothDamp(currentMouseDelta, targetMouseDelta, ref currentMouseDeltaVelocity, mouseSmoothTime);
-        fullPitch -= currentMouseDelta.y * mouseSensitivity;
-        fullPitch = Mathf.Clamp(fullPitch,-maxCameraAngle,-minCameraAngle);
-        //cameraPitch = Mathf.Clamp(fullPitch, -90, 45);
 
-        //neckPitch = Mathf.Clamp(fullPitch, 45, 90);
-        Debug.Log("fullPitch: " + fullPitch);
+        viewPitch -= currentMouseDelta.y * mouseSensitivity;
 
-        if (fullPitch >= neckStartAngle) {
-            playerNeck.localEulerAngles = Vector3.right * (fullPitch - neckStartAngle);
-            
+        viewPitch = Mathf.Clamp(viewPitch,-maxCameraAngle,-minCameraAngle);
+
+        if (viewPitch >= neckStartAngle)
+        {
+            playerNeck.localEulerAngles = Vector3.right * (viewPitch - neckStartAngle);
         }
-        else {
-            playerCamera.localEulerAngles = Vector3.right * fullPitch;
-
-
+        else
+        {
+            playerCamera.localEulerAngles = Vector3.right * viewPitch;
         }
-        playerCamera.position = playerNeck.position;
-        playerCamera.position += playerNeck.up * neckLength;
-        /*
-                playerNeck.localEulerAngles = Vector3.right * neckPitch;
-                playerCamera.localEulerAngles = Vector3.right * cameraPitch;
-                playerCamera.position = playerNeck.position;
-                playerCamera.position += playerNeck.up * neckLength;*/
-        //playerCamera.RotateAround(playerNeck.position, Vector3.right, cameraPitch* Mathf.Deg2Rad - playerCamera.transform.rotation.x);
 
         transform.Rotate(Vector3.up * currentMouseDelta.x * mouseSensitivity); //Rotate the hole player if looked sideways (Rotates the player left and right)
     }
