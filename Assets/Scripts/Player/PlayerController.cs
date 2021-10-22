@@ -23,6 +23,8 @@ public class PlayerController : MonoBehaviour
     [Header("Movement")]
     [SerializeField] private float walkSpeed = 6.0f;
     [SerializeField] private float sprintSpeed = 10.0f;
+    [SerializeField]private float speedUpVal = 0.2f;
+    [SerializeField]private float speedDownVal = 0.1f;
     [SerializeField][Range(0.0f, 0.5f)] private float moveSmoothTime = 0.05f;
     [SerializeField] float gravity = -13.0f;
     [SerializeField] private float jumpHeight;
@@ -35,6 +37,7 @@ public class PlayerController : MonoBehaviour
     public bool isGrounded;
     private float viewPitch = 0f;
     private float velocityY = 0.0f;
+    private float speed;
     private CharacterController controller;
 
     private Vector2 currentDir = Vector2.zero;
@@ -66,7 +69,9 @@ public class PlayerController : MonoBehaviour
     private void Grounded()
     {
         //Check every frame if the player stands on the ground
-        isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
+        Vector3 groundCheckPos = groundCheck.position;
+        groundCheckPos += new Vector3(0,0,0);
+        isGrounded = Physics.CheckSphere(groundCheckPos, groundDistance, groundMask);
     }
     private void UpdateMouseLook()
     {
@@ -108,8 +113,32 @@ public class PlayerController : MonoBehaviour
 
         currentDir = Vector2.SmoothDamp(currentDir, targetDir, ref currentDirVelocity, moveSmoothTime); //Smooth movement change
 
+        
 
-        Vector3 velocity = (transform.forward * currentDir.y + transform.right * currentDir.x) * walkSpeed + (Vector3.up * velocityY);
+        if (Input.GetButton("Sprint") && isGrounded)
+        { //If Sprint button is pressed the speed is switched form walking to sprinting
+            if (speed <= sprintSpeed)
+            {
+                speed += sprintSpeed * speedUpVal;
+            }
+            else
+            {
+                speed = sprintSpeed;
+            }
+        }
+        else
+        {
+            if (speed <= sprintSpeed)
+            {
+                speed += walkSpeed * speedDownVal;
+            }
+            else
+            {
+                speed = walkSpeed;
+            }
+        }
+
+        Vector3 velocity = (transform.forward * currentDir.y + transform.right * currentDir.x) * speed + (Vector3.up * velocityY);
 
         controller.Move(velocity * Time.deltaTime);
 
