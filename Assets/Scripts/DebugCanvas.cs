@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using MLAPI;
-using MLAPI.Transports.UNET;
+using Mirror;
 
 public class DebugCanvas : MonoBehaviour
 {
@@ -36,22 +35,6 @@ public class DebugCanvas : MonoBehaviour
         else
         {
             DebugTextGrounded.text = "isGrounded: " + Player.GetComponent<PlayerController>().isGrounded.ToString();
-
-            if (GameManager.GetComponent<NetworkManager>().IsHost)
-            {
-                DebugTextClientServer.text = "Host";
-                DebugTextClientServer.text += "\n127.0.0.1";
-            }
-            else if(GameManager.GetComponent<NetworkManager>().IsClient)
-            {
-                DebugTextClientServer.text = "Client";
-                DebugTextClientServer.text += "\n" + GameManager.GetComponent<UNetTransport>().ConnectAddress;
-            }
-            else
-            {
-                DebugTextClientServer.text = "Server";
-            }
-
 
             deltaTime += (Time.deltaTime - deltaTime) * 0.1f;
             float fps = 1.0f / deltaTime;

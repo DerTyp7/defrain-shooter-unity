@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using MLAPI;
+using Mirror;
 
 // https://youtu.be/PmIPqGqp8UY
 // https://youtu.be/n-KX8AeGK7E?t=997
@@ -48,7 +48,7 @@ public class PlayerController : NetworkBehaviour
 
     private void Start()
     {
-        if (IsLocalPlayer)
+        if (isLocalPlayer)
         {
             controller = GetComponent<CharacterController>();
             if (lockCursor)
@@ -65,16 +65,11 @@ public class PlayerController : NetworkBehaviour
     }
     private void Update()
     {
-        if (IsLocalPlayer)
-        {
-            UpdateMouseLook();
-            Grounded();
-            UpdateMovement();
-        }
-        else
-        {
-            playerCamera.gameObject.SetActive(false);
-        }
+        if (!isLocalPlayer) return;
+
+        UpdateMouseLook();
+        Grounded();
+        UpdateMovement();
         
     }
     private void Grounded()
