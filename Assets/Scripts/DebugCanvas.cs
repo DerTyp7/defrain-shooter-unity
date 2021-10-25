@@ -3,18 +3,34 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Mirror;
+
 public class DebugCanvas : MonoBehaviour
 {
     public TextMeshProUGUI DebugTextGrounded;
+    public TextMeshProUGUI DebugTextClientServer;
     public GameObject Player;
+    public GameObject GameManager;
     public TextMeshProUGUI fpsText;
     public float deltaTime;
 
+    private void Start()
+    {
+        GameManager = GameObject.Find("GameManager");
+    }
     private void Update()
-    {/*
+    {
         if(Player == null)
         {
-            Player = GameObject.FindGameObjectWithTag("Player").gameObject;
+            try
+            {
+                Player = GameObject.FindGameObjectWithTag("Player").gameObject;
+            }
+            catch
+            {
+                Debug.Log("DEBUG CANVAS PLAYER NOT YET FOUND");
+            }
+            
         }
         else
         {
@@ -24,6 +40,6 @@ public class DebugCanvas : MonoBehaviour
             float fps = 1.0f / deltaTime;
             fpsText.text = Mathf.Ceil(fps).ToString() + "FPS";
         }
-        */
+        
     }
 }

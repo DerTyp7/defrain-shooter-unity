@@ -1,37 +1,128 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Mirror;
 
-public class Player : MonoBehaviour
+public class Player : NetworkBehaviour
 {
-    [SerializeField] int health;
-    [SerializeField] float SyncIntervalSeconds = 5.0f;
-    [SerializeField] GameObject GameManager;
+    public bool isAlive;
+    public Team team;
+    [SerializeField] private const int defaultHp = 100;
 
-    private PlayerMaster playerMaster;
 
-    private void Start()
+    public ulong clientId;
+
+    [SyncVar(hook = nameof(SetName))]
+    public string username;
+    [SerializeField] GameObject usernameTextObj;
+
+    private int health;
+    private int kills;
+    private int deaths;
+    public override void OnStartLocalPlayer()
     {
-        GameManager = GameObject.Find("GameManager");
-        playerMaster = GameManager.GetComponent<PlayerMaster>();
-        
-        //InvokeRepeating("Sync", 3.0f, SyncIntervalSeconds);
+        base.OnStartClient();
     }
 
-
-    private void Sync()
+    public void SetName(string oldName, string newName)
     {
-        Debug.Log("Sync");
-        health = playerMaster.SyncHealth(gameObject);
+        username = newName;
+        usernameTextObj.GetComponent<TMPro.TextMeshPro>().SetText(username);
     }
 
-    public void SubstractHealth(int value)
+    public string GetName()
     {
-        health -= value;
+        return name;
+    }
+    public void Respawn()
+    {
+        isAlive = true;
     }
 
+    public void Die()
+    {
+        isAlive = false;
+        AddDeaths(1);
+    }
+
+    //Health
     public void AddHealth(int value)
     {
-        health += value;
+        if (isAlive)
+        {
+            health += value;
+        }
+        
     }
+    public void RemoveHealth(int value)
+    {
+        if (isAlive)
+        {
+            health -= value;
+            if (health <= 0)
+            {
+                AddDeaths(1);
+                health = 0;
+                Die();
+            }
+        }
+        
+    }
+    public void SetHealth(int value)
+    {
+        if (isAlive)
+        {
+            health = value;
+            if (health <= 0)
+            {
+                AddDeaths(1);
+                health = 0;
+                Die();
+            }
+        }
+    }
+
+    public int GetHealth()
+    {
+        return health;
+    }
+
+    //Kills
+    public void AddKills(int value)
+    {
+        kills += value;
+    }
+    public void RemoveKills(int value)
+    {
+        kills -= value;
+    }
+    public void SetKills(int value)
+    {
+        kills = value;
+    }
+
+    public int GetKills()
+    {
+        return kills;
+    }
+
+    //Deaths
+    public void AddDeaths(int value)
+    {
+        deaths += value;
+    }
+    public void RemoveDeaths(int value)
+    {
+        deaths -= value;
+    }
+    public void SetDeaths(int value)
+    {
+        deaths = value;
+    }
+
+    public int GetDeaths()
+    {
+        return deaths;
+    }
+
 }
