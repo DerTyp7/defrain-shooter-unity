@@ -9,16 +9,25 @@ public class Player : NetworkBehaviour
     public Team team;
     [SerializeField] private const int defaultHp = 100;
 
+
     public ulong clientId;
-    private string name;
+
+    [SyncVar(hook = nameof(SetName))]
+    public string username;
+    [SerializeField] GameObject usernameTextObj;
+
     private int health;
     private int kills;
     private int deaths;
-
-
-    public void SetName(string newName)
+    public override void OnStartLocalPlayer()
     {
-        name = newName;
+        base.OnStartClient();
+    }
+
+    public void SetName(string oldName, string newName)
+    {
+        username = newName;
+        usernameTextObj.GetComponent<TMPro.TextMeshPro>().SetText(username);
     }
 
     public string GetName()

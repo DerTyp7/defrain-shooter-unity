@@ -22,6 +22,7 @@ public class GameMaster : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.H))
         {
+
             Cursor.lockState = CursorLockMode.Confined;
             Cursor.visible = true;
         }
