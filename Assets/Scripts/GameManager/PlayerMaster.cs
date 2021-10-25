@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerMaster : MonoBehaviour
 {
     [Header("PlayerMaster")]
-    [SerializeField] private List<ServerPlayer> Players = new List<ServerPlayer>(); //Contains All Players which are currently connected/in-game
+    //[SerializeField] private List<ServerPlayer> Players = new List<ServerPlayer>(); //Contains All Players which are currently connected/in-game
 
     //JUST FOR DEBUG
     [SerializeField] private GameObject TestPlayer;
@@ -21,7 +21,7 @@ public class PlayerMaster : MonoBehaviour
     {
         foreach(GameObject p in GameObject.FindGameObjectsWithTag("Player"))
         {
-            Players.Add(new ServerPlayer(p));
+            //Players.Add(new ServerPlayer(p));
         }
 
 
@@ -35,7 +35,7 @@ public class PlayerMaster : MonoBehaviour
     //Join
     public void OnPlayerJoin(GameObject player) //When a Player joins
     {
-        foreach (ServerPlayer p in Players)
+        /*foreach (ServerPlayer p in Players)
         {
             if (p.Player == player)
             {
@@ -43,30 +43,30 @@ public class PlayerMaster : MonoBehaviour
                 return;
             }
         }
-        Players.Add(new ServerPlayer(player));
+        Players.Add(new ServerPlayer(player));*/
     }
 
     //Leave
     public void OnPlayerLeave(GameObject player) //When a Player leaves
     {
-        foreach (ServerPlayer p in Players)
+        /*foreach (ServerPlayer p in Players)
         {
             if (p.Player == player)
             {
                 Players.Remove(p);
             }
-        }
+        }*/
     }
 
     public int SyncHealth(GameObject player)
     {
-        foreach (ServerPlayer p in Players)
+        /*foreach (ServerPlayer p in Players)
         {
             if (p.Player == player)
             {
                 return p.GetHealth();
             }
-        }
+        }*/
         return -1;
     }
 }

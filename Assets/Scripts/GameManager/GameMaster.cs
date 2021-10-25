@@ -3,25 +3,34 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
+
+// Erstellung von Teams
+// Auflistung von den Spielern
+// Verwaltung der Spieler und Teams
+// 
+
 public class GameMaster : MonoBehaviour
 {
     [Header("GameMaster")]
-    [SerializeField] private List<Team> teams = new List<Team>();
+    [SerializeField] private List<Player> Players = new List<Player>(); 
     private void Start()
     {
-        
-        CreateTeam("Orange");
-        CreateTeam("Blue");
+
     }
 
-    private void CreateTeam(string name, int score = 0)
+    private void Update()
     {
-        Team team = new Team(name, score);
-        teams.Add(team);
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+
+            Cursor.lockState = CursorLockMode.Confined;
+            Cursor.visible = true;
+        }
+
+        if (Input.GetKeyDown(KeyCode.J))
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
     }
-    
-    public List<Team> GetTeams()
-    {
-        return teams;
-    } 
 }
