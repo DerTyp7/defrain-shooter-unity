@@ -34,6 +34,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float groundDistance = 0.4f;
     [SerializeField] private LayerMask groundMask;
 
+    [Header("Animations")]
+    [SerializeField]private Animator playerAnimator;
+    private float animationVal = 0.0f;
+    float f = 0.5f;
+
     public bool isGrounded;
     private float viewPitch = 0f;
     private float velocityY = 0.0f;
@@ -49,6 +54,7 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
+        playerAnimator = GetComponentInChildren<Animator>();
         controller = GetComponent<CharacterController>();
         if (lockCursor)
         {
@@ -57,11 +63,15 @@ public class PlayerController : MonoBehaviour
         }
 
         //Position the camera at the height of the neck (set by the neckLength)
+        neckLength = Vector3.Distance(playerCamera.position, playerNeck.position);
         playerCamera.position = playerNeck.position;
         playerCamera.position += playerNeck.up * neckLength;
     }
     private void Update()
     {
+        f = (viewPitch + 90f) / 180f;
+
+        playerAnimator.SetFloat("Time", 1-f);
         UpdateMouseLook();
         Grounded();
         UpdateMovement();
