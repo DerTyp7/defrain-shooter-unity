@@ -266,8 +266,8 @@ GameObject:
   - component: {fileID: 320375778840406984}
   - component: {fileID: -4574526707603160507}
   - component: {fileID: 7273209952621479910}
-  - component: {fileID: 5317111308216027170}
   - component: {fileID: 4959463831902427506}
+  - component: {fileID: 9140532221617802975}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -390,24 +390,6 @@ MonoBehaviour:
   showGizmos: 1
   showOverlay: 1
   overlayColor: {r: 0, g: 0, b: 0, a: 0.5}
---- !u!114 &5317111308216027170
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6272346181302961293}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c2e457ad00c1a044a924a5bc00776df9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0.1
-  isAlive: 0
-  clientId: 0
-  username: Janis
-  usernameTextObj: {fileID: 4824770690127859843}
 --- !u!114 &4959463831902427506
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -424,6 +406,24 @@ MonoBehaviour:
   syncInterval: 0.1
   color: {r: 1, g: 0, b: 0, a: 0}
   renderer: {fileID: 8824871639981994016}
+--- !u!114 &9140532221617802975
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6272346181302961293}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3317f24e780855847830f5662153b41d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  isAlive: 0
+  clientId: 0
+  username: 
+  usernameTextObj: {fileID: 4824770690127859843}
 --- !u!1 &6272346181657429393
 GameObject:
   m_ObjectHideFlags: 0
