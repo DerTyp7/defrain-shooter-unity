@@ -8,42 +8,29 @@ using Mirror;
 
 public class PlayerController : NetworkBehaviour
 {
-    [Header("Mouse Look")]
-    [SerializeField] private Transform playerCamera = null;
-    [SerializeField] private Transform playerNeck = null;
-    [SerializeField] private float mouseSensitivity = 4.0f;
-
-    [SerializeField] private float maxCameraAngle = -90f;
-    [SerializeField] private float neckStartAngle = 0f;
-    [SerializeField] private float minCameraAngle = 90f;
-
-    [SerializeField] private float neckLength = 0.2f;
-    [SerializeField] [Range(0.0f, 0.5f)] private float mouseSmoothTime = 0.001f;
-    [SerializeField] private bool lockCursor = true;
 
     [Header("Movement")]
     [SerializeField] private float walkSpeed = 6.0f;
     [SerializeField][Range(0.0f, 0.5f)] private float moveSmoothTime = 0.05f;
     [SerializeField] float gravity = -13.0f;
     [SerializeField] private float jumpHeight;
+    private Vector3 inputDirection = Vector3.zero;
+    private Vector3 moveDirection;
 
     [Header("Ground Check")]
     [SerializeField] private Transform groundCheck;
-    [SerializeField] private float groundDistance = 0.4f;
     [SerializeField] private LayerMask groundMask;
 
+    [Header("Ground Angle")]
+   // [SerializeField] private Transform groundDistance;
+   
+
     public bool isGrounded;
-    private float fullPitch = 0f;
-    private float cameraPitch = 0f;
-    private float neckPitch = 0f;
     private float velocityY = 0.0f;
     private CharacterController controller;
 
     private Vector2 currentDir = Vector2.zero;
     private Vector2 currentDirVelocity = Vector2.zero;
-
-    private Vector2 currentMouseDelta = Vector2.zero;
-    private Vector2 currentMouseDeltaVelocity = Vector2.zero;
 
 
     private void Start()
@@ -51,54 +38,40 @@ public class PlayerController : NetworkBehaviour
         if (isLocalPlayer)
         {
             controller = GetComponent<CharacterController>();
-            if (lockCursor)
-            {
-                Cursor.lockState = CursorLockMode.Locked;
-                Cursor.visible = false;
-            }
         }
-        else
-        {
-            playerCamera.gameObject.SetActive(false);
-        }
-        
     }
     private void Update()
     {
-        if (!isLocalPlayer) return;
-
-        UpdateMouseLook();
-        Grounded();
-        UpdateMovement();
-        
+        if (isLocalPlayer)
+        {
+            Grounded();
+            CheckGoundAngle();
+            UpdateMovement();
+        }
     }
     private void Grounded()
     {
         //Check every frame if the player stands on the ground
-        isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
+        isGrounded = Physics.CheckSphere(groundCheck.position + new Vector3(0, GetComponent<CharacterController>().radius - 0.01f, 0),GetComponent<CharacterController>().radius + 0.0f, groundMask);
     }
-    private void UpdateMouseLook()
+
+    private void CheckGoundAngle()
     {
-        Vector2 targetMouseDelta = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y")); //Get the axis of the mouse
-
-        currentMouseDelta = Vector2.SmoothDamp(currentMouseDelta, targetMouseDelta, ref currentMouseDeltaVelocity, mouseSmoothTime);
-        fullPitch -= currentMouseDelta.y * mouseSensitivity;
-        fullPitch = Mathf.Clamp(fullPitch,-maxCameraAngle,-minCameraAngle);
-
-        if (fullPitch >= neckStartAngle) {
-            playerNeck.localEulerAngles = Vector3.right * (fullPitch - neckStartAngle);
-            
+        //Check every frame if the player stands on the ground
+        RaycastHit hit;
+        if (Physics.Raycast(groundCheck.position + new Vector3(0,0.4f,0),Vector3.down,out hit)) 
+        {
+            Debug.Log(transform.eulerAngles.y);
+            moveDirection =  Quaternion.Euler(0, transform.eulerAngles.y + 90, 0) * inputDirection;
+            moveDirection = Vector3.Cross(moveDirection, hit.normal);
         }
-        else {
-            playerCamera.localEulerAngles = Vector3.right * fullPitch;
-
-
-        }
-        playerCamera.position = playerNeck.position;
-        playerCamera.position += playerNeck.up * neckLength;
-        
-        transform.Rotate(Vector3.up * currentMouseDelta.x * mouseSensitivity); //Rotate the hole player if looked sideways (Rotates the player left and right)
     }
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawRay(new Ray(transform.position, moveDirection * 50));
+    }
+
     private void UpdateMovement()
     {
         //Grounded
@@ -113,10 +86,10 @@ public class PlayerController : NetworkBehaviour
             velocityY += Mathf.Sqrt(jumpHeight * -2f * gravity);
         }
 
-        Vector2 targetDir = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")); //Get Inputs
-        targetDir.Normalize(); //Damit schräg laufen nicht schneller ist
+        inputDirection = new Vector3(Input.GetAxisRaw("Horizontal"),0, Input.GetAxisRaw("Vertical")); //Get Inputs
+        inputDirection.Normalize(); //Damit schräg laufen nicht schneller ist
 
-        currentDir = Vector2.SmoothDamp(currentDir, targetDir, ref currentDirVelocity, moveSmoothTime); //Smooth movement change
+        currentDir = Vector2.SmoothDamp(currentDir, new Vector2(inputDirection.x,inputDirection.z), ref currentDirVelocity, moveSmoothTime); //Smooth movement change
 
 
         Vector3 velocity = (transform.forward * currentDir.y + transform.right * currentDir.x) * walkSpeed + (Vector3.up * velocityY);
