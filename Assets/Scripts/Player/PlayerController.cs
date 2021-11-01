@@ -11,8 +11,8 @@ public class PlayerController : NetworkBehaviour
 
     [Header("Movement")]
     [SerializeField] private float walkSpeed = 6.0f;
-    [SerializeField][Range(0.0f, 0.5f)] private float moveSmoothTime = 0.05f;
-    [SerializeField] float gravity = -13.0f;
+    [SerializeField][Range(0.0f, 0.5f)] private float moveSmoothTime = 0.001f;
+    [SerializeField] float gravity = -10.0f;
     [SerializeField] private float jumpHeight;
     private Vector3 inputDirection = Vector3.zero;
     private Vector3 moveDirection;
@@ -22,15 +22,16 @@ public class PlayerController : NetworkBehaviour
     [SerializeField] private LayerMask groundMask;
 
     [Header("Ground Angle")]
-   // [SerializeField] private Transform groundDistance;
-   
+    [SerializeField] private float groundAngle;
+    [SerializeField] private float moveGroundAngle;
 
     public bool isGrounded;
     private float velocityY = 0.0f;
     private CharacterController controller;
 
-    private Vector2 currentDir = Vector2.zero;
-    private Vector2 currentDirVelocity = Vector2.zero;
+    private Vector3 currentDir = Vector3.zero;
+    private Vector3 currentDirVelocity = Vector3.zero;
+    private Vector3 velocity = Vector3.zero;
 
 
     private void Start()
@@ -52,18 +53,35 @@ public class PlayerController : NetworkBehaviour
     private void Grounded()
     {
         //Check every frame if the player stands on the ground
-        isGrounded = Physics.CheckSphere(groundCheck.position + new Vector3(0, GetComponent<CharacterController>().radius - 0.01f, 0),GetComponent<CharacterController>().radius + 0.0f, groundMask);
+        isGrounded = Physics.CheckSphere(groundCheck.position + new Vector3(0, GetComponent<CharacterController>().radius - 0.1f, 0),GetComponent<CharacterController>().radius + 0.0f, groundMask);
+    }
+
+    public bool isMoving() 
+    {
+        if (velocity.x == 0 && velocity.y == 0 && velocity.z == 0) return true;
+        else return false;
     }
 
     private void CheckGoundAngle()
     {
         //Check every frame if the player stands on the ground
         RaycastHit hit;
-        if (Physics.Raycast(groundCheck.position + new Vector3(0,0.4f,0),Vector3.down,out hit)) 
+        if (Physics.Raycast(groundCheck.position + new Vector3(0, 0.4f, 0), Vector3.down, out hit))
         {
-            Debug.Log(transform.eulerAngles.y);
-            moveDirection =  Quaternion.Euler(0, transform.eulerAngles.y + 90, 0) * inputDirection;
+            moveDirection = Quaternion.Euler(0, transform.eulerAngles.y + 90f, 0) * inputDirection;
             moveDirection = Vector3.Cross(moveDirection, hit.normal);
+
+            if (isMoving())
+            {
+                moveGroundAngle = -(Vector3.Angle(moveDirection, transform.up) - 90f);
+            }
+            else
+            {
+                moveGroundAngle = 0f;
+            }
+
+            groundAngle = Vector3.Angle(hit.normal,transform.up);
+            Debug.Log(moveGroundAngle);
         }
     }
     private void OnDrawGizmos()
@@ -83,16 +101,25 @@ public class PlayerController : NetworkBehaviour
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
             //Debug.Log("Jump");
-            velocityY += Mathf.Sqrt(jumpHeight * -2f * gravity);
+            velocityY += Mathf.Sqrt(jumpHeight * 4f);
         }
 
         inputDirection = new Vector3(Input.GetAxisRaw("Horizontal"),0, Input.GetAxisRaw("Vertical")); //Get Inputs
         inputDirection.Normalize(); //Damit schräg laufen nicht schneller ist
 
-        currentDir = Vector2.SmoothDamp(currentDir, new Vector2(inputDirection.x,inputDirection.z), ref currentDirVelocity, moveSmoothTime); //Smooth movement change
+        if (isGrounded)
+        {
+            currentDir = moveDirection;
+        }
+        else
+        {
+            moveDirection = new Vector3(moveDirection.x, 0, moveDirection.z); 
+            currentDir = moveDirection;
+        }
 
+        currentDir = currentDir + new Vector3(0, velocityY, 0);
+        velocity = currentDir * walkSpeed;
 
-        Vector3 velocity = (transform.forward * currentDir.y + transform.right * currentDir.x) * walkSpeed + (Vector3.up * velocityY);
 
         controller.Move(velocity * Time.deltaTime);
 

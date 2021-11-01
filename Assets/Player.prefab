@@ -344,12 +344,14 @@ MonoBehaviour:
   syncInterval: 0.1
   walkSpeed: 6
   moveSmoothTime: 0.05
-  gravity: -13
-  jumpHeight: 2
+  gravity: -10
+  jumpHeight: 1
   groundCheck: {fileID: 6272346182417644039}
   groundMask:
     serializedVersion: 2
     m_Bits: 64
+  groundAngle: 0
+  moveGroundAngle: 0
   isGrounded: 0
 --- !u!114 &7273209952621479910
 MonoBehaviour:
