@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 681358948229890261}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.3586286, y: -0.5799999, z: -0.03139314}
+  m_LocalPosition: {x: 0, y: -0.5799999, z: 0.27}
   m_LocalScale: {x: 0.8, y: 0.2, z: 1}
   m_Children: []
   m_Father: {fileID: 981273033772084037}
@@ -267,7 +267,7 @@ GameObject:
   - component: {fileID: -4574526707603160507}
   - component: {fileID: 7273209952621479910}
   - component: {fileID: 4959463831902427506}
-  - component: {fileID: 9140532221617802975}
+  - component: {fileID: 5630859218361338035}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -304,10 +304,10 @@ CharacterController:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Height: 2
-  m_Radius: 0.5
+  m_Height: 1.8
+  m_Radius: 0.3
   m_SlopeLimit: 45
-  m_StepOffset: 0.1
+  m_StepOffset: 0.2
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 1, z: 0}
@@ -342,21 +342,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  playerCamera: {fileID: 6272346181657429396}
-  playerNeck: {fileID: 981273033772084037}
-  mouseSensitivity: 4
-  maxCameraAngle: 90
-  neckStartAngle: 0
-  minCameraAngle: -90
-  neckLength: 0.2
-  mouseSmoothTime: 0.001
-  lockCursor: 1
   walkSpeed: 6
   moveSmoothTime: 0.05
   gravity: -13
   jumpHeight: 2
   groundCheck: {fileID: 6272346182417644039}
-  groundDistance: 0.4
   groundMask:
     serializedVersion: 2
     m_Bits: 64
@@ -406,7 +396,7 @@ MonoBehaviour:
   syncInterval: 0.1
   color: {r: 1, g: 0, b: 0, a: 0}
   renderer: {fileID: 8824871639981994016}
---- !u!114 &9140532221617802975
+--- !u!114 &5630859218361338035
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -415,15 +405,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 6272346181302961293}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3317f24e780855847830f5662153b41d, type: 3}
+  m_Script: {fileID: 11500000, guid: a8493f0e2b0d4bd4f98d3cd81c2db5ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  isAlive: 0
-  clientId: 0
-  username: 
-  usernameTextObj: {fileID: 4824770690127859843}
+  playerCamera: {fileID: 6272346181657429396}
+  playerNeck: {fileID: 981273033772084037}
+  mouseSensitivity: 4
+  maxCameraAngle: 90
+  neckStartAngle: 0
+  minCameraAngle: -90
+  neckLength: 0.2
+  mouseSmoothTime: 0.001
+  lockCursor: 1
 --- !u!1 &6272346181657429393
 GameObject:
   m_ObjectHideFlags: 0
@@ -478,7 +473,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
+  near clip plane: 0.1
   far clip plane: 1000
   field of view: 61.4
   orthographic: 0
@@ -522,7 +517,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6272346182417644038}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6272346181302961296}
@@ -571,7 +566,6 @@ GameObject:
   - component: {fileID: 2458562619286483438}
   - component: {fileID: 390397068222218691}
   - component: {fileID: 8824871639981994016}
-  - component: {fileID: 5472825146870239901}
   m_Layer: 0
   m_Name: Capsule
   m_TagString: Untagged
@@ -608,7 +602,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8690889598169456425}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -643,17 +637,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &5472825146870239901
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8690889598169456425}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
