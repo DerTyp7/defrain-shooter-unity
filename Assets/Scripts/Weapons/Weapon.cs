@@ -17,41 +17,31 @@ public class Weapon : MonoBehaviour
     [SerializeField] int magazinSize = 0;
     [SerializeField] int totalAmmunition = 0;
     [SerializeField] ParticleSystem flash;
-    [SerializeField] ParticleSystem smoke;
     [SerializeField] GameObject bulletExit;
-    [SerializeField] GameObject cam;
-    [SerializeField] GameObject model;
 
-    private bool allowShoot = true, isReloading = false;
+    private bool allowShoot = true;
 
     public bool Active { get => active; set => active = value; }
     public weaponKinds WeaponKind { get => weaponKind; set => weaponKind = value; }
    
-    //Animator anim;
 
     private void Start()
     {
-        //anim = GetComponent<Animator>();
         currentAmmunition = magazinSize;
-        if (Physics.Raycast(cam.transform.position, cam.transform.forward, out RaycastHit hit)) // Not Working
-        {
-            transform.rotation = Quaternion.Euler(0f, hit.point.y, 0f);
-        }
     }
     private void FixedUpdate()
     {
         if (Input.GetButton("Fire") && allowShoot && currentAmmunition > 0)
         {
-            //anim.Play("USP_Shooting");
-            StartCoroutine(fireRate());
             fire();
+            StartCoroutine(fireRate());
             currentAmmunition--;
         }
         if (Input.GetButton("Reload"))
         {
-            if (isReloading == false && totalAmmunition > 0)
+            if (allowShoot && totalAmmunition > 0)
             {
-                isReloading = true;
+                allowShoot = false;
                 int dif = magazinSize - currentAmmunition; 
 
                 if(totalAmmunition >= dif) {
@@ -62,12 +52,12 @@ public class Weapon : MonoBehaviour
                     currentAmmunition += totalAmmunition;
                     totalAmmunition = 0;
                 }
-                isReloading = false;
+                allowShoot = true;
             }
         }
-        if (Input.GetButton("Aim")) // Not working properly, maybe Animations are not correct to use
+        if (Input.GetButton("Aim"))
         {
-            //anim.Play("USP_Aim");
+            
         }
         
     }
@@ -75,17 +65,11 @@ public class Weapon : MonoBehaviour
     {
         allowShoot = false;
         flash.Play();
-        //smoke.Play();
         RaycastHit hit; 
         
         if(Physics.Raycast(bulletExit.transform.position,bulletExit.transform.forward, out hit))
         {
             Debug.DrawLine(bulletExit.transform.position, hit.point);
-            /*if(hit.rigidbody != null)
-            {
-                hit.rigidbody.AddForce(hit.normal * 80);
-            }
-            Instantiate(bulletImpact, hit.point, Quaternion.LookRotation(hit.normal));*/
         }
         
     }
