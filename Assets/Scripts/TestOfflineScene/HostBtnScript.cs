@@ -11,6 +11,6 @@ public class HostBtnScript : MonoBehaviour
 
     public void HostServer()
     {
-        NetworkClient.ConnectHost();
+        GameObject.Find("GameManager").GetComponent<JoinLeaveManager>().Host();
     }
 }

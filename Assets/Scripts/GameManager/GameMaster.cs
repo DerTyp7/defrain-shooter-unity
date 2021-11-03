@@ -12,19 +12,10 @@ using UnityEngine;
 public class GameMaster : MonoBehaviour
 {
     [Header("GameMaster")]
-<<<<<<< Updated upstream
     [SerializeField] private List<Player> Players = new List<Player>(); 
-    private void Start()
-    {
-
-    }
-=======
-    [SerializeField] private List<Player> Players = new List<Player>();
     [SerializeField] private int countOfRounds = 10;
 
     public GameObject localPlayer;
-
->>>>>>> Stashed changes
 
     private void Update()
     {
@@ -41,13 +32,4 @@ public class GameMaster : MonoBehaviour
             Cursor.visible = false;
         }
     }
-<<<<<<< Updated upstream
-=======
-
-    
-
- 
-
-
->>>>>>> Stashed changes
 }
