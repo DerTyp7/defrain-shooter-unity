@@ -10,9 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 3422988367618467043}
   - component: {fileID: 3422988367618467039}
-  - component: {fileID: 3422988367618467036}
   - component: {fileID: 3422988367618467037}
   - component: {fileID: 3422988367618467038}
+  - component: {fileID: -5945522205665126515}
+  - component: {fileID: 3094132477016057847}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: GameController
@@ -30,6 +31,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -47,34 +49,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Players: []
+  countOfRounds: 10
   localPlayer: {fileID: 0}
---- !u!114 &3422988367618467036
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3422988367618467032}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 58bd0a0557e21bf4e8ea0e0cd4e9d057, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dontDestroyOnLoad: 1
-  PersistNetworkManagerToOfflineScene: 0
-  runInBackground: 1
-  autoStartServerBuild: 1
-  serverTickRate: 30
-  offlineScene: Assets/Scenes/TestOfflineScene.unity
-  onlineScene: Assets/Scenes/TestScene.unity
-  transport: {fileID: 3422988367618467037}
-  networkAddress: localhost
-  maxConnections: 100
-  authenticator: {fileID: 0}
-  playerPrefab: {fileID: 6272346181302961293, guid: 2935eead9a075fd489d6a6dc273a5999, type: 3}
-  autoCreatePlayer: 1
-  playerSpawnMethod: 0
-  spawnPrefabs: []
 --- !u!114 &3422988367618467037
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -114,3 +90,42 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   offsetX: 0
   offsetY: 0
+--- !u!114 &-5945522205665126515
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3422988367618467032}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b62b46838717d934483010f517c5b772, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3094132477016057847
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3422988367618467032}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8aab4c8111b7c411b9b92cf3dbc5bd4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dontDestroyOnLoad: 1
+  PersistNetworkManagerToOfflineScene: 0
+  runInBackground: 1
+  autoStartServerBuild: 1
+  serverTickRate: 30
+  offlineScene: Assets/Scenes/TestOfflineScene.unity
+  onlineScene: Assets/Scenes/TestScene.unity
+  transport: {fileID: 3422988367618467037}
+  networkAddress: localhost
+  maxConnections: 100
+  authenticator: {fileID: 0}
+  playerPrefab: {fileID: 6272346181302961293, guid: 2935eead9a075fd489d6a6dc273a5999, type: 3}
+  autoCreatePlayer: 1
+  playerSpawnMethod: 0
+  spawnPrefabs: []
