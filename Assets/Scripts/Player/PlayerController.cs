@@ -11,6 +11,8 @@ public class PlayerController : NetworkBehaviour
 
     [Header("Movement")]
     [SerializeField] private float walkSpeed = 6.0f;
+    [SerializeField] private float sprintSpeed = 10.0f;
+
     [SerializeField][Range(0.0f, 0.5f)] private float moveSmoothTime = 0.001f;
     [SerializeField] float gravity = -10.0f;
     [SerializeField] private float jumpHeight;
@@ -26,6 +28,7 @@ public class PlayerController : NetworkBehaviour
     [SerializeField] private float moveGroundAngle;
 
     public bool isGrounded;
+    private float movementSpeed;
     private float velocityY = 0.0f;
     private CharacterController controller;
 
@@ -84,6 +87,18 @@ public class PlayerController : NetworkBehaviour
             Debug.Log(moveGroundAngle);
         }
     }
+    private void Sprint() 
+    {
+        if (Input.GetAxisRaw("Sprint") > 0 && isGrounded)
+        {
+            //Debug.Log("Sprint");
+            movementSpeed = sprintSpeed;
+        }
+        else
+        {
+            movementSpeed = walkSpeed;
+        }
+    }
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
@@ -92,6 +107,8 @@ public class PlayerController : NetworkBehaviour
 
     private void UpdateMovement()
     {
+        
+        
         //Grounded
         velocityY += gravity * Time.deltaTime;
         if (isGrounded && velocityY < 0)
@@ -118,7 +135,7 @@ public class PlayerController : NetworkBehaviour
         }
 
         currentDir = currentDir + new Vector3(0, velocityY, 0);
-        velocity = currentDir * walkSpeed;
+        velocity = currentDir * movementSpeed;
 
 
         controller.Move(velocity * Time.deltaTime);

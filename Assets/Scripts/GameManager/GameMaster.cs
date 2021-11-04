@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Mirror;
 
 
 // Erstellung von Teams
@@ -12,10 +12,10 @@ using UnityEngine;
 public class GameMaster : MonoBehaviour
 {
     [Header("GameMaster")]
-    [SerializeField] private List<Player> Players = new List<Player>(); 
+    [SerializeField] private List<Player> Players = new List<Player>();
+    public GameObject localPlayer;
     private void Start()
     {
-
     }
 
     private void Update()
@@ -33,4 +33,8 @@ public class GameMaster : MonoBehaviour
             Cursor.visible = false;
         }
     }
+
+ 
+
+
 }
