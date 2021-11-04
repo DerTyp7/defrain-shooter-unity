@@ -9,9 +9,6 @@ public class Player : NetworkBehaviour
     public Team team;
     [SerializeField] private const int defaultHp = 100;
 
-
-    public ulong clientId;
-
     [SyncVar(hook = nameof(SetName))]
     public string username;
 
@@ -21,7 +18,6 @@ public class Player : NetworkBehaviour
     public override void OnStartLocalPlayer()
     {
         base.OnStartClient();
-
         //Load Player Username;
 
     }
