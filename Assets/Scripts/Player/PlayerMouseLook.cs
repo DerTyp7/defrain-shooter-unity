@@ -37,6 +37,7 @@ public class PlayerMouseLook : NetworkBehaviour
 
             playerCamera.gameObject.SetActive(true);
 
+
             if (lockCursor)
             {
                 Cursor.lockState = CursorLockMode.Locked;
