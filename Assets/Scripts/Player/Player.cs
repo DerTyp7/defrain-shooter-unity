@@ -5,23 +5,33 @@ using Mirror;
 
 public class Player : NetworkBehaviour
 {
-    public bool isAlive;
+    public bool isAlive = true;
     public Team team;
     [SerializeField] private const int defaultHp = 100;
 
 
     public ulong clientId;
 
-    [SyncVar(hook = nameof(SetName))]
+    [SyncVar(hook = nameof(SetName))] 
     public string username;
+
     [SerializeField] GameObject usernameTextObj;
 
-    private int health;
+    [SerializeField] [SyncVar]public int health = 100;
     private int kills;
     private int deaths;
+
+    private void Start()
+    {
+        if (isServer) 
+        {
+            health = defaultHp;
+        }
+    }
     public override void OnStartLocalPlayer()
     {
         base.OnStartClient();
+        
     }
 
     public void SetName(string oldName, string newName)
@@ -56,8 +66,11 @@ public class Player : NetworkBehaviour
     }
     public void RemoveHealth(int value)
     {
+
+        
         if (isAlive)
         {
+            Debug.Log("yeet" + value);
             health -= value;
             if (health <= 0)
             {

@@ -84,7 +84,6 @@ public class PlayerController : NetworkBehaviour
             }
 
             groundAngle = Vector3.Angle(hit.normal,transform.up);
-            Debug.Log(moveGroundAngle);
         }
     }
     private void Sprint() 
@@ -118,7 +117,7 @@ public class PlayerController : NetworkBehaviour
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
             //Debug.Log("Jump");
-            velocityY += Mathf.Sqrt(jumpHeight * 4f);
+            velocityY += Mathf.Sqrt(jumpHeight * -2f * gravity);
         }
 
         inputDirection = new Vector3(Input.GetAxisRaw("Horizontal"),0, Input.GetAxisRaw("Vertical")); //Get Inputs
