@@ -51,7 +51,9 @@ public class PlayerController : NetworkBehaviour
             Grounded();
             CheckGoundAngle();
             UpdateMovement();
+            
         }
+        
     }
     private void Grounded()
     {
@@ -86,18 +88,7 @@ public class PlayerController : NetworkBehaviour
             groundAngle = Vector3.Angle(hit.normal,transform.up);
         }
     }
-    private void Sprint() 
-    {
-        if (Input.GetAxisRaw("Sprint") > 0 && isGrounded)
-        {
-            //Debug.Log("Sprint");
-            movementSpeed = sprintSpeed;
-        }
-        else
-        {
-            movementSpeed = walkSpeed;
-        }
-    }
+
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
@@ -106,8 +97,19 @@ public class PlayerController : NetworkBehaviour
 
     private void UpdateMovement()
     {
-        
-        
+
+
+        if (Input.GetAxisRaw("Sprint") > 0 && isGrounded)
+        {
+            Debug.Log("Sprint");
+            movementSpeed = sprintSpeed;
+        }
+        else
+        {
+            movementSpeed = walkSpeed;
+        }
+
+        Debug.Log("ggg");
         //Grounded
         velocityY += gravity * Time.deltaTime;
         if (isGrounded && velocityY < 0)
