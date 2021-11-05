@@ -6,11 +6,6 @@ using Mirror;
 public class Shoot : NetworkBehaviour
 {
     [SerializeField] GameObject muzzle;
-
-    private void Start()
-    {
-
-    }
     private void Update()
     {
         if (isLocalPlayer)
@@ -18,24 +13,10 @@ public class Shoot : NetworkBehaviour
             if (Input.GetKeyDown(KeyCode.Mouse0))
             {
                 //CmdFireBullet();
-                RpcOnFire();
-                Debug.Log("Hit Left Mouse  ");
+                //RpcOnFire();
+                CmdFireBullet();
             }
         }
-    }
-    private void OnDrawGizmos()
-    {
-
-        if (!Input.GetKeyDown(KeyCode.Mouse0))
-        {
-            Gizmos.color = Color.red;
-        }
-        else 
-        {
-            Gizmos.color = Color.green;
-        }
-        Gizmos.DrawRay(muzzle.transform.position, muzzle.transform.forward);
-
     }
     
     [Command]
@@ -46,14 +27,10 @@ public class Shoot : NetworkBehaviour
         RaycastHit hit;
         if (Physics.Raycast(muzzle.transform.position, muzzle.transform.forward, out hit))
         {
-
             if (hit.transform.gameObject.GetComponent<Player>() != null)
             {
-                Debug.Log("Hit player:  " + hit.transform.gameObject.name);
                 dedplayer = hit.transform.gameObject;
-                //dedplayer.GetComponent<Player>().health -= 20;
                 dedplayer.GetComponent<Player>().RemoveHealth(20);
-
             }
         }
     }
@@ -63,7 +40,7 @@ public class Shoot : NetworkBehaviour
     // This code will be executed on the Client.
     void RpcOnFire()
     {
-        CmdFireBullet();
+
 
     }
 }

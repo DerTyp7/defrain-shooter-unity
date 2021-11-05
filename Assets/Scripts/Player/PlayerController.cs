@@ -28,6 +28,7 @@ public class PlayerController : NetworkBehaviour
     [SerializeField] private float moveGroundAngle;
 
     public bool isGrounded;
+    public bool isSprinting;
     private float movementSpeed;
     private float velocityY = 0.0f;
     private CharacterController controller;
@@ -103,15 +104,23 @@ public class PlayerController : NetworkBehaviour
         {
             Debug.Log("Sprint");
             movementSpeed = sprintSpeed;
+            isSprinting = true;
         }
         else
         {
             movementSpeed = walkSpeed;
+            isSprinting = false;
         }
 
-        Debug.Log("ggg");
         //Grounded
-        velocityY += gravity * Time.deltaTime;
+        if (velocityY < 0)
+        {
+            velocityY += gravity * Time.deltaTime;
+        }
+        else
+        {
+            velocityY += gravity * 1.0f * Time.deltaTime;
+        }
         if (isGrounded && velocityY < 0)
             velocityY = 0.0f;
 
@@ -135,8 +144,7 @@ public class PlayerController : NetworkBehaviour
             currentDir = moveDirection;
         }
 
-        currentDir = currentDir + new Vector3(0, velocityY, 0);
-        velocity = currentDir * movementSpeed;
+        velocity = currentDir * movementSpeed + new Vector3(0, velocityY, 0);
 
 
         controller.Move(velocity * Time.deltaTime);
