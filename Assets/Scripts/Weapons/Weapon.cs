@@ -12,73 +12,29 @@ public class Weapon : MonoBehaviour
     [SerializeField] bool active = false;
     [SerializeField] float damage = 0;
     [SerializeField] float firerate = 0;
+    [SerializeField] int roundsPerShot = 1;
     [SerializeField] float recoilStrength = 0;
     [SerializeField] int currentAmmunition = 0;
     [SerializeField] int magazinSize = 0;
     [SerializeField] int totalAmmunition = 0;
-    [SerializeField] ParticleSystem flash;
     [SerializeField] GameObject bulletExit;
-
-    private bool allowShoot = true;
+    [SerializeField] bool allowAction = true;
 
     public bool Active { get => active; set => active = value; }
     public weaponKinds WeaponKind { get => weaponKind; set => weaponKind = value; }
-   
+    public float Damage { get => damage; set => damage = value; }
+    public float Firerate { get => firerate; set => firerate = value; }
+    public int RoundsPerShot { get => roundsPerShot; set => roundsPerShot = value; }
+    public float RecoilStrength { get => recoilStrength; set => recoilStrength = value; }
+    public int CurrentAmmunition { get => currentAmmunition; set => currentAmmunition = value; }
+    public int MagazinSize { get => magazinSize; set => magazinSize = value; }
+    public int TotalAmmunition { get => totalAmmunition; set => totalAmmunition = value; }
+    public GameObject BulletExit { get => bulletExit; set => bulletExit = value; }
+    public bool AllowAction { get => allowAction; set => allowAction = value; }
 
     private void Start()
     {
-        currentAmmunition = magazinSize;
-    }
-    private void FixedUpdate()
-    {
-        if (Input.GetButton("Fire") && allowShoot && currentAmmunition > 0)
-        {
-            fire();
-            StartCoroutine(fireRate());
-            currentAmmunition--;
-        }
-        if (Input.GetButton("Reload"))
-        {
-            if (allowShoot && totalAmmunition > 0)
-            {
-                allowShoot = false;
-                int dif = magazinSize - currentAmmunition; 
-
-                if(totalAmmunition >= dif) {
-                    currentAmmunition += dif;
-                    totalAmmunition -= dif;
-                }
-                else{
-                    currentAmmunition += totalAmmunition;
-                    totalAmmunition = 0;
-                }
-                allowShoot = true;
-            }
-        }
-        if (Input.GetButton("Aim"))
-        {
-            
-        }
-        
-    }
-    private void fire()
-    {
-        allowShoot = false;
-        flash.Play();
-        RaycastHit hit; 
-        
-        if(Physics.Raycast(bulletExit.transform.position,bulletExit.transform.forward, out hit))
-        {
-            Debug.DrawLine(bulletExit.transform.position, hit.point);
-        }
-        
-    }
-
-    IEnumerator fireRate()
-    {
-        allowShoot = false;
-        yield return new WaitForSeconds(firerate);
-        allowShoot = true;
+        CurrentAmmunition = MagazinSize;
     }
 
 }

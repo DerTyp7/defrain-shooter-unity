@@ -81,7 +81,7 @@ public class PlayerController : NetworkBehaviour
             }
 
             groundAngle = Vector3.Angle(hit.normal,transform.up);
-            Debug.Log(moveGroundAngle);
+            //Debug.Log(moveGroundAngle);
         }
     }
     private void OnDrawGizmos()

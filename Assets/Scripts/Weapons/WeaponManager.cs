@@ -26,6 +26,8 @@ public class WeaponManager : MonoBehaviour
             { currentWeaponIndex = 0; }
             else {  currentWeaponIndex++; }
         }
+
+
         if (Input.GetButton("Interact")) // e
         { 
             if (Physics.Raycast(cam.transform.position, cam.transform.forward, out RaycastHit hit))
