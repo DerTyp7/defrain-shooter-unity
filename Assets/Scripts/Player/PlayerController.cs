@@ -11,6 +11,8 @@ public class PlayerController : NetworkBehaviour
 
     [Header("Movement")]
     [SerializeField] private float walkSpeed = 6.0f;
+    [SerializeField] private float sprintSpeed = 10.0f;
+
     [SerializeField][Range(0.0f, 0.5f)] private float moveSmoothTime = 0.001f;
     [SerializeField] float gravity = -10.0f;
     [SerializeField] private float jumpHeight;
@@ -26,6 +28,8 @@ public class PlayerController : NetworkBehaviour
     [SerializeField] private float moveGroundAngle;
 
     public bool isGrounded;
+    public bool isSprinting;
+    private float movementSpeed;
     private float velocityY = 0.0f;
     private CharacterController controller;
 
@@ -48,7 +52,9 @@ public class PlayerController : NetworkBehaviour
             Grounded();
             CheckGoundAngle();
             UpdateMovement();
+            
         }
+        
     }
     private void Grounded()
     {
@@ -81,9 +87,9 @@ public class PlayerController : NetworkBehaviour
             }
 
             groundAngle = Vector3.Angle(hit.normal,transform.up);
-            //Debug.Log(moveGroundAngle);
         }
     }
+
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
@@ -92,8 +98,29 @@ public class PlayerController : NetworkBehaviour
 
     private void UpdateMovement()
     {
+
+
+        if (Input.GetAxisRaw("Sprint") > 0 && isGrounded)
+        {
+            Debug.Log("Sprint");
+            movementSpeed = sprintSpeed;
+            isSprinting = true;
+        }
+        else
+        {
+            movementSpeed = walkSpeed;
+            isSprinting = false;
+        }
+
         //Grounded
-        velocityY += gravity * Time.deltaTime;
+        if (velocityY < 0)
+        {
+            velocityY += gravity * Time.deltaTime;
+        }
+        else
+        {
+            velocityY += gravity * 1.0f * Time.deltaTime;
+        }
         if (isGrounded && velocityY < 0)
             velocityY = 0.0f;
 
@@ -101,7 +128,7 @@ public class PlayerController : NetworkBehaviour
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
             //Debug.Log("Jump");
-            velocityY += Mathf.Sqrt(jumpHeight * 4f);
+            velocityY += Mathf.Sqrt(jumpHeight * -2f * gravity);
         }
 
         inputDirection = new Vector3(Input.GetAxisRaw("Horizontal"),0, Input.GetAxisRaw("Vertical")); //Get Inputs
@@ -117,8 +144,7 @@ public class PlayerController : NetworkBehaviour
             currentDir = moveDirection;
         }
 
-        currentDir = currentDir + new Vector3(0, velocityY, 0);
-        velocity = currentDir * walkSpeed;
+        velocity = currentDir * movementSpeed + new Vector3(0, velocityY, 0);
 
 
         controller.Move(velocity * Time.deltaTime);

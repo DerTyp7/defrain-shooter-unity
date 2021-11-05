@@ -14,7 +14,7 @@ public class PlayerMouseLook : NetworkBehaviour
     [SerializeField] private float neckStartAngle = 0f;
     [SerializeField] private float minCameraAngle = -90f;
 
-    [SerializeField] private float neckLength = 0.2f;
+    private float neckLength = 0.2f;
     [SerializeField] [Range(0.0f, 0.5f)] private float mouseSmoothTime = 0.001f;
     [SerializeField] private bool lockCursor = true;
 
@@ -36,6 +36,7 @@ public class PlayerMouseLook : NetworkBehaviour
             controller = GetComponent<CharacterController>();
 
             playerCamera.gameObject.SetActive(true);
+            neckLength = Vector3.Distance(playerNeck.position,playerCamera.position);
 
             if (lockCursor)
             {

@@ -13,10 +13,9 @@ public class GameMaster : MonoBehaviour
 {
     [Header("GameMaster")]
     [SerializeField] private List<Player> Players = new List<Player>(); 
-    private void Start()
-    {
+    [SerializeField] private int countOfRounds = 10;
 
-    }
+    public GameObject localPlayer;
 
     private void Update()
     {
@@ -33,4 +32,7 @@ public class GameMaster : MonoBehaviour
             Cursor.visible = false;
         }
     }
+
+
+
 }
