@@ -8,6 +8,14 @@ public class Shoot : NetworkBehaviour
     [SerializeField] GameObject muzzle;
     [SerializeField] ShootAnimation shootAnim;
     [SerializeField] float fireRate;
+
+    private void Start()
+    {
+        if (isLocalPlayer)
+        {
+            shootAnim.OnSwitchWeapon(fireRate);
+        }
+    }
     private void Update()
     {
         if (isLocalPlayer)
@@ -28,7 +36,7 @@ public class Shoot : NetworkBehaviour
         GameObject dedplayer;
         RaycastHit hit;
 
-        shootAnim.StartShootAnimation(60f/fireRate);
+        shootAnimation();
 
         if (Physics.Raycast(muzzle.transform.position, muzzle.transform.forward, out hit))
         {
@@ -43,9 +51,9 @@ public class Shoot : NetworkBehaviour
 
     [Client]
     // This code will be executed on the Client.
-    void RpcOnFire()
+    void shootAnimation()
     {
-
+        shootAnim.StartShootAnimation(fireRate);
 
     }
 }

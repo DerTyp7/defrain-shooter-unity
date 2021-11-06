@@ -76,7 +76,7 @@ public class PlayerMouseLook : NetworkBehaviour
         }
         playerCamera.position = playerNeck.position;
         playerCamera.position += playerNeck.up * neckLength;
-
+        
         transform.Rotate(Vector3.up * currentMouseDelta.x * mouseSensitivity); //Rotate the hole player if looked sideways (Rotates the player left and right)
     }
 

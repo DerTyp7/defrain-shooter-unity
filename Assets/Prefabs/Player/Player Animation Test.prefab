@@ -686,8 +686,8 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   muzzle: {fileID: 3649358604728444914}
-  shootAnim: {fileID: 0}
-  fireRate: 120
+  shootAnim: {fileID: 4276885029697240453}
+  fireRate: 320
 --- !u!114 &6207632454083444980
 MonoBehaviour:
   m_ObjectHideFlags: 0

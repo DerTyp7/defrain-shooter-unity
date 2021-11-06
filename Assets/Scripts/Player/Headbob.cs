@@ -18,12 +18,14 @@ public class Headbob : NetworkBehaviour
     [SerializeField] private Transform Neck;
 
     private Vector3 lastPos;
+    private Vector3 startPos;
     private Vector3 newPos;
     private float oldDist = 0;
     private float lerpVal = 0;
     private void Start()
     {
         lastPos = this.transform.position;
+        //startPos = this.transform.position;
     }
 
     private void Update()
@@ -53,19 +55,7 @@ public class Headbob : NetworkBehaviour
         }
         else
         {
-            Neck.localPosition = Vector3.zero;
-            if (false) {
-                Neck.localPosition = Vector3.Lerp(newPos, Vector3.zero, lerpVal);
-                if (lerpVal < 1)
-                {
-                    lerpVal = lerpVal + 0.01f;
-                }
-                else
-                {
-                    Neck.position = Vector3.zero;
-                }
-            }
-            
+            Neck.localPosition = Vector3.zero;            
         }
         
     }
