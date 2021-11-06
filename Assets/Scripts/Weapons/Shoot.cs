@@ -10,9 +10,13 @@ public class Shoot : NetworkBehaviour
     private Weapon weapon;
 
     Ammunition ammunition;
-
+    private RaycastHit crosshairHitPoint;
+    private Camera mCamera;
+    private Vector3 _pointDirection;
+    private Quaternion _lookRotation;
     private void Start()
     {
+        mCamera = Camera.main;
         weapon = weaponHolder.GetComponent<Weapon>();
     }
 
@@ -20,6 +24,7 @@ public class Shoot : NetworkBehaviour
     {
         if (isLocalPlayer)
         {
+
             if (Input.GetButton("Fire"))
             {
                 CmdFireBullet();
@@ -41,13 +46,23 @@ public class Shoot : NetworkBehaviour
         }
     }
 
-    [Command]
+   [Command]
     // This code will be executed on the Server.
     private void CmdFireBullet()
     {
+        Physics.Raycast(mCamera.transform.position, mCamera.transform.forward, out crosshairHitPoint);
+        Debug.DrawLine(mCamera.transform.position, crosshairHitPoint.point);
+        _pointDirection = crosshairHitPoint.point - muzzle.transform.position;
+        _lookRotation = Quaternion.LookRotation(_pointDirection);
+        weapon.transform.rotation = Quaternion.RotateTowards(weapon.transform.rotation, _lookRotation, 1f);
+        if (Physics.Raycast(muzzle.transform.position, muzzle.transform.forward, out RaycastHit hit) && weapon.CurrentAmmunition > 0)
+        {
+            Debug.DrawLine(muzzle.transform.position, hit.point);
+        }
+
         if (weapon.AllowAction)
         {
-            if (Physics.Raycast(muzzle.transform.position, muzzle.transform.forward, out RaycastHit hit) && weapon.CurrentAmmunition > 0)
+            if (Physics.Raycast(muzzle.transform.position, muzzle.transform.forward, out hit) && weapon.CurrentAmmunition > 0)
             {
                 Debug.DrawLine(muzzle.transform.position, hit.point);
                 Debug.Log("Geshooted BITCH");
@@ -65,7 +80,7 @@ public class Shoot : NetworkBehaviour
         }
         
     }
-
+    
     IEnumerator fireRate()
     {
         weapon.AllowAction = false;
