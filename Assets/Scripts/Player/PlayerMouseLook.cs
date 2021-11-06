@@ -70,7 +70,6 @@ public class PlayerMouseLook : NetworkBehaviour
         }
         else
         {
-            playerNeck.localEulerAngles = Vector3.right * 0f;
             playerCamera.localEulerAngles = Vector3.right * fullPitch;
 
 

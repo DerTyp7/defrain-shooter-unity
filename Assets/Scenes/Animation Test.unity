@@ -302,7 +302,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1113968959
 GameObject:
@@ -419,7 +419,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3422988367618467043, guid: b62548b3f87093b4dbc561f3dd1abcb8, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3422988367618467043, guid: b62548b3f87093b4dbc561f3dd1abcb8, type: 3}
       propertyPath: m_LocalPosition.x
@@ -463,3 +463,89 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b62548b3f87093b4dbc561f3dd1abcb8, type: 3}
+--- !u!1001 &1852602306
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 320375778840406984, guid: a14d876ac00bdf6498e30b3e58b68fdf, type: 3}
+      propertyPath: sceneId
+      value: 1961350237
+      objectReference: {fileID: 0}
+    - target: {fileID: 6272346181302961293, guid: a14d876ac00bdf6498e30b3e58b68fdf, type: 3}
+      propertyPath: m_Name
+      value: Player Animation Test
+      objectReference: {fileID: 0}
+    - target: {fileID: 6272346181302961296, guid: a14d876ac00bdf6498e30b3e58b68fdf, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6272346181302961296, guid: a14d876ac00bdf6498e30b3e58b68fdf, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6272346181302961296, guid: a14d876ac00bdf6498e30b3e58b68fdf, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 6272346181302961296, guid: a14d876ac00bdf6498e30b3e58b68fdf, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6272346181302961296, guid: a14d876ac00bdf6498e30b3e58b68fdf, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6272346181302961296, guid: a14d876ac00bdf6498e30b3e58b68fdf, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6272346181302961296, guid: a14d876ac00bdf6498e30b3e58b68fdf, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6272346181302961296, guid: a14d876ac00bdf6498e30b3e58b68fdf, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6272346181302961296, guid: a14d876ac00bdf6498e30b3e58b68fdf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6272346181302961296, guid: a14d876ac00bdf6498e30b3e58b68fdf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6272346181302961296, guid: a14d876ac00bdf6498e30b3e58b68fdf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a14d876ac00bdf6498e30b3e58b68fdf, type: 3}
+--- !u!1 &1978909960 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6576156620079053231, guid: a14d876ac00bdf6498e30b3e58b68fdf, type: 3}
+  m_PrefabInstance: {fileID: 1852602306}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1978909962
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1978909960}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

@@ -17,7 +17,6 @@ public class Headbob : NetworkBehaviour
     [SerializeField] [Range(0.01f, 10.0f)] private float stepFrequency;
     [SerializeField] private Transform Neck;
 
-    private Vector3 startPos;
     private Vector3 lastPos;
     private Vector3 newPos;
     private float oldDist = 0;
@@ -25,8 +24,6 @@ public class Headbob : NetworkBehaviour
     private void Start()
     {
         lastPos = this.transform.position;
-        startPos = this.transform.position;
-
     }
 
     private void Update()
@@ -56,7 +53,18 @@ public class Headbob : NetworkBehaviour
         }
         else
         {
-            Neck.localPosition = startPos;
+            Neck.localPosition = Vector3.zero;
+            if (false) {
+                Neck.localPosition = Vector3.Lerp(newPos, Vector3.zero, lerpVal);
+                if (lerpVal < 1)
+                {
+                    lerpVal = lerpVal + 0.01f;
+                }
+                else
+                {
+                    Neck.position = Vector3.zero;
+                }
+            }
             
         }
         
