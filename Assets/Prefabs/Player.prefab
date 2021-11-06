@@ -390,7 +390,49 @@ MonoBehaviour:
   showGizmos: 1
   showOverlay: 1
   overlayColor: {r: 0, g: 0, b: 0, a: 0.5}
+<<<<<<< Updated upstream
 --- !u!114 &5317111308216027170
+=======
+--- !u!114 &4959463831902427506
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6272346181302961293}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00dc60b61b501f2419e2abd7158be5f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  color: {r: 1, g: 0, b: 0, a: 0}
+  renderer: {fileID: 8824871639981994016}
+--- !u!114 &5630859218361338035
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6272346181302961293}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8493f0e2b0d4bd4f98d3cd81c2db5ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  playerCamera: {fileID: 6272346181657429396}
+  playerNeck: {fileID: 981273033772084037}
+  mouseSensitivity: 4
+  maxCameraAngle: 90
+  neckStartAngle: 0
+  minCameraAngle: -90
+  mouseSmoothTime: 0.001
+  lockCursor: 1
+--- !u!114 &8436279266335313624
+>>>>>>> Stashed changes
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -406,9 +448,82 @@ MonoBehaviour:
   syncInterval: 0.1
   isAlive: 0
   clientId: 0
+<<<<<<< Updated upstream
   username: Janis
   usernameTextObj: {fileID: 4824770690127859843}
 --- !u!114 &4959463831902427506
+=======
+  username: 
+  usernameTextObj: {fileID: 0}
+  health: 0
+--- !u!114 &268368477457052331
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6272346181302961293}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4db7caf602ce379408a59c8722e06e46, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  playerController: {fileID: -4574526707603160507}
+  posCheckDistance: 1
+  checkDist: 0
+  stepAmplitudeWalking: 0.05
+  stepAmplitudeSprinting: 0.07
+  stepFrequency: 0.8
+  Neck: {fileID: 6272346181657429396}
+--- !u!114 &3781802212159559521
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6272346181302961293}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc5bc2b49bd326e4db460a6a3af59311, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  muzzle: {fileID: 3649358604728444914}
+--- !u!114 &6207632454083444980
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6272346181302961293}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 734b48bea0b204338958ee3d885e11f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  clientAuthority: 1
+  sendInterval: 0.05
+  syncPosition: 1
+  syncRotation: 1
+  syncScale: 0
+  interpolatePosition: 1
+  interpolateRotation: 1
+  interpolateScale: 0
+  bufferTimeMultiplier: 1
+  bufferSizeLimit: 64
+  catchupThreshold: 4
+  catchupMultiplier: 0.1
+  showGizmos: 0
+  showOverlay: 0
+  overlayColor: {r: 0, g: 0, b: 0, a: 0.5}
+  target: {fileID: 6272346181657429396}
+--- !u!114 &1509131218531316230
+>>>>>>> Stashed changes
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

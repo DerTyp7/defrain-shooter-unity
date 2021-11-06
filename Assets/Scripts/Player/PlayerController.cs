@@ -32,12 +32,28 @@ public class PlayerController : NetworkBehaviour
     [SerializeField] private float groundDistance = 0.4f;
     [SerializeField] private LayerMask groundMask;
 
+<<<<<<< Updated upstream
+=======
+    [Header("Ground Angle")]
+    [SerializeField] private float groundAngle;
+    [SerializeField] private float moveGroundAngle;
+
+    [Header("bullets per minute")]
+    [SerializeField] private float bulletsPerMinute = 120f;
+    [SerializeField] private bool canFire = true;
+
+
+
+    [SerializeField] private GameObject gun;
+
+>>>>>>> Stashed changes
     public bool isGrounded;
     private float fullPitch = 0f;
     private float cameraPitch = 0f;
     private float neckPitch = 0f;
     private float velocityY = 0.0f;
     private CharacterController controller;
+    [SerializeField]private Animator anim;
 
     private Vector2 currentDir = Vector2.zero;
     private Vector2 currentDirVelocity = Vector2.zero;
@@ -48,6 +64,7 @@ public class PlayerController : NetworkBehaviour
 
     private void Start()
     {
+        anim = gun.GetComponent<Animator>();
         if (isLocalPlayer)
         {
             controller = GetComponent<CharacterController>();
@@ -93,6 +110,7 @@ public class PlayerController : NetworkBehaviour
             playerCamera.localEulerAngles = Vector3.right * fullPitch;
 
 
+<<<<<<< Updated upstream
         }
         playerCamera.position = playerNeck.position;
         playerCamera.position += playerNeck.up * neckLength;
@@ -101,6 +119,59 @@ public class PlayerController : NetworkBehaviour
     }
     private void UpdateMovement()
     {
+=======
+    IEnumerator OnGunReset()
+    {
+        //gun.GetComponent<Animator>().SetTrigger("shootTrigger");
+        //gun.GetComponent<Animator>().Play("Shoot");
+        anim.Play("Shoot");
+        yield return new WaitForSeconds(anim.GetCurrentAnimatorStateInfo(0).normalizedTime);
+        Debug.Log(anim.GetCurrentAnimatorStateInfo(0).speed);
+        //Debug.Log(anim.GetNextAnimatorStateInfo(0).speed);
+        
+        yield return new WaitForSeconds(0.5f/3f);
+
+        canFire = true;
+    }
+    IEnumerator reset()
+    {
+        yield return new WaitForSeconds(60f / bulletsPerMinute);
+        Debug.Log(60f / bulletsPerMinute);
+        canFire = true;
+    }
+
+
+        private void UpdateMovement()
+    {
+        
+
+        if (Input.GetButton("Fire1") && canFire)
+        {
+            
+            canFire = false;
+            anim.PlayInFixedTime("Base Layer.Shoot", 0, bulletsPerMinute);
+            StartCoroutine("reset");
+            //StartCoroutine("OnGunReset");
+            //Debug.Log(anim.GetCurrentAnimatorStateInfo(0).speed);
+           //Debug.Log(anim.GetCurrentAnimatorClipInfo(0).Length);
+            //Debug.Log("mult " + anim.GetNextAnimatorStateInfo(0).speedMultiplier);
+
+
+        }
+       // Debug.Log("2 " + canFire);
+        if (Input.GetAxisRaw("Sprint") > 0 && isGrounded)
+        {
+            Debug.Log("Sprint");
+            movementSpeed = sprintSpeed;
+            isSprinting = true;
+        }
+        else
+        {
+            movementSpeed = walkSpeed;
+            isSprinting = false;
+        }
+
+>>>>>>> Stashed changes
         //Grounded
         velocityY += gravity * Time.deltaTime;
         if (isGrounded && velocityY < 0)
