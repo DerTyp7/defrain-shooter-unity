@@ -6,6 +6,8 @@ using Mirror;
 public class Shoot : NetworkBehaviour
 {
     [SerializeField] GameObject muzzle;
+    [SerializeField] ShootAnimation shootAnim;
+    [SerializeField] float fireRate;
     private void Update()
     {
         if (isLocalPlayer)
@@ -25,6 +27,9 @@ public class Shoot : NetworkBehaviour
     {
         GameObject dedplayer;
         RaycastHit hit;
+
+        shootAnim.StartShootAnimation(60f/fireRate);
+
         if (Physics.Raycast(muzzle.transform.position, muzzle.transform.forward, out hit))
         {
             if (hit.transform.gameObject.GetComponent<Player>() != null)
