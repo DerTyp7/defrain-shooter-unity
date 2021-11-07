@@ -102,7 +102,7 @@ public class PlayerController : NetworkBehaviour
 
         if (Input.GetAxisRaw("Sprint") > 0 && isGrounded)
         {
-            Debug.Log("Sprint");
+            //Debug.Log("Sprint");
             movementSpeed = sprintSpeed;
             isSprinting = true;
         }
@@ -115,11 +115,11 @@ public class PlayerController : NetworkBehaviour
         //Grounded
         if (velocityY < 0)
         {
-            velocityY += gravity * Time.deltaTime;
+            velocityY += gravity * 0.9f * Time.deltaTime;
         }
         else
         {
-            velocityY += gravity * 1.0f * Time.deltaTime;
+            velocityY += gravity* Time.deltaTime;
         }
         if (isGrounded && velocityY < 0)
             velocityY = 0.0f;

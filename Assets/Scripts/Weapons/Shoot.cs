@@ -8,6 +8,7 @@ public class Shoot : NetworkBehaviour
     [SerializeField] GameObject muzzle;
     [SerializeField] ShootAnimation shootAnim;
     [SerializeField] float fireRate;
+    [SerializeField] GameObject gunHoldPos;
 
     private void Start()
     {
@@ -38,6 +39,7 @@ public class Shoot : NetworkBehaviour
 
         shootAnimation();
 
+
         if (Physics.Raycast(muzzle.transform.position, muzzle.transform.forward, out hit))
         {
             if (hit.transform.gameObject.GetComponent<Player>() != null)
@@ -53,7 +55,7 @@ public class Shoot : NetworkBehaviour
     // This code will be executed on the Client.
     void shootAnimation()
     {
-        shootAnim.StartShootAnimation(fireRate);
-
+       //shootAnim.StartShootAnimation(fireRate);
+        shootAnim.recoil(gunHoldPos,0.1f);
     }
 }

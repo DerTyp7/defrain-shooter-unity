@@ -688,6 +688,7 @@ MonoBehaviour:
   muzzle: {fileID: 3649358604728444914}
   shootAnim: {fileID: 4276885029697240453}
   fireRate: 320
+  gunHoldPos: {fileID: 3682030003239559187}
 --- !u!114 &6207632454083444980
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -797,6 +798,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gun: {fileID: 3682030003239559187}
+  zOffset: 0
+  returnForce: 0.006
+  impulsForce: 0.03
+  maxRecoil: 0.1
 --- !u!1 &6272346181657429393
 GameObject:
   m_ObjectHideFlags: 0
@@ -1076,7 +1081,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d1ac7df45c0d7e84993ff57afe3c4d6f, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d1ac7df45c0d7e84993ff57afe3c4d6f, type: 3}
       propertyPath: m_LocalRotation.y
@@ -1084,7 +1089,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d1ac7df45c0d7e84993ff57afe3c4d6f, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d1ac7df45c0d7e84993ff57afe3c4d6f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
