@@ -23,8 +23,6 @@ public class Shoot : NetworkBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Mouse0))
             {
-                //CmdFireBullet();
-                //RpcOnFire();
                 CmdFireBullet();
             }
         }
@@ -55,7 +53,6 @@ public class Shoot : NetworkBehaviour
     // This code will be executed on the Client.
     void shootAnimation()
     {
-       //shootAnim.StartShootAnimation(fireRate);
         shootAnim.recoil(gunHoldPos,0.1f);
     }
 }
