@@ -22,12 +22,25 @@ public class ShootAnimation : MonoBehaviour
     [SerializeField] float positionMultZ = 25f;
 
     [Header("Rotation Settings")]
+    [SerializeField] PlayerMouseLook playerMouseLook;
+    [SerializeField] float cameraRecoilX = 0.1f;
+    [SerializeField] float cameraRecoilY = 0.1f;
+
+
     [SerializeField] bool rotX = true;
     [SerializeField] float rotationMultX = 25f;
+    [SerializeField] float rotationOffsetX = 0.1f;
     [SerializeField] bool rotY = true;
     [SerializeField] float rotationMultY = 25f;
     [SerializeField] bool rotZ = true;
     [SerializeField] float rotationMultZ = 15f;
+
+    [Header("Swey Settings")]
+    [SerializeField] AimDownSights ADSController;
+    [SerializeField] bool sideSwey = true;
+    [SerializeField] float sweyMult = 15f;
+    [SerializeField] float sweyWhileAim = 0.1f;
+    float swey = 0f;
 
 
 
@@ -59,9 +72,18 @@ public class ShootAnimation : MonoBehaviour
     {
         //Play the animation
         anim.Play("Shoot");
-
+        playerMouseLook.fullPitch -= cameraRecoilX * Mathf.PerlinNoise(Time.time * 3f + 10f, 1f);
+        transform.Rotate(Vector3.up * ((Mathf.PerlinNoise(Time.time * 1f + 10f, 1f) - 0.5f) * 2f) * cameraRecoilY);
         //Add force for the recoil
         recoilCounter++;
+    }
+
+    public void gunSideSwey(float sinVal,float moveInput) 
+    {
+
+            swey = (sweyMult * sinVal * moveInput * 0.7f
+                 + sweyMult * sinVal * moveInput * ((Mathf.PerlinNoise(Time.time * 1f + 10f, 1f) - 0.5f) * 2f) * 0.3f) * Mathf.Clamp((1 - ADSController.aimVal) * (1 - ADSController.aimVal), sweyWhileAim,1f);
+        
     }
 
 
@@ -93,9 +115,12 @@ public class ShootAnimation : MonoBehaviour
         //Position recoil
         if (positionRecoil)
         {
+            int sideLock = 0;
+
+            if (sideSwey) sideLock = 1;
             gunPositionObj.transform.localPosition = startPos + new Vector3(
-                positionMultX * zOffset * ((Mathf.PerlinNoise(Time.time * 1f + 10f, 1f) - 0.5f) * 2f),
-                positionMultY * zOffset * ((Mathf.PerlinNoise(Time.time * 2f + 20f, 2f) - 0.5f) * 2f),
+                positionMultX * zOffset * ((Mathf.PerlinNoise(Time.time * 1f + 10f, 1f) - 0.5f) * 2f) + sideLock * swey,
+                positionMultY * zOffset * Mathf.PerlinNoise(Time.time * 2f + 20f, 2f),
                 positionMultZ* zOffset * ((Mathf.PerlinNoise(Time.time * 3f + 30f, 3f) - 0.5f) * 2f));
         }
         else 
@@ -109,13 +134,15 @@ public class ShootAnimation : MonoBehaviour
             int xLock = 0;
             int yLock = 0;
             int zLock = 0;
+            
 
             if (rotX) xLock = 1;
             if (rotY) yLock = 1;
             if (rotZ) zLock = 1;
+            
 
             gunRotationObj.transform.localRotation = Quaternion.Euler(
-                startRot.x + xLock * rotationMultX * zOffset * ((Mathf.PerlinNoise(Time.time * 3f + 30f, 4f) - 0.5f) * 2f),
+                startRot.x + xLock * rotationMultX * zOffset * Mathf.PerlinNoise(Time.time * 3f + 30f, 4f),
                 startRot.y + yLock * rotationMultY * zOffset * ((Mathf.PerlinNoise(Time.time * 2f + 10f, 3f) - 0.5f) * 2f),
                 startRot.z + zLock * rotationMultZ * zOffset * ((Mathf.PerlinNoise(Time.time * 1.5f, 2f) - 0.5f) * 2f));
         }

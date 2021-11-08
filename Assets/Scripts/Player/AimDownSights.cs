@@ -5,7 +5,7 @@ using UnityEngine;
 public class AimDownSights : MonoBehaviour
 {
     [SerializeField] float aimSpeed = 0.01f;
-    [SerializeField][Range(0,1)] float aimVal = 0;
+    [SerializeField][Range(0,1)] public  float aimVal = 0;
     [SerializeField] private GameObject gun;
     [SerializeField] GameObject AimPoint;
     [SerializeField] GameObject HoldPoint;
@@ -15,9 +15,8 @@ public class AimDownSights : MonoBehaviour
         
         return true;
     }
-    private void Update()
+    private void FixedUpdate()
     {
-        Debug.Log(Input.GetButton("Aim"));
         if (Input.GetButton("Aim")) 
         {
             isAiming = true;
@@ -29,7 +28,7 @@ public class AimDownSights : MonoBehaviour
             aimVal -= aimSpeed;
         }
         aimVal = Mathf.Clamp(aimVal,0,1);
-        
-        gun.transform.position = Vector3.Lerp(HoldPoint.transform.position, AimPoint.transform.position, aimVal);
+
+        gun.transform.position = Vector3.Lerp(HoldPoint.transform.position, AimPoint.transform.position,Mathf.Pow(aimVal,1.3f)) ;
     }
 }
