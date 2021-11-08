@@ -319,6 +319,37 @@ Transform:
   m_Father: {fileID: 4058555163434875561}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: -90, y: 90, z: 0}
+--- !u!1 &2992488853448454767
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1468248131875751636}
+  m_Layer: 0
+  m_Name: GunAimPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1468248131875751636
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2992488853448454767}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6272346181657429396}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3649358604728444914
 GameObject:
   m_ObjectHideFlags: 0
@@ -558,6 +589,7 @@ GameObject:
   - component: {fileID: 8957579265169979397}
   - component: {fileID: 3965891812990671158}
   - component: {fileID: 4276885029697240453}
+  - component: {fileID: 7198056240135858432}
   m_Layer: 0
   m_Name: Player Animation Test
   m_TagString: Player
@@ -912,6 +944,24 @@ MonoBehaviour:
   returnForce: 0.006
   impulsForce: 0.025
   maxRecoil: 0.1
+--- !u!114 &7198056240135858432
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6272346181302961293}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 916f2d37f60a91149bbca3280a1b69ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  aimSpeed: 0.03
+  aimVal: 1
+  gun: {fileID: 6522444664664986769}
+  AimPoint: {fileID: 2992488853448454767}
+  HoldPoint: {fileID: 8043317747957554736}
+  isAiming: 0
 --- !u!1 &6272346181657429393
 GameObject:
   m_ObjectHideFlags: 0
@@ -945,6 +995,7 @@ Transform:
   - {fileID: 5021921342190399731}
   - {fileID: 4074665071222326704}
   - {fileID: 1979435770070801855}
+  - {fileID: 1468248131875751636}
   m_Father: {fileID: 981273033772084037}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1045,7 +1096,7 @@ GameObject:
   - component: {fileID: 4074665071222326704}
   - component: {fileID: 909517976577723968}
   m_Layer: 0
-  m_Name: GunHoldPoint
+  m_Name: GunHolster
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1059,7 +1110,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6522444664664986769}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.005, z: 0.5}
+  m_LocalPosition: {x: 0, y: 0, z: 0.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1245,7 +1296,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1979435770070801855}
   m_Layer: 0
-  m_Name: GunHolsterPoint
+  m_Name: GunHoldPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1259,7 +1310,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8043317747957554736}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.0500001, z: 0}
+  m_LocalPosition: {x: 0.134, y: -0.115, z: 0.397}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
