@@ -6,18 +6,27 @@ using Mirror;
 public class Shoot : NetworkBehaviour
 {
     [SerializeField] GameObject muzzle;
+    [SerializeField] ShootAnimation shootAnim;
+    [SerializeField] GameObject gunHoldPos;
     [SerializeField] GameObject weaponHolder;
-    private Weapon weapon;
+    [SerializeField] GameObject GunRotation;
+    
 
     Ammunition ammunition;
+    private Weapon weapon;
     private RaycastHit crosshairHitPoint;
     private Camera mCamera;
     private Vector3 _pointDirection;
     private Quaternion _lookRotation;
     private void Start()
     {
-        mCamera = Camera.main;
-        weapon = weaponHolder.GetComponent<Weapon>();
+        
+        if (isLocalPlayer)
+        {
+            mCamera = Camera.main;
+            weapon = weaponHolder.GetComponent<Weapon>();
+            shootAnim.OnSwitchWeapon(weapon.Firerate);
+        }
     }
 
     private void Update()
@@ -50,17 +59,18 @@ public class Shoot : NetworkBehaviour
     // This code will be executed on the Server.
     private void CmdFireBullet()
     {
-        Physics.Raycast(mCamera.transform.position, mCamera.transform.forward, out crosshairHitPoint);
-        Debug.DrawLine(mCamera.transform.position, crosshairHitPoint.point);
-        _pointDirection = crosshairHitPoint.point - muzzle.transform.position;
-        _lookRotation = Quaternion.LookRotation(_pointDirection);
-        weapon.transform.rotation = Quaternion.RotateTowards(weapon.transform.rotation, _lookRotation, 1f);
-        if (Physics.Raycast(muzzle.transform.position, muzzle.transform.forward, out RaycastHit hit) && weapon.CurrentAmmunition > 0)
+        RaycastHit hit;
+        Ray ray = new Ray(mCamera.transform.position, mCamera.transform.forward);
+        Physics.Raycast(ray, out crosshairHitPoint, 5000f);
+        
+        if (crosshairHitPoint.distance != 0 && crosshairHitPoint.distance < 2) // Turning Weapon to shooting point
         {
-            Debug.DrawLine(muzzle.transform.position, hit.point);
+            _pointDirection = crosshairHitPoint.point - muzzle.transform.position;
+            _lookRotation = Quaternion.LookRotation(_pointDirection);
+            GunRotation.transform.rotation = Quaternion.RotateTowards(GunRotation.transform.rotation, _lookRotation, 1f);
         }
 
-        if (weapon.AllowAction)
+        if (weapon.AllowAction) // shooting
         {
             if (Physics.Raycast(muzzle.transform.position, muzzle.transform.forward, out hit) && weapon.CurrentAmmunition > 0)
             {
@@ -80,11 +90,15 @@ public class Shoot : NetworkBehaviour
         }
         
     }
-    
+    [Client]
+    void shootAnimation()
+    {
+        shootAnim.recoil(gunHoldPos, 0.1f);
+    }
     IEnumerator fireRate()
     {
         weapon.AllowAction = false;
-        yield return new WaitForSeconds(weapon.Firerate);
+        yield return new WaitForSeconds(60f/weapon.Firerate);
         weapon.AllowAction = true;
     }
 
