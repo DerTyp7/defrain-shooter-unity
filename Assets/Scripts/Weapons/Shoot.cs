@@ -59,23 +59,30 @@ public class Shoot : NetworkBehaviour
     // This code will be executed on the Server.
     private void CmdFireBullet()
     {
+        Debug.Log(mCamera.transform.forward);
+        Vector3 hitpos;
         RaycastHit hit;
         Ray ray = new Ray(mCamera.transform.position, mCamera.transform.forward);
-        Physics.Raycast(ray, out crosshairHitPoint, 5000f);
-        
-        if (crosshairHitPoint.distance != 0 && crosshairHitPoint.distance < 2) // Turning Weapon to shooting point
-        {
-            _pointDirection = crosshairHitPoint.point - muzzle.transform.position;
-            _lookRotation = Quaternion.LookRotation(_pointDirection);
-            GunRotation.transform.rotation = Quaternion.RotateTowards(GunRotation.transform.rotation, _lookRotation, 1f);
+        if(Physics.Raycast(ray, out crosshairHitPoint, 5000f)){
+
+            hitpos = crosshairHitPoint.point;
         }
+        else
+        {
+            hitpos = mCamera.transform.position + mCamera.transform.forward * 5000;
+        }
+        _pointDirection = hitpos - muzzle.transform.position;
+        _lookRotation = Quaternion.LookRotation(_pointDirection);
+        GunRotation.transform.rotation = Quaternion.RotateTowards(GunRotation.transform.rotation, _lookRotation, 1f);
 
         if (weapon.AllowAction) // shooting
         {
+            shootAnimation();
             if (Physics.Raycast(muzzle.transform.position, muzzle.transform.forward, out hit) && weapon.CurrentAmmunition > 0)
             {
                 Debug.DrawLine(muzzle.transform.position, hit.point);
-                Debug.Log("Geshooted BITCH");
+
+                Debug.Log("Distance: " + hit.distance);
                 if (hit.transform.gameObject.GetComponent<Player>() != null)
                 {
                     Debug.Log("GETROFFEN------------------");
