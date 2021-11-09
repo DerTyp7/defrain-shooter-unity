@@ -20,8 +20,7 @@ public class Ammunition : MonoBehaviour
     public bool subtractAmmunition(Weapon weapon)
     {
         if (weapon.CurrentAmmunition > 0) {
-            weapon.CurrentAmmunition -= weapon.RoundsPerShot;
-            Debug.Log(weapon.CurrentAmmunition + " - " + weapon.RoundsPerShot);
+            weapon.CurrentAmmunition -= 1;
             return true;
         }
         return false;

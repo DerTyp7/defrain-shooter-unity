@@ -70,7 +70,7 @@ public class Player : NetworkBehaviour
         
         if (isAlive)
         {
-            Debug.Log("yeet" + value);
+            /*Debug.Log("yeet" + value);*/
             health -= value;
             if (health <= 0)
             {

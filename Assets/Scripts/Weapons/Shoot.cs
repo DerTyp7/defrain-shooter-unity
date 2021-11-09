@@ -7,7 +7,6 @@ public class Shoot : NetworkBehaviour
 {
     [SerializeField] GameObject muzzle;
     [SerializeField] ShootAnimation shootAnim;
-    [SerializeField] GameObject gunHoldPos;
     [SerializeField] GameObject weaponHolder;
     [SerializeField] GameObject GunRotation;
     
@@ -18,9 +17,11 @@ public class Shoot : NetworkBehaviour
     private Camera mCamera;
     private Vector3 _pointDirection;
     private Quaternion _lookRotation;
+    private Vector3 hitpos;
+    private RaycastHit hit;
+    private Ray ray;
     private void Start()
     {
-        
         if (isLocalPlayer)
         {
             mCamera = Camera.main;
@@ -31,14 +32,14 @@ public class Shoot : NetworkBehaviour
 
     private void Update()
     {
+        Debug.Log("Test");
         if (isLocalPlayer)
         {
-
-            if (Input.GetButton("Fire"))
+            if (Input.GetButtonDown("Fire"))
             {
                 CmdFireBullet();
             }
-            if (Input.GetButton("Reload"))
+            if (Input.GetButtonDown("Reload"))
             {
                 CmdReloadWeapon();
             }
@@ -59,10 +60,7 @@ public class Shoot : NetworkBehaviour
     // This code will be executed on the Server.
     private void CmdFireBullet()
     {
-        Debug.Log(mCamera.transform.forward);
-        Vector3 hitpos;
-        RaycastHit hit;
-        Ray ray = new Ray(mCamera.transform.position, mCamera.transform.forward);
+        ray = new Ray(mCamera.transform.position, mCamera.transform.forward);
         if(Physics.Raycast(ray, out crosshairHitPoint, 5000f)){
 
             hitpos = crosshairHitPoint.point;
@@ -75,14 +73,13 @@ public class Shoot : NetworkBehaviour
         _lookRotation = Quaternion.LookRotation(_pointDirection);
         GunRotation.transform.rotation = Quaternion.RotateTowards(GunRotation.transform.rotation, _lookRotation, 1f);
 
-        if (weapon.AllowAction) // shooting
+        if (weapon.AllowAction)
         {
-            shootAnimation();
             if (Physics.Raycast(muzzle.transform.position, muzzle.transform.forward, out hit) && weapon.CurrentAmmunition > 0)
             {
+                shootAnimation();
                 Debug.DrawLine(muzzle.transform.position, hit.point);
-
-                Debug.Log("Distance: " + hit.distance);
+                Debug.Log(hit.transform.name);
                 if (hit.transform.gameObject.GetComponent<Player>() != null)
                 {
                     Debug.Log("GETROFFEN------------------");
@@ -100,7 +97,7 @@ public class Shoot : NetworkBehaviour
     [Client]
     void shootAnimation()
     {
-        shootAnim.recoil(gunHoldPos, 0.1f);
+        shootAnim.recoil(0.1f);
     }
     IEnumerator fireRate()
     {

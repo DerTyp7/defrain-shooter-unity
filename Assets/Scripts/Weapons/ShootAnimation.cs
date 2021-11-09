@@ -68,7 +68,7 @@ public class ShootAnimation : MonoBehaviour
     }
 
 
-    public void recoil(GameObject gun, float force)
+    public void recoil(float force)
     {
         //Play the animation
         anim.Play("Shoot");
