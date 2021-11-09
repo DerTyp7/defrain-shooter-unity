@@ -5,6 +5,7 @@ using Mirror;
 public class Headbob : NetworkBehaviour
 {
     [SerializeField] private PlayerController playerController;
+    [SerializeField] private ShootAnimation gunAnimation;
 
 
     [SerializeField] private float posCheckDistance = 0.01f;
@@ -22,6 +23,14 @@ public class Headbob : NetworkBehaviour
     private Vector3 newPos;
     private float oldDist = 0;
     private float lerpVal = 0;
+
+
+    [Header("Gun Settings")]
+    [SerializeField] GameObject gunRotation;
+    [SerializeField] float rotationMultiplier = 0.1f;
+
+
+
     private void Start()
     {
         lastPos = this.transform.position;
@@ -50,6 +59,7 @@ public class Headbob : NetworkBehaviour
             {
                 checkDist = currentDist + dist;
             }
+            gunAnimation.gunSideSwey(getSin(amplitude, stepFrequency/2, checkDist),playerController.inputDirection.magnitude);
             newPos = new Vector3(getSin(amplitude / 2, stepFrequency, checkDist), getSin(amplitude, stepFrequency, checkDist), 0);
             Neck.localPosition = newPos;
         }

@@ -8,15 +8,16 @@ using Mirror;
 
 public class PlayerController : NetworkBehaviour
 {
-
+    [SerializeField] private AimDownSights ADSContoller;
     [Header("Movement")]
     [SerializeField] private float walkSpeed = 6.0f;
     [SerializeField] private float sprintSpeed = 10.0f;
+    [SerializeField] private float aimWalkSpeed = 3.0f;
 
     [SerializeField][Range(0.0f, 0.5f)] private float moveSmoothTime = 0.001f;
     [SerializeField] float gravity = -10.0f;
     [SerializeField] private float jumpHeight;
-    private Vector3 inputDirection = Vector3.zero;
+    public Vector3 inputDirection = Vector3.zero;
     private Vector3 moveDirection;
 
     [Header("Ground Check")]
@@ -100,15 +101,15 @@ public class PlayerController : NetworkBehaviour
     {
 
 
-        if (Input.GetAxisRaw("Sprint") > 0 && isGrounded)
+        if (Input.GetAxisRaw("Sprint") > 0 && isGrounded && !ADSContoller.isAiming)
         {
-            //Debug.Log("Sprint");
             movementSpeed = sprintSpeed;
             isSprinting = true;
         }
         else
         {
-            movementSpeed = walkSpeed;
+            if(ADSContoller.isAiming) movementSpeed = aimWalkSpeed;
+            else movementSpeed = walkSpeed;
             isSprinting = false;
         }
 

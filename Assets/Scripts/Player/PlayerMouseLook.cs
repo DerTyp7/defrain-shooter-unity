@@ -18,7 +18,7 @@ public class PlayerMouseLook : NetworkBehaviour
     [SerializeField] [Range(0.0f, 0.5f)] private float mouseSmoothTime = 0.001f;
     [SerializeField] private bool lockCursor = true;
 
-    private float fullPitch = 0f;
+    public float fullPitch = 0f;
     private float cameraPitch = 0f;
     private float neckPitch = 0f;
     private float velocityY = 0.0f;
