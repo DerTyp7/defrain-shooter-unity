@@ -69,10 +69,10 @@ public class Headbob : NetworkBehaviour
         }
         
     }
-
-    private float getSin(float multiplier, float devisor,float x)
+    //check
+    private float getSin(float amplitude, float frequency,float x)
     {
-        return multiplier * Mathf.Sin((x/3.14f) * 10 * devisor);
+        return amplitude * Mathf.Sin((x/3.14f) * 10 * frequency);
     }
     
 }

@@ -10,10 +10,9 @@ public class AimDownSights : MonoBehaviour
     [SerializeField] GameObject AimPoint;
     [SerializeField] GameObject HoldPoint;
     public bool isAiming = false;
-    bool ADS() 
+    private void Update()
     {
         
-        return true;
     }
     private void FixedUpdate()
     {

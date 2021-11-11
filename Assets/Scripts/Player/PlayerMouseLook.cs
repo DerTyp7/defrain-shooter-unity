@@ -27,15 +27,13 @@ public class PlayerMouseLook : NetworkBehaviour
     private Vector2 currentMouseDelta = Vector2.zero;
     private Vector2 currentMouseDeltaVelocity = Vector2.zero;
 
-
-
     private void Start()
     {
         if (isLocalPlayer)
         {
             controller = GetComponent<CharacterController>();
+            playerCamera.gameObject.GetComponent<Camera>().enabled = true;
 
-            playerCamera.gameObject.SetActive(true);
             neckLength = Vector3.Distance(playerNeck.position,playerCamera.position);
 
             if (lockCursor)
@@ -74,6 +72,7 @@ public class PlayerMouseLook : NetworkBehaviour
 
 
         }
+
         playerCamera.position = playerNeck.position;
         playerCamera.position += playerNeck.up * neckLength;
         

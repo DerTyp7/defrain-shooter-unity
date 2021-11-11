@@ -8,7 +8,7 @@ using Mirror;
 
 public class PlayerController : NetworkBehaviour
 {
-    [SerializeField] private AimDownSights ADSContoller;
+    [SerializeField] private ProcedualAnimationController procedualAnimationController;
     [Header("Movement")]
     [SerializeField] private float walkSpeed = 6.0f;
     [SerializeField] private float sprintSpeed = 10.0f;
@@ -33,10 +33,11 @@ public class PlayerController : NetworkBehaviour
     private float movementSpeed;
     private float velocityY = 0.0f;
     private CharacterController controller;
-
+    Vector3 currentPos = Vector3.zero;
     private Vector3 currentDir = Vector3.zero;
     private Vector3 currentDirVelocity = Vector3.zero;
-    private Vector3 velocity = Vector3.zero;
+    public Vector3 velocity = Vector3.zero;
+    Vector3 refVelocity = Vector3.zero;
 
 
     private void Start()
@@ -53,7 +54,6 @@ public class PlayerController : NetworkBehaviour
             Grounded();
             CheckGoundAngle();
             UpdateMovement();
-            
         }
         
     }
@@ -65,8 +65,8 @@ public class PlayerController : NetworkBehaviour
 
     public bool isMoving() 
     {
-        if (velocity.x == 0 && velocity.y == 0 && velocity.z == 0) return true;
-        else return false;
+        if (velocity.x == 0 && velocity.y == 0 && velocity.z == 0) return false;
+        else return true;
     }
 
     private void CheckGoundAngle()
@@ -101,14 +101,14 @@ public class PlayerController : NetworkBehaviour
     {
 
 
-        if (Input.GetAxisRaw("Sprint") > 0 && isGrounded && !ADSContoller.isAiming)
+        if (Input.GetAxisRaw("Sprint") > 0 && isGrounded && !procedualAnimationController.isAiming)
         {
             movementSpeed = sprintSpeed;
             isSprinting = true;
         }
         else
         {
-            if(ADSContoller.isAiming) movementSpeed = aimWalkSpeed;
+            if(procedualAnimationController.isAiming) movementSpeed = aimWalkSpeed;
             else movementSpeed = walkSpeed;
             isSprinting = false;
         }
@@ -145,9 +145,7 @@ public class PlayerController : NetworkBehaviour
             currentDir = moveDirection;
         }
 
-        velocity = currentDir * movementSpeed + new Vector3(0, velocityY, 0);
-
-
+        velocity = Vector3.SmoothDamp(velocity, currentDir * movementSpeed + new Vector3(0, velocityY, 0),ref refVelocity,0.1f);
         controller.Move(velocity * Time.deltaTime);
 
     }

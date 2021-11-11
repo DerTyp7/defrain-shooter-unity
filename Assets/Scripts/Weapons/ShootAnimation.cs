@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class ShootAnimation : MonoBehaviour
 {
+    [Header("Step Settings")]
+    [SerializeField] private float stepAmplitude;
+    [SerializeField] private float stepFrequency;
+     private float stepSin;
 
     [Header("GameObjects")]
     [SerializeField] private GameObject gun;
@@ -68,7 +72,7 @@ public class ShootAnimation : MonoBehaviour
     }
 
 
-    public void recoil(GameObject gun, float force)
+    public void recoil(float force)
     {
         //Play the animation
         anim.Play("Shoot");

@@ -6,7 +6,7 @@ using Mirror;
 public class Shoot : NetworkBehaviour
 {
     [SerializeField] GameObject muzzle;
-    [SerializeField] ShootAnimation shootAnim;
+    [SerializeField] ProcedualAnimationController procedualAnimationController;
     [SerializeField] float fireRate;
     [SerializeField] GameObject gunHoldPos;
 
@@ -14,7 +14,7 @@ public class Shoot : NetworkBehaviour
     {
         if (isLocalPlayer)
         {
-            shootAnim.OnSwitchWeapon(fireRate);
+            procedualAnimationController.OnSwitchWeapon(fireRate);
         }
     }
     private void Update()
@@ -53,6 +53,7 @@ public class Shoot : NetworkBehaviour
     // This code will be executed on the Client.
     void shootAnimation()
     {
-        shootAnim.recoil(gunHoldPos,0.1f);
+        Debug.Log("Shooot animation in shoot script");
+        procedualAnimationController.Recoil(0.1f);
     }
 }
