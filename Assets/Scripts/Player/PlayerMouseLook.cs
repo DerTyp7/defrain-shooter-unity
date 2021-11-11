@@ -35,7 +35,7 @@ public class PlayerMouseLook : NetworkBehaviour
         {
             controller = GetComponent<CharacterController>();
 
-            playerCamera.gameObject.SetActive(true);
+            playerCamera.GetComponent<Camera>().enabled = true;
             neckLength = Vector3.Distance(playerNeck.position,playerCamera.position);
 
             if (lockCursor)
@@ -52,7 +52,7 @@ public class PlayerMouseLook : NetworkBehaviour
         {
             UpdateMouseLook();
         }
-
+        
     }
 
     private void UpdateMouseLook()

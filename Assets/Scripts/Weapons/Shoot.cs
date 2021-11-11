@@ -6,7 +6,7 @@ using Mirror;
 public class Shoot : NetworkBehaviour
 {
     [SerializeField] GameObject muzzle;
-    [SerializeField] ShootAnimation shootAnim;
+    [SerializeField] ProcedualAnimationController shootAnim;
     [SerializeField] float fireRate;
     [SerializeField] GameObject gunHoldPos;
 
@@ -40,6 +40,9 @@ public class Shoot : NetworkBehaviour
 
         if (Physics.Raycast(muzzle.transform.position, muzzle.transform.forward, out hit))
         {
+            GameObject g = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+            g.transform.position = hit.point;
+            g.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
             if (hit.transform.gameObject.GetComponent<Player>() != null)
             {
                 dedplayer = hit.transform.gameObject;
@@ -53,6 +56,6 @@ public class Shoot : NetworkBehaviour
     // This code will be executed on the Client.
     void shootAnimation()
     {
-        shootAnim.recoil(gunHoldPos,0.1f);
+        shootAnim.Recoil(0.1f);
     }
 }

@@ -389,18 +389,21 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6272346181302961293}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 124e7dc536a7de8418284dc873cb1bb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
+  ADSContoller: {fileID: 0}
   walkSpeed: 6
   sprintSpeed: 8
+  aimWalkSpeed: 3
   moveSmoothTime: 0.05
   gravity: -10
   jumpHeight: 1.2
+  inputDirection: {x: 0, y: 0, z: 0}
   groundCheck: {fileID: 6272346182417644039}
   groundMask:
     serializedVersion: 2
@@ -461,7 +464,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6272346181302961293}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a8493f0e2b0d4bd4f98d3cd81c2db5ad, type: 3}
   m_Name: 
@@ -474,9 +477,9 @@ MonoBehaviour:
   maxCameraAngle: 90
   neckStartAngle: 0
   minCameraAngle: -90
-  neckLength: 0.2
   mouseSmoothTime: 0.001
   lockCursor: 1
+  fullPitch: 0
 --- !u!114 &8436279266335313624
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -484,7 +487,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6272346181302961293}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3317f24e780855847830f5662153b41d, type: 3}
   m_Name: 
@@ -503,7 +506,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6272346181302961293}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4db7caf602ce379408a59c8722e06e46, type: 3}
   m_Name: 
@@ -511,12 +514,15 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   playerController: {fileID: -4574526707603160507}
+  gunAnimation: {fileID: 0}
   posCheckDistance: 1
   checkDist: 0
   stepAmplitudeWalking: 0.05
   stepAmplitudeSprinting: 0.07
   stepFrequency: 0.8
   Neck: {fileID: 6272346181657429396}
+  gunRotation: {fileID: 0}
+  rotationMultiplier: 0.1
 --- !u!114 &3781802212159559521
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -524,7 +530,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6272346181302961293}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bc5bc2b49bd326e4db460a6a3af59311, type: 3}
   m_Name: 
@@ -532,6 +538,9 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   muzzle: {fileID: 3649358604728444914}
+  shootAnim: {fileID: 0}
+  fireRate: 0
+  gunHoldPos: {fileID: 0}
 --- !u!114 &6207632454083444980
 MonoBehaviour:
   m_ObjectHideFlags: 0
