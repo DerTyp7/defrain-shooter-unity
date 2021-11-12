@@ -7,6 +7,7 @@ public class PlayerMouseLook : NetworkBehaviour
 {
     [Header("Mouse Look")]
     [SerializeField] private Transform playerCamera = null;
+    [SerializeField] private Transform weaponCamera = null;
     [SerializeField] private Transform playerNeck = null;
     [SerializeField] private float mouseSensitivity = 4.0f;
 
@@ -35,7 +36,7 @@ public class PlayerMouseLook : NetworkBehaviour
         {
             controller = GetComponent<CharacterController>();
 
-            playerCamera.gameObject.SetActive(true);
+            playerCamera.gameObject.GetComponent<Camera>().enabled = true;
             neckLength = Vector3.Distance(playerNeck.position,playerCamera.position);
 
             if (lockCursor)

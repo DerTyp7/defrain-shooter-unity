@@ -10,7 +10,7 @@ public class Weapon : MonoBehaviour
     }
     [SerializeField] weaponKinds weaponKind;
     [SerializeField] bool active = false;
-    [SerializeField] float damage = 0;
+    [SerializeField] int damage = 0;
     [SerializeField] float firerate = 0;
     [SerializeField] int roundsPerShot = 1;
     [SerializeField] float recoilStrength = 0;
@@ -22,7 +22,7 @@ public class Weapon : MonoBehaviour
 
     public bool Active { get => active; set => active = value; }
     public weaponKinds WeaponKind { get => weaponKind; set => weaponKind = value; }
-    public float Damage { get => damage; set => damage = value; }
+    public int Damage { get => damage; set => damage = value; }
     public float Firerate { get => firerate; set => firerate = value; }
     public int RoundsPerShot { get => roundsPerShot; set => roundsPerShot = value; }
     public float RecoilStrength { get => recoilStrength; set => recoilStrength = value; }
