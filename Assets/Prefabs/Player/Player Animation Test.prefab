@@ -475,7 +475,7 @@ GameObject:
   - component: {fileID: 3387435154213398635}
   - component: {fileID: 5630859218361338035}
   - component: {fileID: 8436279266335313624}
-  - component: {fileID: 3781802212159559521}
+  - component: {fileID: 1258077278480047560}
   - component: {fileID: 320375778840406984}
   - component: {fileID: 7273209952621479910}
   - component: {fileID: 6207632454083444980}
@@ -623,6 +623,10 @@ MonoBehaviour:
   AimPoint: {fileID: 2992488853448454767}
   HoldPoint: {fileID: 8043317747957554736}
   isAiming: 0
+  rotationMod:
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
+  - {x: 0, y: 0, z: 0, w: 0}
 --- !u!114 &5630859218361338035
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -665,7 +669,7 @@ MonoBehaviour:
   username: 
   usernameTextObj: {fileID: 0}
   health: 0
---- !u!114 &3781802212159559521
+--- !u!114 &1258077278480047560
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -674,15 +678,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 6272346181302961293}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc5bc2b49bd326e4db460a6a3af59311, type: 3}
+  m_Script: {fileID: 11500000, guid: 0f43c52a1834dcb4bab807bc0cbddec2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
   muzzle: {fileID: 3649358604728444914}
   shootAnim: {fileID: 3387435154213398635}
-  fireRate: 320
-  gunHoldPos: {fileID: 3682030003239559187}
+  weaponHolder: {fileID: 7768205653369755348}
+  mCamera: {fileID: 6272346181657429395}
+  limitAmmunition: 1
 --- !u!114 &320375778840406984
 MonoBehaviour:
   m_ObjectHideFlags: 0

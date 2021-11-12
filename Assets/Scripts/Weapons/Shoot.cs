@@ -6,9 +6,8 @@ using TMPro;
 public class Shoot : NetworkBehaviour
 {
     [SerializeField] GameObject muzzle;
-    [SerializeField] ShootAnimation shootAnim;
+    [SerializeField] ProcedualAnimationController shootAnim;
     [SerializeField] GameObject weaponHolder;
-    [SerializeField] GameObject GunRotation;
     [SerializeField] Camera mCamera;
     [SerializeField] bool limitAmmunition = true;
 
@@ -26,7 +25,10 @@ public class Shoot : NetworkBehaviour
     public int TotalAmmo { get => totalAmmo; set => totalAmmo = value; }
 
     private void Start() {
-        
+        if (isServer) { 
+            weapon = weaponHolder.GetComponent<Weapon>();
+            shootAnim.OnSwitchWeapon(weapon.Firerate);
+        }
         if (isLocalPlayer) {
             weapon = weaponHolder.GetComponent<Weapon>();
             shootAnim.OnSwitchWeapon(weapon.Firerate);
@@ -44,7 +46,9 @@ public class Shoot : NetworkBehaviour
             }
             if (Input.GetButtonDown("Fire")) {
                 updateCanvas = true;
+                Debug.Log(" click");
                 CmdFireBullet();
+                shootAnim.Recoil(0.1f);
             }
             if (Input.GetButtonDown("Reload")) {
                 updateCanvas = true;
@@ -65,18 +69,21 @@ public class Shoot : NetworkBehaviour
     // This code will be executed on the Server.
     private void CmdFireBullet() {
         ray = new Ray(mCamera.transform.position, mCamera.transform.forward); // Raycast from Camera
-        if(Physics.Raycast(ray, out crosshairHitPoint, 5000f)) { // Check if Raycast is beyond 5000
+        Debug.Log(" C Ray");
+        if (Physics.Raycast(ray, out crosshairHitPoint, 5000f)) { // Check if Raycast is beyond 5000
+            Debug.Log(" floor");
             hitpos = crosshairHitPoint.point; // If hitpoint is under 5000
-        } else { 
+        } else {
             hitpos = mCamera.transform.position + mCamera.transform.forward * 5000; 
         }
+        
         _pointDirection = hitpos - muzzle.transform.position;
         _lookRotation = Quaternion.LookRotation(_pointDirection);
-        GunRotation.transform.rotation = Quaternion.RotateTowards(GunRotation.transform.rotation, _lookRotation, 1f); // Point weapon to raycast hitpoint from camera
-
+        shootAnim.rotationMod[1] = Quaternion.RotateTowards(weaponHolder.transform.rotation, _lookRotation, 1f); // Point weapon to raycast hitpoint from camera
+        
         if (weapon.AllowAction) { // If not reloading etc.
             if (Physics.Raycast(muzzle.transform.position, muzzle.transform.forward, out hit) && weapon.CurrentAmmunition > 0) { // Raycast from Bullet Exit Point to camera raycast 
-                shootAnimation(); // Start Shoot Animation
+                
                 Debug.DrawLine(muzzle.transform.position, hit.point);
 
                 bulletHole(GameObject.CreatePrimitive(PrimitiveType.Sphere), hit); // Creates bullethole where raycast hits
@@ -90,18 +97,13 @@ public class Shoot : NetworkBehaviour
                 subtractAmmunition(weapon); // Subtract Ammunition 
             }
             StartCoroutine(fireRate());
-        }        
+        }
     }
 
     void bulletHole(GameObject holeObject, RaycastHit hit)
     {
         holeObject.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
         holeObject.transform.position = hit.point;
-    }
-
-    [Client]
-    void shootAnimation() {
-        shootAnim.recoil(0.1f);
     }
 
 

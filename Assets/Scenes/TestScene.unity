@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1233,7 +1233,7 @@ MonoBehaviour:
   DebugTextGrounded: {fileID: 987854205}
   DebugTextAmmunition: {fileID: 1430445133}
   DebugTextClientServer: {fileID: 0}
-  Player: {fileID: 0}
+  Player: {fileID: 6272346181302961293, guid: a14d876ac00bdf6498e30b3e58b68fdf, type: 3}
   GameManager: {fileID: 0}
   fpsText: {fileID: 72243808}
   deltaTime: 0

@@ -91,7 +91,7 @@ public class ProcedualAnimationController : NetworkBehaviour
     public bool isAiming = false;
 
     Vector3[] positionMod = new Vector3[3];
-    Quaternion[] rotationMod = new Quaternion[3];
+    public Quaternion[] rotationMod = new Quaternion[3];
 
 
     public void OnSwitchWeapon(float fireRate)
