@@ -116,9 +116,10 @@ GameObject:
   - component: {fileID: 732033708985862910}
   - component: {fileID: 6352645931139448055}
   - component: {fileID: 5204381087217674634}
+  - component: {fileID: 3937508078766297979}
   m_Layer: 0
   m_Name: M92
-  m_TagString: Untagged
+  m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -177,6 +178,19 @@ MonoBehaviour:
   totalAmmunition: 100
   bulletExit: {fileID: 2236875552107647873}
   allowAction: 1
+--- !u!65 &3937508078766297979
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5071598280516985511}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.034888696, y: 0.17788172, z: 0.26456618}
+  m_Center: {x: 0.009451332, y: -0.07946879, z: -0.26701045}
 --- !u!1001 &1330674258901920049
 PrefabInstance:
   m_ObjectHideFlags: 0

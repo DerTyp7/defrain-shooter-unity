@@ -6,7 +6,7 @@ public class Weapon : MonoBehaviour
 {
     public enum weaponKinds
     {
-        Rifle, Pistole, Knife, Granade
+        Rifle, Pistole, Knife, Grenade
     }
     [SerializeField] weaponKinds weaponKind;
     [SerializeField] bool active = false;
