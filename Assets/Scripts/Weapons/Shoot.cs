@@ -48,7 +48,10 @@ public class Shoot : NetworkBehaviour
                 updateCanvas = true;
                 Debug.Log(" click");
                 CmdFireBullet();
-                shootAnim.Recoil(0.1f);
+                if (weapon.AllowAction)
+                {
+                    shootAnim.Recoil(0.1f);
+                }
             }
             if (Input.GetButtonDown("Reload")) {
                 updateCanvas = true;
@@ -69,35 +72,26 @@ public class Shoot : NetworkBehaviour
     // This code will be executed on the Server.
     private void CmdFireBullet() {
         ray = new Ray(mCamera.transform.position, mCamera.transform.forward); // Raycast from Camera
-        Debug.Log(" C Ray");
         if (Physics.Raycast(ray, out crosshairHitPoint, 5000f)) { // Check if Raycast is beyond 5000
             hitpos = crosshairHitPoint.point; // If hitpoint is under 5000
         } else {
             hitpos = mCamera.transform.position + mCamera.transform.forward * 5000; 
         }
-        Debug.Log("shootAnim.rotationMod");
         _pointDirection = hitpos - muzzle.transform.position;
         _lookRotation = Quaternion.LookRotation(_pointDirection);
         shootAnim.rotationMod[1] = Quaternion.RotateTowards(weaponHolder.transform.rotation, _lookRotation, 1f); // Point weapon to raycast hitpoint from camera
-        Debug.Log("Weapon.AllowAction");
+        
         if (weapon.AllowAction) { // If not reloading etc.
-            Debug.Log("Raycast");
             if (Physics.Raycast(muzzle.transform.position, muzzle.transform.forward, out hit) && weapon.CurrentAmmunition > 0) { // Raycast from Bullet Exit Point to camera raycast 
-                
-                Debug.DrawLine(muzzle.transform.position, hit.point);
-                Debug.Log("BulletHole");
                 bulletHole(GameObject.CreatePrimitive(PrimitiveType.Sphere), hit); // Creates bullethole where raycast hits
-                Debug.Log("hit Player?");
                 if (hit.transform.gameObject.GetComponent<Player>() != null) { // If hit object is a player
                     Debug.Log("-->HIT PLAYER: " + hit.transform.name);
                     hit.transform.gameObject.GetComponent<Player>().RemoveHealth(weapon.Damage); 
                 }
             }
-            Debug.Log("SubtractAmmunition");
             if (limitAmmunition) {
                 subtractAmmunition(weapon); // Subtract Ammunition 
             }
-            Debug.Log("Firerate");
             StartCoroutine(fireRate());
         }
     }
