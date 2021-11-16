@@ -38,7 +38,6 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.0004, y: -0.01487, z: -0.143}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 732033708985862910}
   m_RootOrder: 1
@@ -69,7 +68,6 @@ Transform:
   m_LocalRotation: {x: -0, y: 0.7071068, z: 0.7071068, w: 0}
   m_LocalPosition: {x: -0.03000002, y: -0.11399987, z: -0.42400002}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 732033708985862910}
   m_RootOrder: 2
@@ -100,7 +98,6 @@ Transform:
   m_LocalRotation: {x: -0, y: 0.7071068, z: 0.7071068, w: 0}
   m_LocalPosition: {x: 0.030000005, y: -0.10400012, z: -0.42400002}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 732033708985862910}
   m_RootOrder: 3
@@ -134,7 +131,6 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0.03999999}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1584484548595912410}
   - {fileID: 7502619830433694848}
@@ -167,15 +163,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c98f5c47a8b7dd64f86fd6f42c4d6e5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponKind: 0
+  weaponKind: 1
   active: 0
-  damage: 0
+  damage: 15
   firerate: 320
   roundsPerShot: 1
-  recoilStrength: 0
-  currentAmmunition: 100
-  magazinSize: 100
-  totalAmmunition: 100
+  recoilStrength: 15
+  currentAmmunition: 16
+  magazinSize: 16
+  totalAmmunition: 64
   bulletExit: {fileID: 2236875552107647873}
   allowAction: 1
 --- !u!65 &3937508078766297979
@@ -189,8 +185,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.034888696, y: 0.17788172, z: 0.26456618}
-  m_Center: {x: 0.009451332, y: -0.07946879, z: -0.26701045}
+  m_Size: {x: 0.040187918, y: 0.16860102, z: 0.2560755}
+  m_Center: {x: 0.00017769728, y: -0.07880532, z: -0.26860136}
 --- !u!1001 &1330674258901920049
 PrefabInstance:
   m_ObjectHideFlags: 0

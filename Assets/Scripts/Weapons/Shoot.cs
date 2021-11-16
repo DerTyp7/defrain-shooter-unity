@@ -47,7 +47,7 @@ public class Shoot : NetworkBehaviour
             if (Input.GetButtonDown("Fire")) {
                 updateCanvas = true;
                 Debug.Log(" click");
-                if (weapon.AllowAction)
+                if (weapon.AllowAction && weapon.CurrentAmmunition > 0)
                 {
                     shootAnim.Recoil(0.1f);
                 }
