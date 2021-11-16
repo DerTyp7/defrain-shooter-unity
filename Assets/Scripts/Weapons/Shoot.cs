@@ -47,11 +47,12 @@ public class Shoot : NetworkBehaviour
             if (Input.GetButtonDown("Fire")) {
                 updateCanvas = true;
                 Debug.Log(" click");
-                CmdFireBullet();
                 if (weapon.AllowAction)
                 {
                     shootAnim.Recoil(0.1f);
                 }
+                CmdFireBullet();
+                
             }
             if (Input.GetButtonDown("Reload")) {
                 updateCanvas = true;

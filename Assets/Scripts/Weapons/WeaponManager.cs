@@ -8,24 +8,52 @@ public class WeaponManager : NetworkBehaviour
 {
     public int currentWeaponIndex = 0;
     public GameObject[] activeWeapons;
+    private int counter = 0;
 
     [SerializeField] Camera cam;
 
     private void Awake()
     {
         activeWeapons = new GameObject[4];
+        for(int i = 0; i<4; i++)
+        {
+            activeWeapons[i] = null;
+        }
     }
 
     void Update() {
         if (isLocalPlayer) {
+            counter = 0;
             if(Input.GetAxis("Mouse ScrollWheel") > 0f){ // Scroll up
-                if (currentWeaponIndex <= 0) 
-                { currentWeaponIndex = activeWeapons.Length; }
-                else { currentWeaponIndex--; }
-            }else if (Input.GetAxis("Mouse ScrollWheel") < 0f){ // Scroll down
-                if (currentWeaponIndex >= activeWeapons.Length) 
-                { currentWeaponIndex = 0; }
-                else {  currentWeaponIndex++; }
+                do
+                {
+                    if (currentWeaponIndex <= 0)
+                    {
+                        currentWeaponIndex = activeWeapons.Length - 1;
+                    }
+                    else
+                    {
+                        currentWeaponIndex--;
+                    }
+                    counter++;
+                    Debug.Log(activeWeapons[currentWeaponIndex]);
+                } while (activeWeapons[currentWeaponIndex] == null);
+            }
+            else if (Input.GetAxis("Mouse ScrollWheel") < 0f){ // Scroll down
+                do
+                {
+                    if (currentWeaponIndex >= activeWeapons.Length - 1)
+                    {
+                        currentWeaponIndex = 0;
+                    }
+                    else
+                    {
+                        currentWeaponIndex++;
+                    }
+                    counter++;
+                    Debug.Log(activeWeapons[currentWeaponIndex]);
+                } while (activeWeapons[currentWeaponIndex] == null);
+                
             }
 
             if (Input.GetButton("Interact")) // e
@@ -45,7 +73,7 @@ public class WeaponManager : NetworkBehaviour
         {
             if (hit.transform.tag == "Weapon") // If Object is a weapon and the weapon is not in the current active weapons
             {
-                Destroy(hit.transform.gameObject);
+                
                 switch (hit.transform.GetComponent<Weapon>().WeaponKind.ToString()) // Adding weapon to inventory slot
                 {
                     case "Rifle": activeWeapons[0] = hit.transform.gameObject; break;
@@ -56,15 +84,6 @@ public class WeaponManager : NetworkBehaviour
                 }
             }
         }
-    }
-
-    private bool isInArray(GameObject[] arr, GameObject searchObj)
-    {
-        foreach(GameObject obj in arr)
-        {
-            if (obj == searchObj) return true;
-        }
-        return false;
     }
 
 }
