@@ -36,7 +36,7 @@ public class WeaponManager : NetworkBehaviour
                         currentWeaponIndex--;
                     }
                     counter++;
-                    Debug.Log(activeWeapons[currentWeaponIndex]);
+                    //Debug.Log(activeWeapons[currentWeaponIndex]);
                 } while (activeWeapons[currentWeaponIndex] == null);
             }
             else if (Input.GetAxis("Mouse ScrollWheel") < 0f){ // Scroll down
@@ -51,7 +51,7 @@ public class WeaponManager : NetworkBehaviour
                         currentWeaponIndex++;
                     }
                     counter++;
-                    Debug.Log(activeWeapons[currentWeaponIndex]);
+                    //Debug.Log(activeWeapons[currentWeaponIndex]);
                 } while (activeWeapons[currentWeaponIndex] == null);
                 
             }
