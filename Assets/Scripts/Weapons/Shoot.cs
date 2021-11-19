@@ -46,7 +46,6 @@ public class Shoot : NetworkBehaviour
             }
             if (Input.GetButtonDown("Fire")) {
                 updateCanvas = true;
-                Debug.Log(" click");
                 if (weapon.AllowAction)
                 {
                     shootAnim.Recoil(0.1f);
@@ -86,7 +85,6 @@ public class Shoot : NetworkBehaviour
             if (Physics.Raycast(muzzle.transform.position, muzzle.transform.forward, out hit) && weapon.CurrentAmmunition > 0) { // Raycast from Bullet Exit Point to camera raycast 
                 bulletHole(GameObject.CreatePrimitive(PrimitiveType.Sphere), hit); // Creates bullethole where raycast hits
                 if (hit.transform.gameObject.GetComponent<Player>() != null) { // If hit object is a player
-                    Debug.Log("-->HIT PLAYER: " + hit.transform.name);
                     hit.transform.gameObject.GetComponent<Player>().RemoveHealth(weapon.Damage); 
                 }
             }

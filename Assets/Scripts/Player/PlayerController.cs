@@ -54,7 +54,6 @@ public class PlayerController : NetworkBehaviour
             Grounded();
             CheckGoundAngle();
             UpdateMovement();
-            
         }
         
     }
@@ -151,6 +150,7 @@ public class PlayerController : NetworkBehaviour
 
         velocity = Vector3.SmoothDamp(velocity, currentDir * movementSpeed + new Vector3(0, velocityY, 0),ref refVelocity,0.01f);
         controller.Move(velocity * Time.deltaTime);
+        //transform.position += velocity * Time.deltaTime;
     }
   
 }

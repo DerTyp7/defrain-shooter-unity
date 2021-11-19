@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 3422988367618467038}
   - component: {fileID: -5945522205665126515}
   - component: {fileID: 3094132477016057847}
+  - component: {fileID: 840472934}
+  - component: {fileID: 840472941}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: GameController
@@ -50,6 +52,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Players: []
   countOfRounds: 10
+  spawnController: {fileID: 0}
   localPlayer: {fileID: 0}
 --- !u!114 &3422988367618467037
 MonoBehaviour:
@@ -129,3 +132,32 @@ MonoBehaviour:
   autoCreatePlayer: 1
   playerSpawnMethod: 0
   spawnPrefabs: []
+--- !u!114 &840472934
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3422988367618467032}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4449624fc82d6174f85b2f83bbfa91f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  availableSpawns:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+--- !u!114 &840472941
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3422988367618467032}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc117181a5e845145888b1c152bcb4ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

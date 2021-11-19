@@ -8,6 +8,8 @@ public class Player : NetworkBehaviour
     public bool isAlive = true;
     public Team team;
     [SerializeField] private const int defaultHp = 100;
+    GameObject GameManager;
+    GameMaster gameMaster;
 
 
     public ulong clientId;
@@ -23,9 +25,30 @@ public class Player : NetworkBehaviour
 
     private void Start()
     {
+        
+        GameManager = GameObject.Find("MatchController");
+        gameMaster = GameManager.GetComponent<GameMaster>();
         if (isServer) 
         {
             health = defaultHp;
+            gameMaster.RegisterPlayer(GetComponent<Player>());
+            //respawnPos(gameMaster.RespawnRequest(this.gameObject, team.teamID));
+        }
+        
+
+    }
+
+    private void Update()
+    {
+        if (isLocalPlayer)
+        {
+            if (Input.GetKeyDown("n"))
+            {
+                //Debug.Log("Request respawn on local player");
+                CmdRespawnRequest();
+                //transform.position = Vector3.zero;
+                
+            }
         }
     }
     public override void OnStartLocalPlayer()
@@ -46,6 +69,23 @@ public class Player : NetworkBehaviour
     }
     public void Respawn()
     {
+        
+        
+    }
+    [Command]
+    void CmdRespawnRequest() 
+    {
+        respawnPos(gameMaster.RespawnRequest(this.gameObject, team.teamID));
+        isAlive = true;
+    }
+
+    [ClientRpc]
+    public void respawnPos(Vector3 pos) 
+    {
+        GetComponent<CharacterController>().enabled = false;
+        transform.position = pos;
+        GetComponent<CharacterController>().enabled = true;
+        health = defaultHp;
         isAlive = true;
     }
 
@@ -53,6 +93,7 @@ public class Player : NetworkBehaviour
     {
         isAlive = false;
         AddDeaths(1);
+        Debug.Log("DIE");
     }
 
     //Health
@@ -70,11 +111,9 @@ public class Player : NetworkBehaviour
         
         if (isAlive)
         {
-            /*Debug.Log("yeet" + value);*/
             health -= value;
             if (health <= 0)
             {
-                AddDeaths(1);
                 health = 0;
                 Die();
             }
@@ -139,3 +178,7 @@ public class Player : NetworkBehaviour
     }
 
 }
+
+
+
+
