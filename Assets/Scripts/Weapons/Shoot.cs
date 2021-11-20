@@ -44,7 +44,7 @@ public class Shoot : NetworkBehaviour
                 totalAmmo = weapon.TotalAmmunition;
                 updateCanvas = false;
             }
-            if (Input.GetButtonDown("Fire")) {
+            if (Input.GetButtonDown("Fire")) { // BOX COLLIDER AUS
                 updateCanvas = true;
                 Debug.Log(" click");
                 if (weapon.AllowAction && weapon.CurrentAmmunition > 0)
