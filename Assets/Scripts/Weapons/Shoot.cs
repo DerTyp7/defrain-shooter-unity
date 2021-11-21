@@ -44,9 +44,12 @@ public class Shoot : NetworkBehaviour
                 totalAmmo = weapon.TotalAmmunition;
                 updateCanvas = false;
             }
-            if (Input.GetButtonDown("Fire")) { // BOX COLLIDER AUS
+            if (Input.GetButtonDown("Fire")) { 
                 updateCanvas = true;
-                Debug.Log(" click");
+                if(weapon.GetComponent<BoxCollider>().enabled == true) // NACH ANDERE LÖSUNG SUCHEN
+                {
+                    weapon.GetComponent<BoxCollider>().enabled = false;
+                }
                 if (weapon.AllowAction && weapon.CurrentAmmunition > 0)
                 {
                     shootAnim.Recoil(0.1f);
@@ -97,7 +100,7 @@ public class Shoot : NetworkBehaviour
         }
     }
 
-    void bulletHole(GameObject holeObject, RaycastHit hit)
+    void bulletHole(GameObject holeObject, RaycastHit hit) // Nur zum testen da
     {
         holeObject.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
         holeObject.transform.position = hit.point;

@@ -27,48 +27,20 @@ public class WeaponManager : NetworkBehaviour
         if (isLocalPlayer) {
             if(Input.GetAxis("Mouse ScrollWheel") > 0f){ // Scroll up
                 lastWeaponIndex = currentWeaponIndex;
-                counter = 0;
-                do {
-                    if (currentWeaponIndex <= 0) {
-                        currentWeaponIndex = activeWeapons.Count - 1;
-                    } else {
-                        currentWeaponIndex--;
-                    }
-                    counter++;
-                    if (counter > 10) { break; }
-                } while (activeWeapons[currentWeaponIndex] == null);
-                if (lastWeaponIndex != currentWeaponIndex && activeWeapons[currentWeaponIndex] != null)
-                {
-                    // play switch animation or move weapon (hands) down
-                    foreach (GameObject obj in activeWeapons)
-                    { // Disable all weapons
-                        if (obj != null) { obj.SetActive(false); }
-                    }
-                    Debug.Log("Set Active (" + currentWeaponIndex + "): " + activeWeapons[currentWeaponIndex].name);
+                int nextActive = SearchForNext(activeWeapons, lastWeaponIndex, -1);
+                if (nextActive != -1) { // -1 no next found
+                    currentWeaponIndex = nextActive;
                     activeWeapons[currentWeaponIndex].SetActive(true);
+                    // play weapon switch animation
                 }
             }
             else if (Input.GetAxis("Mouse ScrollWheel") < 0f){ // Scroll down
                 lastWeaponIndex = currentWeaponIndex;
-                counter = 0;
-                do {
-                    if (currentWeaponIndex >= activeWeapons.Count - 1) {
-                        currentWeaponIndex = 0;
-                    } else {
-                        currentWeaponIndex++;
-                    }
-                    counter++;
-                    if(counter > 10) { break; }
-                } while (activeWeapons[currentWeaponIndex] == null);
-                if (lastWeaponIndex != currentWeaponIndex && activeWeapons[currentWeaponIndex] != null)
-                {
-                    // play switch animation or move weapon (hands) down
-                    foreach (GameObject obj in activeWeapons)
-                    { // Disable all weapons
-                        if (obj != null) { obj.SetActive(false); }
-                    }
-                    Debug.Log("Set Active (" + currentWeaponIndex + "): " + activeWeapons[currentWeaponIndex].name);
+                int nextActive = SearchForNext(activeWeapons, lastWeaponIndex, 1);
+                if (nextActive != -1) { // -1 no next found
+                    currentWeaponIndex = nextActive;
                     activeWeapons[currentWeaponIndex].SetActive(true);
+                    // play weapon switch animation
                 }
             }
             
@@ -78,20 +50,54 @@ public class WeaponManager : NetworkBehaviour
             
             }else if (Input.GetButtonDown("Drop")) // q Droping weapon
             {
-                // WENN GEDROPT WIRD MUSS DIE NÄCHSTE AKTIVE GSUCHT WERDEn
                 if(activeWeapons[currentWeaponIndex] != null)
                 {
-                    activeWeapons[currentWeaponIndex].GetComponent<Rigidbody>().useGravity = true;
-                    activeWeapons[currentWeaponIndex].GetComponent<Rigidbody>().isKinematic = false;
+                    Rigidbody rigid = activeWeapons[currentWeaponIndex].GetComponent<Rigidbody>();
+                    rigid.useGravity = true;
+                    rigid.isKinematic = false;
                     activeWeapons[currentWeaponIndex].transform.position = cam.transform.position;
                     activeWeapons[currentWeaponIndex].GetComponent<BoxCollider>().enabled = true;
-                    activeWeapons[currentWeaponIndex].GetComponent<Rigidbody>().velocity = cam.transform.forward * 10 + cam.transform.up * 2;
+                    rigid.velocity = cam.transform.forward * 10 + cam.transform.up * 2;
                     activeWeapons[currentWeaponIndex].gameObject.transform.SetParent(null);
                     activeWeapons[currentWeaponIndex] = null;
+
+                    int nextActive = SearchForNext(activeWeapons, currentWeaponIndex, 1);
+                    if(nextActive != -1) // -1 no next found
+                    {
+                        lastWeaponIndex = currentWeaponIndex;
+                        currentWeaponIndex = nextActive;
+                        activeWeapons[currentWeaponIndex].SetActive(true);
+                    }
+                    
                 }
+
             }
+
         }
 
+    }
+
+    private int SearchForNext(List<GameObject> l, int lastActive = 0, int direction = 1) {
+        int size = l.Count-1;
+        bool condition = true;
+        if (lastActive <= -1) { lastActive = size; }
+        if(lastActive >= l.Count) { lastActive = 0; }
+        for (int i = lastActive+direction; condition; i+= direction) {
+            if (i >= l.Count-1) { i = 0; size = lastActive+1;  }
+            else if(i < 0) { i = size; size = -1;  }
+            if (l[i] != null) {
+                if(l[lastActive] != null) { l[lastActive].SetActive(false); }
+                return i; 
+            }
+            if (direction == 1) {
+                if (i < size + 1) { condition = true; }
+                else { condition = false; }
+            }else if(direction == -1) {
+                if (i > size + 1) { condition = true; }
+                else { condition = false; }
+            }
+        }
+        return -1;
     }
 
     [Command]

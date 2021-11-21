@@ -110,12 +110,12 @@ public class ProcedualAnimationController : NetworkBehaviour
     {
         if (isLocalPlayer) 
         { 
-        //Play the animation
-        gunAnimator.Play("Shoot");
-        //Add force for the recoil
-        //currentCameraRecoilX -= weightedPerlinNoise(cameraRecoilX, 1f, Time.time, 1);
-        //playerMouseLook = Mathf.SmoothDamp(playerMouseLook.fullPitch, playerMouseLook.fullPitch - weightedPerlinNoise(cameraRecoilX, 1f, Time.time, 1),ref f,0.01f);
-        CmdRecoil();
+            //Play the animation
+            gunAnimator.Play("Shoot");
+            //Add force for the recoil
+            //currentCameraRecoilX -= weightedPerlinNoise(cameraRecoilX, 1f, Time.time, 1);
+            //playerMouseLook = Mathf.SmoothDamp(playerMouseLook.fullPitch, playerMouseLook.fullPitch - weightedPerlinNoise(cameraRecoilX, 1f, Time.time, 1),ref f,0.01f);
+            CmdRecoil();
         }
     }
     [Command]
