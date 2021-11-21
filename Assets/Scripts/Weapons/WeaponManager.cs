@@ -44,31 +44,32 @@ public class WeaponManager : NetworkBehaviour
                 }
             }
             
-            if (Input.GetButtonDown("Interact")) // e
+            if (Input.GetButtonDown("Interact")) // e NACH DEM AUFHEBEN MUSS NÄCSHTE AKTIVE GESUCHT WEREDN
             {
                 CmdPickupWeapon();
             
-            }else if (Input.GetButtonDown("Drop")) // q Droping weapon
+            }else if (Input.GetButtonDown("Drop")) // q Droping weapon ERSTE WAFFE DIE MAN DROPT WIRD DEAKTIVIERT
             {
                 if(activeWeapons[currentWeaponIndex] != null)
                 {
-                    Rigidbody rigid = activeWeapons[currentWeaponIndex].GetComponent<Rigidbody>();
+                    activeWeapons[currentWeaponIndex].SetActive(true);
+                    GameObject curWeapon = activeWeapons[currentWeaponIndex];
+                    Rigidbody rigid = curWeapon.GetComponent<Rigidbody>();
+                    
+                    curWeapon.transform.position = cam.transform.position;
                     rigid.useGravity = true;
                     rigid.isKinematic = false;
-                    activeWeapons[currentWeaponIndex].transform.position = cam.transform.position;
-                    activeWeapons[currentWeaponIndex].GetComponent<BoxCollider>().enabled = true;
                     rigid.velocity = cam.transform.forward * 10 + cam.transform.up * 2;
-                    activeWeapons[currentWeaponIndex].gameObject.transform.SetParent(null);
+                    curWeapon.GetComponent<BoxCollider>().enabled = true;
+                    curWeapon.gameObject.transform.SetParent(null);
                     activeWeapons[currentWeaponIndex] = null;
 
                     int nextActive = SearchForNext(activeWeapons, currentWeaponIndex, 1);
-                    if(nextActive != -1) // -1 no next found
-                    {
-                        lastWeaponIndex = currentWeaponIndex;
+                    if (nextActive != -1) { // -1 no next found
                         currentWeaponIndex = nextActive;
                         activeWeapons[currentWeaponIndex].SetActive(true);
+                        // play weapon switch animation
                     }
-                    
                 }
 
             }
@@ -86,7 +87,7 @@ public class WeaponManager : NetworkBehaviour
             if (i >= l.Count) { i = 0; size = lastActive;  }
             else if(i < 0) { i = size-1; size = -1;  }
             if (l[i] != null) {
-                if(l[lastActive] != null) { l[lastActive].SetActive(false); }
+                if(l[lastActive] != null) { Debug.Log("SetActive(False)"); l[lastActive].SetActive(false);  }
                 return i; 
             }
             if (direction == 1) {
