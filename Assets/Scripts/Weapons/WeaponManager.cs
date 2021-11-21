@@ -78,22 +78,22 @@ public class WeaponManager : NetworkBehaviour
     }
 
     private int SearchForNext(List<GameObject> l, int lastActive = 0, int direction = 1) {
-        int size = l.Count-1;
+        int size = l.Count;
         bool condition = true;
         if (lastActive <= -1) { lastActive = size; }
         if(lastActive >= l.Count) { lastActive = 0; }
         for (int i = lastActive+direction; condition; i+= direction) {
-            if (i >= l.Count-1) { i = 0; size = lastActive+1;  }
-            else if(i < 0) { i = size; size = -1;  }
+            if (i >= l.Count) { i = 0; size = lastActive;  }
+            else if(i < 0) { i = size-1; size = -1;  }
             if (l[i] != null) {
                 if(l[lastActive] != null) { l[lastActive].SetActive(false); }
                 return i; 
             }
             if (direction == 1) {
-                if (i < size + 1) { condition = true; }
+                if (i <= size-1) { condition = true; }
                 else { condition = false; }
             }else if(direction == -1) {
-                if (i > size + 1) { condition = true; }
+                if (i >= size-1) { condition = true; }
                 else { condition = false; }
             }
         }
