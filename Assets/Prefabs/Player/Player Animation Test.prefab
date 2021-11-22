@@ -601,7 +601,7 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   stepAmplitudeWalking: 0.02
-  stepAmplitudeSprinting: 0.07
+  stepAmplitudeSprinting: 0.04
   stepFrequency: 0.3
   playerController: {fileID: -4574526707603160507}
   currentCameraRecoilX: 0
