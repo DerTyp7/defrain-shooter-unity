@@ -24,7 +24,7 @@ public class WeaponManager : NetworkBehaviour
     void Update() {
         if (isLocalPlayer) {
             counter = 0;
-            if(Input.GetAxis("Mouse ScrollWheel") > 0f){ // Scroll up
+            if(Input.GetAxis("Mouse ScrollWheel") > 0f && false){ // Scroll up
                 do
                 {
                     if (currentWeaponIndex <= 0)
@@ -39,7 +39,7 @@ public class WeaponManager : NetworkBehaviour
                     //Debug.Log(activeWeapons[currentWeaponIndex]);
                 } while (activeWeapons[currentWeaponIndex] == null);
             }
-            else if (Input.GetAxis("Mouse ScrollWheel") < 0f){ // Scroll down
+            else if (Input.GetAxis("Mouse ScrollWheel") < 0f && false){ // Scroll down
                 do
                 {
                     if (currentWeaponIndex >= activeWeapons.Length - 1)

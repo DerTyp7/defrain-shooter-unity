@@ -435,9 +435,9 @@ MonoBehaviour:
   rotationMultX: 5
   rotationOffsetX: 0.1
   rotY: 1
-  rotationMultY: 5
+  rotationMultY: 0
   rotZ: 1
-  rotationMultZ: 15
+  rotationMultZ: 0
   sideSwey: 1
   sweyMultX: 1
   sweyMultY: 0
