@@ -71,17 +71,21 @@ public class Shoot : NetworkBehaviour
    [Command]
     // This code will be executed on the Server.
     private void CmdFireBullet() {
-        ray = new Ray(mCamera.transform.position, mCamera.transform.forward); // Raycast from Camera
-        if (Physics.Raycast(ray, out crosshairHitPoint, 5000f)) { // Check if Raycast is beyond 5000
-            hitpos = crosshairHitPoint.point; // If hitpoint is under 5000
-        } else {
-            hitpos = mCamera.transform.position + mCamera.transform.forward * 5000; 
-        }
-        _pointDirection = hitpos - muzzle.transform.position;
-        _lookRotation = Quaternion.LookRotation(_pointDirection);
-        shootAnim.rotationMod[1] = Quaternion.RotateTowards(weaponHolder.transform.rotation, _lookRotation, 1f); // Point weapon to raycast hitpoint from camera
         
         if (weapon.AllowAction) { // If not reloading etc.
+            ray = new Ray(mCamera.transform.position, mCamera.transform.forward); // Raycast from Camera
+            if (Physics.Raycast(ray, out crosshairHitPoint, 5000f))
+            { // Check if Raycast is beyond 5000
+                hitpos = crosshairHitPoint.point; // If hitpoint is under 5000
+            }
+            else
+            {
+                hitpos = mCamera.transform.position + mCamera.transform.forward * 5000;
+            }
+            _pointDirection = hitpos - muzzle.transform.position;
+            _lookRotation = Quaternion.LookRotation(_pointDirection);
+            shootAnim.rotationMod[1] = Quaternion.RotateTowards(weaponHolder.transform.rotation, _lookRotation, 1f); // Point weapon to raycast hitpoint from camera
+
             if (Physics.Raycast(muzzle.transform.position, muzzle.transform.forward, out hit) && weapon.CurrentAmmunition > 0) { // Raycast from Bullet Exit Point to camera raycast 
                 bulletHole(GameObject.CreatePrimitive(PrimitiveType.Sphere), hit); // Creates bullethole where raycast hits
                 if (hit.transform.gameObject.GetComponent<Player>() != null) { // If hit object is a player

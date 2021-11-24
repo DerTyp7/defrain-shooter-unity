@@ -7,6 +7,10 @@ public class Player : NetworkBehaviour
 {
     public bool isAlive = true;
     public Team team;
+
+
+
+    [SerializeField]PlayerUIController playerUIController;
     [SerializeField] private const int defaultHp = 100;
     GameObject GameManager;
     GameMaster gameMaster;
@@ -42,11 +46,9 @@ public class Player : NetworkBehaviour
     {
         if (isLocalPlayer)
         {
-            if (Input.GetKeyDown("n"))
+            if (Input.GetKeyDown(KeyCode.N))
             {
-                //Debug.Log("Request respawn on local player");
-                CmdRespawnRequest();
-                //transform.position = Vector3.zero;
+                playerUIController.showHit();
                 
             }
         }
@@ -111,6 +113,7 @@ public class Player : NetworkBehaviour
         
         if (isAlive)
         {
+            ShowHit();
             health -= value;
             if (health <= 0)
             {
@@ -119,6 +122,12 @@ public class Player : NetworkBehaviour
             }
         }
         
+    }
+
+    [ClientRpc]
+    private void ShowHit() 
+    {
+        playerUIController.showHit();
     }
     public void SetHealth(int value)
     {
