@@ -30,8 +30,8 @@ public class ProcedualAnimationController : NetworkBehaviour
     [SerializeField] private float currentCameraRecoilX = 0f;
     [SerializeField] private float currentCameraRecoilY = 0f;
     [Header("GameObjects")]
-    [SerializeField] private GameObject gun; // The gun object with the animator on it.
     [SerializeField] private GameObject gunHolder;
+    [SerializeField] private WeaponManager weaponManager;
 
 
     [Header("General Settings")]
@@ -94,15 +94,14 @@ public class ProcedualAnimationController : NetworkBehaviour
     public Quaternion[] rotationMod = new Quaternion[3];
 
 
-    public void OnSwitchWeapon(float fireRate)
+    public void OnSwitchWeapon(GameObject currentWeapon)
     {
-        if (isLocalPlayer)
-        { 
-            //gun = newGun;
-            gunAnimator = gun.GetComponent<Animator>();
-            gunAnimator.SetFloat("ShootSpeed", 1f / (60f / fireRate));
-            //startPos = gunPositionObj.transform.localPosition;
-            //startRot = gunRotationObj.transform.localRotation.eulerAngles;
+        if (isLocalPlayer) {
+            if(currentWeapon != null) {
+                gunHolder = currentWeapon;
+                gunAnimator = currentWeapon.GetComponent<Weapon>().WeaponAnimator;
+                gunAnimator.SetFloat("ShootSpeed", 1f / (60f / currentWeapon.GetComponent<Weapon>().Firerate));
+            }
         }
     }
 

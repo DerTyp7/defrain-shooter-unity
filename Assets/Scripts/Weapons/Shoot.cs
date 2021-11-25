@@ -27,11 +27,9 @@ public class Shoot : NetworkBehaviour
     private void Start() {
         if (isServer) { 
             weapon = weaponHolder.GetComponent<Weapon>();
-            shootAnim.OnSwitchWeapon(weapon.Firerate);
         }
         if (isLocalPlayer) {
             weapon = weaponHolder.GetComponent<Weapon>();
-            shootAnim.OnSwitchWeapon(weapon.Firerate);
             curAmmo = weapon.CurrentAmmunition;
             totalAmmo = weapon.TotalAmmunition;
         }

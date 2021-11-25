@@ -19,9 +19,10 @@ public class Weapon : MonoBehaviour
     [SerializeField] int totalAmmunition = 0;
     [SerializeField] GameObject bulletExit;
     [SerializeField] bool allowAction = true;
+    [SerializeField] Animator weaponAnimator;
 
     public bool Active { get => active; set => active = value; }
-    public weaponKinds WeaponKind { get => weaponKind; set => weaponKind = value; }
+    public weaponKinds WeaponKind { get => weaponKind; }
     public int Damage { get => damage; set => damage = value; }
     public float Firerate { get => firerate; set => firerate = value; }
     public int RoundsPerShot { get => roundsPerShot; set => roundsPerShot = value; }
@@ -29,8 +30,9 @@ public class Weapon : MonoBehaviour
     public int CurrentAmmunition { get => currentAmmunition; set => currentAmmunition = value; }
     public int MagazinSize { get => magazinSize; set => magazinSize = value; }
     public int TotalAmmunition { get => totalAmmunition; set => totalAmmunition = value; }
-    public GameObject BulletExit { get => bulletExit; set => bulletExit = value; }
+    public GameObject BulletExit { get => bulletExit; }
     public bool AllowAction { get => allowAction; set => allowAction = value; }
+    public Animator WeaponAnimator { get => weaponAnimator; }
 
     private void Start()
     {
