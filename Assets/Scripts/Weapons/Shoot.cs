@@ -119,6 +119,14 @@ public class Shoot : NetworkBehaviour
         return false;
     }
 
+    public bool setWeapon(GameObject newWeapon) {
+        Debug.Log("SetWeapon: " + newWeapon);
+        weapon = newWeapon.GetComponent<Weapon>();
+        curAmmo = weapon.CurrentAmmunition;
+        totalAmmo = weapon.TotalAmmunition;
+        muzzle = weapon.BulletExit;
+        return true;
+    }
     private bool reloadWeapon(Weapon weapon) {  // Reloads Ammunition from weapon 
         if (weapon.AllowAction && weapon.TotalAmmunition > 0) {
             weapon.AllowAction = false;

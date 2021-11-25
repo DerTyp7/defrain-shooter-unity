@@ -11,13 +11,15 @@ public class WeaponManager : NetworkBehaviour
     private int counter = 0;
     public List<GameObject> activeWeapons = new List<GameObject>();
     private ProcedualAnimationController procedualAnimationController;
-    
+
+    [SerializeField] Shoot shoot;
     [SerializeField] GameObject gunHolster;
     [SerializeField] Camera cam;
 
+
+
     private void Awake()
     {
-        
         procedualAnimationController = GetComponent<ProcedualAnimationController>();
     }
 
@@ -29,7 +31,8 @@ public class WeaponManager : NetworkBehaviour
                 if (nextActive != -1) { // -1 no next found
                     currentWeaponIndex = nextActive;
                     activeWeapons[currentWeaponIndex].SetActive(true);
-                    procedualAnimationController.OnSwitchWeapon(activeWeapons[currentWeaponIndex].gameObject);
+                    procedualAnimationController.OnSwitchWeapon(activeWeapons[currentWeaponIndex]);
+                    shoot.setWeapon(activeWeapons[currentWeaponIndex]);
                     // play weapon switch animation
                 }
             }
@@ -39,7 +42,8 @@ public class WeaponManager : NetworkBehaviour
                 if (nextActive != -1) { // -1 no next found
                     currentWeaponIndex = nextActive;
                     activeWeapons[currentWeaponIndex].SetActive(true);
-                    procedualAnimationController.OnSwitchWeapon(activeWeapons[currentWeaponIndex].gameObject);
+                    procedualAnimationController.OnSwitchWeapon(activeWeapons[currentWeaponIndex]);
+                    shoot.setWeapon(activeWeapons[currentWeaponIndex]);
                     // play weapon switch animation
                 }
             }
@@ -57,7 +61,8 @@ public class WeaponManager : NetworkBehaviour
                     if (nextActive != -1) { // -1 no next found
                         currentWeaponIndex = nextActive;
                         activeWeapons[currentWeaponIndex].SetActive(true);
-                        procedualAnimationController.OnSwitchWeapon(activeWeapons[currentWeaponIndex].gameObject);
+                        procedualAnimationController.OnSwitchWeapon(activeWeapons[currentWeaponIndex]);
+                        shoot.setWeapon(activeWeapons[currentWeaponIndex]);
                         // play weapon switch animation
                     }
                 }
@@ -130,7 +135,9 @@ public class WeaponManager : NetworkBehaviour
         activeWeapons[index] = hit.transform.gameObject;
         activeWeapons[index].SetActive(true);
         currentWeaponIndex = index;
-        procedualAnimationController.OnSwitchWeapon(activeWeapons[currentWeaponIndex].gameObject);
+        procedualAnimationController.OnSwitchWeapon(activeWeapons[currentWeaponIndex]);
+        Debug.Log(activeWeapons[currentWeaponIndex]);
+        shoot.setWeapon(activeWeapons[currentWeaponIndex]);
         return true;
     }
 
