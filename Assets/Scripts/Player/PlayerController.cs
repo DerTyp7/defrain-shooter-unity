@@ -13,6 +13,7 @@ public class PlayerController : NetworkBehaviour
     [SerializeField] private float walkSpeed = 6.0f;
     [SerializeField] private float sprintSpeed = 10.0f;
     [SerializeField] private float aimWalkSpeed = 3.0f;
+    [SerializeField] private float fallDamageSpeed = 10.0f;
 
     [SerializeField][Range(0.0f, 0.5f)] private float moveSmoothTime = 0.001f;
     [SerializeField] float gravity = -10.0f;
@@ -54,7 +55,6 @@ public class PlayerController : NetworkBehaviour
             Grounded();
             CheckGoundAngle();
             UpdateMovement();
-            
         }
         
     }
@@ -97,7 +97,11 @@ public class PlayerController : NetworkBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawRay(new Ray(transform.position, moveDirection * 50));
     }
-
+    [Command]
+    void CmdFallDamage(int damage) 
+    {
+        GetComponent<Player>().RemoveHealth(damage);
+    }
     private void UpdateMovement()
     {
 
@@ -114,6 +118,13 @@ public class PlayerController : NetworkBehaviour
             else movementSpeed = walkSpeed;
             isSprinting = false;
 
+        }
+
+        if(isGrounded && velocity.y < -fallDamageSpeed)
+        {
+            Debug.Log(velocity.y);
+            Debug.Log("Fall Damage");
+            CmdFallDamage((int)Mathf.Abs(velocity.y));
         }
 
         //Grounded
@@ -151,6 +162,7 @@ public class PlayerController : NetworkBehaviour
 
         velocity = Vector3.SmoothDamp(velocity, currentDir * movementSpeed + new Vector3(0, velocityY, 0),ref refVelocity,0.01f);
         controller.Move(velocity * Time.deltaTime);
+        //transform.position += velocity * Time.deltaTime;
     }
   
 }
