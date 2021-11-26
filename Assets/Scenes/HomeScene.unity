@@ -2169,91 +2169,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 2454942472495841689, guid: a973691757099224ca132b32daabf67c, type: 3}
   m_PrefabInstance: {fileID: 1018124453}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1773379358
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1773379361}
-  - component: {fileID: 1773379360}
-  - component: {fileID: 1773379359}
-  m_Layer: 0
-  m_Name: MenuManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1773379359
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1773379358}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b0fecffa3f624585964b0d0eb21b18e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Port: 7777
-  DualMode: 1
-  NoDelay: 1
-  Interval: 10
-  Timeout: 10000
-  FastResend: 2
-  CongestionWindow: 0
-  SendWindowSize: 4096
-  ReceiveWindowSize: 4096
-  NonAlloc: 1
-  debugLog: 0
-  statisticsGUI: 0
-  statisticsLog: 0
---- !u!114 &1773379360
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1773379358}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 145706024aa7ca34b9312d85f68fc209, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dontDestroyOnLoad: 1
-  PersistNetworkManagerToOfflineScene: 0
-  runInBackground: 1
-  autoStartServerBuild: 1
-  serverTickRate: 30
-  offlineScene: Assets/Scenes/HomeScene.unity
-  onlineScene: Assets/Scenes/Lobby.unity
-  transport: {fileID: 1773379359}
-  networkAddress: localhost
-  maxConnections: 100
-  authenticator: {fileID: 0}
-  playerPrefab: {fileID: 0}
-  autoCreatePlayer: 1
-  playerSpawnMethod: 0
-  spawnPrefabs: []
---- !u!4 &1773379361
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1773379358}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 354.46393, y: 179.54048, z: -5.4055643}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!224 &1785160360 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8580211107013450537, guid: 39cebc5bdea8db94c8b7d687886df440, type: 3}
@@ -3239,3 +3154,60 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 39cebc5bdea8db94c8b7d687886df440, type: 3}
+--- !u!1001 &2504770963688188196
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2504770964117222917, guid: 0f6d9d1e97686d34d9872b5028512de5, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2504770964117222917, guid: 0f6d9d1e97686d34d9872b5028512de5, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 354.46393
+      objectReference: {fileID: 0}
+    - target: {fileID: 2504770964117222917, guid: 0f6d9d1e97686d34d9872b5028512de5, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 179.54048
+      objectReference: {fileID: 0}
+    - target: {fileID: 2504770964117222917, guid: 0f6d9d1e97686d34d9872b5028512de5, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -5.4055643
+      objectReference: {fileID: 0}
+    - target: {fileID: 2504770964117222917, guid: 0f6d9d1e97686d34d9872b5028512de5, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2504770964117222917, guid: 0f6d9d1e97686d34d9872b5028512de5, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2504770964117222917, guid: 0f6d9d1e97686d34d9872b5028512de5, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2504770964117222917, guid: 0f6d9d1e97686d34d9872b5028512de5, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2504770964117222917, guid: 0f6d9d1e97686d34d9872b5028512de5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2504770964117222917, guid: 0f6d9d1e97686d34d9872b5028512de5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2504770964117222917, guid: 0f6d9d1e97686d34d9872b5028512de5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2504770964117222970, guid: 0f6d9d1e97686d34d9872b5028512de5, type: 3}
+      propertyPath: m_Name
+      value: NetManager
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 0f6d9d1e97686d34d9872b5028512de5, type: 3}

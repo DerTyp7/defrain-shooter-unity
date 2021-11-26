@@ -1,6 +1,5 @@
 using Mirror;
 using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
 
 public class MenuStartClient : MonoBehaviour
