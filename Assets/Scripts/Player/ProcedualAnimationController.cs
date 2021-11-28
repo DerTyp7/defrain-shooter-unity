@@ -75,6 +75,7 @@ public class ProcedualAnimationController : NetworkBehaviour
     [SerializeField] float maxRecoil = 0.1f;
 
     private Animator gunAnimator;
+    [SerializeField] private Animator playerAnimator;
 
     Vector3 startPos, startRot;
     float recoilOffset = 0f;
@@ -93,7 +94,11 @@ public class ProcedualAnimationController : NetworkBehaviour
     Vector3[] positionMod = new Vector3[3];
     public Quaternion[] rotationMod = new Quaternion[3];
 
-
+    public void walkAnimation() 
+    {
+        playerAnimator.SetFloat("x", playerController.localVelocity.x / playerController.currentMaxSpeed);
+        playerAnimator.SetFloat("y", playerController.localVelocity.z / playerController.currentMaxSpeed);
+    }
     public void OnSwitchWeapon(GameObject currentWeapon)
     {
         if (isLocalPlayer) {
@@ -135,6 +140,8 @@ public class ProcedualAnimationController : NetworkBehaviour
     {
         if (isLocalPlayer)
         {
+            walkAnimation();
+
             CmdAim(Input.GetButton("Aim"));
         }
         /*-----Aiming-----*/

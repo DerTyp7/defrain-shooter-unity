@@ -10,10 +10,11 @@ public class PlayerController : NetworkBehaviour
 {
     [SerializeField] private ProcedualAnimationController procedualAnimationController;
     [Header("Movement")]
-    [SerializeField] private float walkSpeed = 6.0f;
-    [SerializeField] private float sprintSpeed = 10.0f;
+    [SerializeField] private float walkSpeed = 5.0f;
+    [SerializeField] private float sprintSpeed = 7.0f;
     [SerializeField] private float aimWalkSpeed = 3.0f;
     [SerializeField] private float fallDamageSpeed = 10.0f;
+    
 
     [SerializeField][Range(0.0f, 0.5f)] private float moveSmoothTime = 0.001f;
     [SerializeField] float gravity = -10.0f;
@@ -31,13 +32,14 @@ public class PlayerController : NetworkBehaviour
 
     public bool isGrounded;
     public bool isSprinting;
-    private float movementSpeed;
+    public float currentMaxSpeed = 5.0f;
     private float velocityY = 0.0f;
     private CharacterController controller;
 
-    private Vector3 currentDir = Vector3.zero;
+    public Vector3 currentDir = Vector3.zero;
     private Vector3 currentDirVelocity = Vector3.zero;
     public Vector3 velocity = Vector3.zero;
+    public Vector3 localVelocity = Vector3.zero;
     private Vector3 refVelocity = Vector3.zero;
 
 
@@ -108,14 +110,14 @@ public class PlayerController : NetworkBehaviour
 
         if (Input.GetAxisRaw("Sprint") > 0 && isGrounded && !procedualAnimationController.isAiming)
             {
-            movementSpeed = sprintSpeed;
+            currentMaxSpeed = sprintSpeed;
             isSprinting = true;
         }
         else
         {
 
-            if(procedualAnimationController.isAiming) movementSpeed = aimWalkSpeed;
-            else movementSpeed = walkSpeed;
+            if(procedualAnimationController.isAiming) currentMaxSpeed = aimWalkSpeed;
+            else currentMaxSpeed = walkSpeed;
             isSprinting = false;
 
         }
@@ -159,8 +161,9 @@ public class PlayerController : NetworkBehaviour
             moveDirection = new Vector3(moveDirection.x, 0, moveDirection.z); 
             currentDir = moveDirection;
         }
-
-        velocity = Vector3.SmoothDamp(velocity, currentDir * movementSpeed + new Vector3(0, velocityY, 0),ref refVelocity,0.01f);
+        Debug.Log(currentMaxSpeed);
+        velocity = Vector3.SmoothDamp(velocity, currentDir * currentMaxSpeed + new Vector3(0, velocityY, 0),ref refVelocity,moveSmoothTime);
+        localVelocity = transform.InverseTransformDirection(velocity);
         controller.Move(velocity * Time.deltaTime);
         //transform.position += velocity * Time.deltaTime;
     }
