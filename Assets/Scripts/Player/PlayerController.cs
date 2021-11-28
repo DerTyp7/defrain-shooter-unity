@@ -161,7 +161,6 @@ public class PlayerController : NetworkBehaviour
             moveDirection = new Vector3(moveDirection.x, 0, moveDirection.z); 
             currentDir = moveDirection;
         }
-        Debug.Log(currentMaxSpeed);
         velocity = Vector3.SmoothDamp(velocity, currentDir * currentMaxSpeed + new Vector3(0, velocityY, 0),ref refVelocity,moveSmoothTime);
         localVelocity = transform.InverseTransformDirection(velocity);
         controller.Move(velocity * Time.deltaTime);
