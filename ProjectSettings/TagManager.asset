@@ -5,6 +5,11 @@ TagManager:
   serializedVersion: 2
   tags:
   - Weapon
+  - MenuPanel
+  - BackBtnMenu
+  - Team1
+  - NetManager
+  - VariableSaver
   layers:
   - Default
   - TransparentFX
