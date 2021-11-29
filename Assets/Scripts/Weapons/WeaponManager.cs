@@ -27,13 +27,15 @@ public class WeaponManager : NetworkBehaviour
         if (isLocalPlayer) {
             if (Input.GetAxis("Mouse ScrollWheel") > 0f) { // Scroll up
                 lastWeaponIndex = currentWeaponIndex;
+                activeWeapons[currentWeaponIndex].SetActive(false);
                 switchWeapon(-1);
             }
             else if (Input.GetAxis("Mouse ScrollWheel") < 0f) { // Scroll down
                 lastWeaponIndex = currentWeaponIndex;
+                activeWeapons[currentWeaponIndex].SetActive(false);
                 switchWeapon(1);
             }
-
+            activeWeapons[currentWeaponIndex].SetActive(true);
             if (Input.GetButtonDown("Interact")) { // e 
                     PickupWeapon();
 
@@ -41,6 +43,7 @@ public class WeaponManager : NetworkBehaviour
                 if (activeWeapons[currentWeaponIndex] != null) {
                     dropWeapon(); // Throws weapon away
                     switchWeapon(1);
+                    activeWeapons[currentWeaponIndex].SetActive(true);
                 }
             }
         }
@@ -48,21 +51,46 @@ public class WeaponManager : NetworkBehaviour
     
 
     private bool switchWeapon(int direction) {
+        
         int nextActive = searchForNext(activeWeapons, lastWeaponIndex, direction);
-        if (nextActive != -1) { // -1 no next found
+
             currentWeaponIndex = nextActive;
-            activeWeapons[currentWeaponIndex].SetActive(true);
+            
             procedualAnimationController.OnSwitchWeapon(activeWeapons[currentWeaponIndex]);
             shoot.setWeapon(activeWeapons[currentWeaponIndex]);
             Weapon weaponData = activeWeapons[currentWeaponIndex].GetComponent<Weapon>();
             procedualAnimationController.GunRightHandREF = weaponData.GunRightREF;
             procedualAnimationController.GunLeftHandREF = weaponData.GunLeftREF;
             // play weapon switch animation
-        }
 
         return false;
     }
-    private int searchForNext(List<GameObject> l, int lastActive = 0, int direction = 1) {
+
+    private int searchForNext(List<GameObject> l, int lastActive = 0, int direction = 1)
+    {
+        int current = lastActive + direction;
+
+        for (int trys = 0; trys < l.Count; trys++)
+        {
+            //Check if you are at the start or end of the list and loop around accordingly
+            if (current < 0) current = l.Count - 1; 
+            else if (current >= l.Count) current = 0;
+            
+            //Check if in the current position is a gun or not 
+            if (l[current] != null) 
+            {
+                return current;
+            }
+            //if there is no gun go to the next
+            current = current + direction;
+        }
+        //If no next gun can be found return the index of the gun that was already selected
+        return lastActive;
+    }
+
+
+
+        private int searchForNextOld(List<GameObject> l, int lastActive = 0, int direction = 1) {
         int size = l.Count;
         bool condition = true;
         int counter = 0;

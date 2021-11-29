@@ -124,8 +124,6 @@ public class PlayerController : NetworkBehaviour
 
         if(isGrounded && velocity.y < -fallDamageSpeed)
         {
-            Debug.Log(velocity.y);
-            Debug.Log("Fall Damage");
             CmdFallDamage((int)Mathf.Abs(velocity.y));
         }
 
