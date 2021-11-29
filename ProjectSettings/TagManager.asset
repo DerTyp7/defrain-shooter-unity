@@ -7,9 +7,10 @@ TagManager:
   - Weapon
   - MenuPanel
   - BackBtnMenu
-  - Team1
   - NetManager
   - VariableSaver
+  - Team1List
+  - Team2List
   layers:
   - Default
   - TransparentFX

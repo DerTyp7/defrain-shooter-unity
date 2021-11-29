@@ -9,11 +9,17 @@ public class LobbyPlayer : NetworkBehaviour
     [SerializeField] private TextMeshProUGUI usernameText;
     [SerializeField] private TextMeshProUGUI rdyText;
 
+    [SerializeField] private Button team1Btn;
+    [SerializeField] private Button team2Btn;
+
     [SyncVar(hook = "DisplayPlayerName")]
     [SerializeField] public string username;
 
     [SyncVar(hook = "ChangeReadyState")]
     [SerializeField] bool ready = false;
+
+    [SyncVar]
+    [SerializeField] int teamId = 0;
 
     Lobby lobby;
     public override void OnStartClient()
@@ -21,7 +27,13 @@ public class LobbyPlayer : NetworkBehaviour
         lobby = GameObject.Find("LobbyManager").GetComponent<Lobby>();
         lobby.RegisterPlayer(this);
 
-        gameObject.transform.parent = GameObject.FindGameObjectWithTag("Team1").transform;
+        if(teamId == 0)
+        {
+            gameObject.transform.parent = GameObject.FindGameObjectWithTag("Team1").transform;
+        }else if(teamId == 1)
+        {
+            gameObject.transform.parent = GameObject.FindGameObjectWithTag("Team2").transform;
+        }
     }
 
     public void Start()
@@ -48,6 +60,11 @@ public class LobbyPlayer : NetworkBehaviour
         ready = !ready;
     }
 
+    [Command]
+    public void SelectTeam(int _teamId)
+    {
+        teamId = _teamId;
+    }
     public void DisplayPlayerName(string oldName, string newName)
     {
         Debug.Log("Player changed name from " + oldName + " to " + newName);

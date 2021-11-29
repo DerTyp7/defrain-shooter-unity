@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Mirror;
 
-public class TeamManager : MonoBehaviour
+public class TeamManager : NetworkBehaviour
 {
 
     public List<Team> Teams = new List<Team>();
