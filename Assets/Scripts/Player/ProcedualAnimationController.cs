@@ -102,6 +102,9 @@ public class ProcedualAnimationController : NetworkBehaviour
     Vector3[] positionMod = new Vector3[3];
     public Quaternion[] rotationMod = new Quaternion[3];
 
+    public Transform GunRightHandREF { get => gunRightHandREF; set => gunRightHandREF = value; }
+    public Transform GunLeftHandREF { get => gunLeftHandREF; set => gunLeftHandREF = value; }
+
     public void walkAnimation() 
     {
         playerAnimator.SetFloat("x", playerController.localVelocity.x / playerController.currentMaxSpeed);
@@ -119,10 +122,10 @@ public class ProcedualAnimationController : NetworkBehaviour
         {
             rightHandREF.position = defaultRightHandPosition;
         }
-        if (gunLeftHandREF != null)
+        if (GunLeftHandREF != null)
         {
-            leftHandREF.position = gunLeftHandREF.position;
-            leftHandREF.rotation = gunLeftHandREF.rotation;
+            leftHandREF.position = GunLeftHandREF.position;
+            leftHandREF.rotation = GunLeftHandREF.rotation;
         }
         else
         {

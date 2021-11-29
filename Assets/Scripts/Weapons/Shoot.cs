@@ -120,7 +120,6 @@ public class Shoot : NetworkBehaviour
     }
 
     public bool setWeapon(GameObject newWeapon) {
-        Debug.Log("SetWeapon: " + newWeapon);
         weapon = newWeapon.GetComponent<Weapon>();
         curAmmo = weapon.CurrentAmmunition;
         totalAmmo = weapon.TotalAmmunition;

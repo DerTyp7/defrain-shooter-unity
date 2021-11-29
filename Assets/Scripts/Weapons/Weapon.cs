@@ -20,6 +20,8 @@ public class Weapon : MonoBehaviour
     [SerializeField] GameObject bulletExit;
     [SerializeField] bool allowAction = true;
     [SerializeField] Animator weaponAnimator;
+    [SerializeField] Transform gunRightREF;
+    [SerializeField] Transform gunLeftREF;
 
     public bool Active { get => active; set => active = value; }
     public weaponKinds WeaponKind { get => weaponKind; }
@@ -33,6 +35,8 @@ public class Weapon : MonoBehaviour
     public GameObject BulletExit { get => bulletExit; }
     public bool AllowAction { get => allowAction; set => allowAction = value; }
     public Animator WeaponAnimator { get => weaponAnimator; }
+    public Transform GunLeftREF { get => gunLeftREF; }
+    public Transform GunRightREF { get => gunRightREF; }
 
     private void Start()
     {
