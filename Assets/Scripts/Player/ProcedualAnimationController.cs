@@ -5,6 +5,14 @@ using Mirror;
 
 public class ProcedualAnimationController : NetworkBehaviour
 {
+    [Header("Hand Settings")]
+    [SerializeField] private Transform rightHandREF;
+    [SerializeField] private Transform leftHandREF;
+    [SerializeField] private Transform gunRightHandREF;
+    [SerializeField] private Transform gunLeftHandREF;
+    [SerializeField] private Vector3   defaultRightHandPosition = Vector3.zero;
+    [SerializeField] private Vector3   defaultLeftHandPosition  = Vector3.zero;
+
 
     [Header("Step Settings")]
     [SerializeField] private float stepAmplitudeWalking;
@@ -75,6 +83,7 @@ public class ProcedualAnimationController : NetworkBehaviour
     [SerializeField] float maxRecoil = 0.1f;
 
     private Animator gunAnimator;
+    [SerializeField] private Animator playerAnimator;
 
     Vector3 startPos, startRot;
     float recoilOffset = 0f;
@@ -93,7 +102,33 @@ public class ProcedualAnimationController : NetworkBehaviour
     Vector3[] positionMod = new Vector3[3];
     public Quaternion[] rotationMod = new Quaternion[3];
 
+    public void walkAnimation() 
+    {
+        playerAnimator.SetFloat("x", playerController.localVelocity.x / playerController.currentMaxSpeed);
+        playerAnimator.SetFloat("y", playerController.localVelocity.z / playerController.currentMaxSpeed);
+    }
 
+    public void handPositioning()
+    {
+        if (gunRightHandREF != null)
+        {
+            rightHandREF.position = gunRightHandREF.position;
+            rightHandREF.rotation = gunRightHandREF.rotation;
+        }
+        else 
+        {
+            rightHandREF.position = defaultRightHandPosition;
+        }
+        if (gunLeftHandREF != null)
+        {
+            leftHandREF.position = gunLeftHandREF.position;
+            leftHandREF.rotation = gunLeftHandREF.rotation;
+        }
+        else
+        {
+            leftHandREF.position = defaultLeftHandPosition;
+        }
+    }
     public void OnSwitchWeapon(GameObject currentWeapon)
     {
         if (isLocalPlayer) {
@@ -135,6 +170,8 @@ public class ProcedualAnimationController : NetworkBehaviour
     {
         if (isLocalPlayer)
         {
+            walkAnimation();
+            handPositioning();
             CmdAim(Input.GetButton("Aim"));
         }
         /*-----Aiming-----*/
