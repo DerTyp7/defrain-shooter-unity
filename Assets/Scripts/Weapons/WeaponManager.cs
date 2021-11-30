@@ -89,47 +89,6 @@ public class WeaponManager : NetworkBehaviour
     }
 
 
-
-        private int searchForNextOld(List<GameObject> l, int lastActive = 0, int direction = 1) {
-        int size = l.Count;
-        bool condition = true;
-        int counter = 0;
-        foreach (GameObject obj in l) { if(obj == null) { counter++;  } }
-        if(counter < 4) {
-            if (lastActive <= -1) { lastActive = size; }
-            if (lastActive >= l.Count) { lastActive = 0; }
-            for (int i = lastActive + direction; condition; i += direction) {
-                if (i >= l.Count) { 
-                    i = 0; size = lastActive; 
-                }
-                else if (i < 0) {
-                    i = size - 1; size = -1; 
-                }
-
-                Debug.Log("1 " + i);
-
-                if (l[i] != null) {
-                    if (l[lastActive] != null) { 
-                        l[lastActive].SetActive(false); 
-                    }
-                    return i;
-                }
-
-                Debug.Log("2 " + i);
-
-                if (direction == 1) {
-                    if (i <= size - 1) { condition = true; }
-                    else { condition = false; }
-                } else if (direction == -1) {
-                    if (i >= size - 1) { condition = true; }
-                    else { condition = false; }
-                }
-            }
-        }
-        
-        return -1;
-    }
-
     public GameObject getCurrentWeapon() {
         return activeWeapons[currentWeaponIndex].gameObject;
     }
