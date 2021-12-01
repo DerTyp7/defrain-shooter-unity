@@ -8,6 +8,7 @@ public class Weapon : MonoBehaviour
     {
         Rifle, Pistole, Knife, Grenade
     }
+    [SerializeField] string WeaponName;
     [SerializeField] weaponKinds weaponKind;
     [SerializeField] bool active = false;
     [SerializeField] int damage = 0;
@@ -38,9 +39,10 @@ public class Weapon : MonoBehaviour
     public Transform GunLeftREF { get => gunLeftREF; }
     public Transform GunRightREF { get => gunRightREF; }
 
-    private void Start()
+    private void Awake()
     {
         CurrentAmmunition = MagazinSize;
+        WeaponName = transform.name;
     }
 
 }

@@ -25,12 +25,19 @@ public class WeaponManager : NetworkBehaviour
 
     void Update() {
         if (isLocalPlayer) {
-            if (Input.GetAxis("Mouse ScrollWheel") > 0f) { // Scroll up
+            if (Input.GetButtonDown("Weapon1")) {
+                currentWeaponIndex = 0;
+            }else if (Input.GetButtonDown("Weapon2")) {
+                currentWeaponIndex = 1;
+            }else if (Input.GetButtonDown("Weapon3")) {
+                currentWeaponIndex = 2;
+            }else if (Input.GetButtonDown("Weapon4")) {
+                currentWeaponIndex = 4; 
+            }else if (Input.GetAxis("Mouse ScrollWheel") > 0f) { // Scroll up
                 lastWeaponIndex = currentWeaponIndex;
                 activeWeapons[currentWeaponIndex].SetActive(false);
                 switchWeapon(-1);
-            }
-            else if (Input.GetAxis("Mouse ScrollWheel") < 0f) { // Scroll down
+            }else if (Input.GetAxis("Mouse ScrollWheel") < 0f) { // Scroll down
                 lastWeaponIndex = currentWeaponIndex;
                 activeWeapons[currentWeaponIndex].SetActive(false);
                 switchWeapon(1);

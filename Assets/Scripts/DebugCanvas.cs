@@ -9,6 +9,7 @@ public class DebugCanvas : MonoBehaviour
 {
     public TextMeshProUGUI DebugTextGrounded;
     public TextMeshProUGUI DebugTextClientServer;
+    public TextMeshProUGUI DebugAmmunition;
     public GameObject Player;
     public GameObject GameManager;
     public TextMeshProUGUI fpsText;
@@ -36,6 +37,8 @@ public class DebugCanvas : MonoBehaviour
         else
         {
             DebugTextGrounded.text = "isGrounded: " + Player.GetComponent<PlayerController>().isGrounded.ToString();
+            Shoot shoot = Player.GetComponent<Shoot>();
+            DebugAmmunition.text = shoot.CurAmmo + " / " + shoot.TotalAmmo;
             deltaTime += (Time.deltaTime - deltaTime) * 0.1f;
             float fps = 1.0f / deltaTime;
             fpsText.text = Mathf.Ceil(fps).ToString() + "FPS";

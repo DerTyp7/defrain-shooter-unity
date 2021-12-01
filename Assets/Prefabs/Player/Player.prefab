@@ -1629,6 +1629,18 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7365407325767981111, guid: f1dd059fe90d9e14da7ad60b3612969c, type: 3}
+      propertyPath: magazinSize
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7365407325767981111, guid: f1dd059fe90d9e14da7ad60b3612969c, type: 3}
+      propertyPath: totalAmmunition
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7365407325767981111, guid: f1dd059fe90d9e14da7ad60b3612969c, type: 3}
+      propertyPath: currentAmmunition
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7716234701984758470, guid: f1dd059fe90d9e14da7ad60b3612969c, type: 3}
       propertyPath: m_Name
       value: Gun_Right_Hand_REF
