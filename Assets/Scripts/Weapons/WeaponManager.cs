@@ -41,7 +41,7 @@ public class WeaponManager : NetworkBehaviour
 
             }else if (Input.GetButtonDown("Drop")) { // q Droping weapon 
                 if (activeWeapons[currentWeaponIndex] != null) {
-                    dropWeapon(); // Throws weapon away
+                    dropWeapon(currentWeaponIndex); // Throws weapon away
                     switchWeapon(1);
                     activeWeapons[currentWeaponIndex].SetActive(true);
                 }
@@ -117,8 +117,8 @@ public class WeaponManager : NetworkBehaviour
     }
 
     private bool putWeaponInArray(int index, RaycastHit hit) {
-        if (activeWeapons[currentWeaponIndex] != null) {
-            dropWeapon(); // Throws weapon away
+        if (activeWeapons[index] != null) {
+            dropWeapon(index); // Throws weapon away
         }
         activeWeapons[index] = hit.transform.gameObject;
         activeWeapons[index].SetActive(true);
@@ -131,9 +131,9 @@ public class WeaponManager : NetworkBehaviour
         return true;
     }
 
-    private bool dropWeapon() {
-        if(currentWeaponIndex != 2) {
-            GameObject currentWeapon = activeWeapons[currentWeaponIndex];
+    private bool dropWeapon(int index) {
+        if(index != 2) {
+            GameObject currentWeapon = activeWeapons[index];
             currentWeapon.SetActive(true);
             Rigidbody rigid = currentWeapon.GetComponent<Rigidbody>();
             rigid.useGravity = true;
@@ -141,7 +141,7 @@ public class WeaponManager : NetworkBehaviour
             rigid.velocity = cam.transform.forward * 10 + cam.transform.up * 2;
             currentWeapon.GetComponent<BoxCollider>().enabled = true;
             currentWeapon.gameObject.transform.SetParent(null);
-            activeWeapons[currentWeaponIndex] = null;
+            activeWeapons[index] = null;
 
             return true;
         }
