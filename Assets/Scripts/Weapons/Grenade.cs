@@ -32,16 +32,23 @@ public class Grenade : MonoBehaviour
         GameObject spawnedExplosion = Instantiate(explodeParticle, transform.position, transform.rotation);
         // Destroys explosion particle after on second
         Destroy(spawnedExplosion, 1);
+
         // Gets all collider that are in a sphere around the grenade
         Collider[] colliders = Physics.OverlapSphere(transform.position, weapon.GrenadeRadius);
         // Iterate over all colliders found in radius
         foreach(Collider nearbyObject in colliders) {
-            // Get Rigidbody from nearby object and...
-            Rigidbody rb = nearbyObject.GetComponent<Rigidbody>();
-            // if rigidbody exists...
-            if(rb != null) {
-                // adds force to nearby objects
-                rb.AddExplosionForce(weapon.ExplosionForce, transform.position, weapon.GrenadeRadius);
+            // Check if nearby object is a Player
+            if (nearbyObject.transform.gameObject.GetComponent<Player>()) {
+                // Remove health from player
+                nearbyObject.transform.gameObject.GetComponent<Player>().RemoveHealth(weapon.Damage);
+            } else {
+                // Get Rigidbody from nearby object and...
+                Rigidbody rb = nearbyObject.GetComponent<Rigidbody>();
+                // if rigidbody exists...
+                if (rb != null) {
+                    // adds force to nearby objects
+                    rb.AddExplosionForce(weapon.ExplosionForce, transform.position, weapon.GrenadeRadius);
+                }
             }
         }
         weapon.HasExploded = true;
