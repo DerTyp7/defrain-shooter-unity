@@ -39,10 +39,10 @@ public class WeaponManager : NetworkBehaviour
             }
             if (Input.GetButtonDown("Interact")) { // e 
                     PickupWeapon();
-
             }else if (Input.GetButtonDown("Drop")) { // q Droping weapon 
                 if (activeWeapons[currentWeaponIndex] != null) {
                     dropWeapon(activeWeapons[currentWeaponIndex].GetComponent<Weapon>().DropForce); // Throws weapon away
+                    switchWeapon(1);
                     activeWeapons[currentWeaponIndex].SetActive(true);
                 }
             }
@@ -50,18 +50,18 @@ public class WeaponManager : NetworkBehaviour
     }
     
 
-    private bool switchWeapon(int direction) {
-        
+    public bool switchWeapon(int direction) {
+        // Get next active weapon index
         int nextActive = searchForNext(activeWeapons, lastWeaponIndex, direction);
 
-            currentWeaponIndex = nextActive;
+        currentWeaponIndex = nextActive;
             
-            procedualAnimationController.OnSwitchWeapon(activeWeapons[currentWeaponIndex]);
-            shoot.setWeapon(activeWeapons[currentWeaponIndex]);
-            Weapon weaponData = activeWeapons[currentWeaponIndex].GetComponent<Weapon>();
-            procedualAnimationController.GunRightHandREF = weaponData.GunRightREF;
-            procedualAnimationController.GunLeftHandREF = weaponData.GunLeftREF;
-            // play weapon switch animation
+        procedualAnimationController.OnSwitchWeapon(activeWeapons[currentWeaponIndex]);
+        shoot.setWeapon(activeWeapons[currentWeaponIndex]);
+        Weapon weaponData = activeWeapons[currentWeaponIndex].GetComponent<Weapon>();
+        procedualAnimationController.GunRightHandREF = weaponData.GunRightREF;
+        procedualAnimationController.GunLeftHandREF = weaponData.GunLeftREF;
+        // play weapon switch animation
 
         return false;
     }
@@ -117,7 +117,7 @@ public class WeaponManager : NetworkBehaviour
     }
 
     private bool putWeaponInArray(int index, RaycastHit hit) {
-        if (activeWeapons[currentWeaponIndex] != null) {
+        if (activeWeapons[index] != null) {
             dropWeapon(activeWeapons[currentWeaponIndex].GetComponent<Weapon>().DropForce); // Throws weapon away
         }
         activeWeapons[index] = hit.transform.gameObject;
@@ -138,11 +138,10 @@ public class WeaponManager : NetworkBehaviour
             Rigidbody rigid = currentWeapon.GetComponent<Rigidbody>();
             rigid.useGravity = true;
             rigid.isKinematic = false;
-            rigid.velocity = cam.transform.forward * 10 + cam.transform.up * 2;
+            rigid.velocity = cam.transform.forward * dropForce + cam.transform.up * 2;
             currentWeapon.GetComponent<BoxCollider>().enabled = true;
             currentWeapon.gameObject.transform.SetParent(null);
             activeWeapons[currentWeaponIndex] = null;
-            switchWeapon(1);
             return true;
         }
         else {

@@ -79,6 +79,7 @@ public class Shoot : NetworkBehaviour
         // Throws grenade with dropForce
         weapon.HasBeenThrown = true;
         weaponManager.dropWeapon(weapon.DropForce);
+        weaponManager.switchWeapon(1);
     }
 
     [Command]
@@ -138,6 +139,7 @@ public class Shoot : NetworkBehaviour
     }
 
     public bool setWeapon(GameObject newWeapon) {
+        Debug.Log("Switch weapon to: " + newWeapon.transform.name);
         weapon = newWeapon.GetComponent<Weapon>();
         curAmmo = weapon.CurrentAmmunition;
         totalAmmo = weapon.TotalAmmunition;
