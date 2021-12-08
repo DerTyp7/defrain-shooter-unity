@@ -5,12 +5,14 @@ using Mirror;
 using TMPro;
 public class Shoot : NetworkBehaviour
 {
+
+    [SerializeField] WeaponManager weaponManager; // For throwing grenade
     [SerializeField] GameObject muzzle;
     [SerializeField] ProcedualAnimationController shootAnim;
     [SerializeField] GameObject weaponHolder;
     [SerializeField] Camera mCamera;
     [SerializeField] bool limitAmmunition = true;
-
+    
     private Weapon weapon;
     private RaycastHit crosshairHitPoint;
     private Vector3 _pointDirection;
@@ -48,19 +50,35 @@ public class Shoot : NetworkBehaviour
                 {
                     weapon.GetComponent<BoxCollider>().enabled = false;
                 }
-                if (weapon.AllowAction && weapon.CurrentAmmunition > 0)
-                {
-                    shootAnim.Recoil(0.1f);
-                }
-                CmdFireBullet();
-                
+                // If current weapon kind is a rifle or pistole
+                string weaponKindString = weapon.WeaponKind.ToString();
+                if(weaponKindString == "Rifle" || weaponKindString == "Pistole") {
+                    if (weapon.AllowAction && weapon.CurrentAmmunition > 0) {
+                        shootAnim.Recoil(0.1f);
+                    }
+                    // Shoot Weapon
+                    CmdFireBullet(); 
+                } // If current weapon kind is grenade
+                else if(weaponKindString == "Grenade"){
+                    // Throw Grenade
+                    throwGrenade(); 
+                } // If current weapon kind is kinfe
+                else { 
+                    // Throw hands (punch)
+                }       
             }
             if (Input.GetButtonDown("Reload")) {
                 updateCanvas = true;
                 CmdReloadWeapon();
-            }
-            
+            }            
         }
+    }
+
+    private void throwGrenade() {
+        Debug.Log("ThrowGrenade!");
+        // Throws grenade with dropForce
+        weapon.HasBeenThrown = true;
+        weaponManager.dropWeapon(weapon.DropForce);
     }
 
     [Command]

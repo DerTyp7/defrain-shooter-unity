@@ -29,20 +29,20 @@ public class WeaponManager : NetworkBehaviour
                 lastWeaponIndex = currentWeaponIndex;
                 activeWeapons[currentWeaponIndex].SetActive(false);
                 switchWeapon(-1);
+                activeWeapons[currentWeaponIndex].SetActive(true);
             }
             else if (Input.GetAxis("Mouse ScrollWheel") < 0f) { // Scroll down
                 lastWeaponIndex = currentWeaponIndex;
                 activeWeapons[currentWeaponIndex].SetActive(false);
                 switchWeapon(1);
+                activeWeapons[currentWeaponIndex].SetActive(true);
             }
-            activeWeapons[currentWeaponIndex].SetActive(true);
             if (Input.GetButtonDown("Interact")) { // e 
                     PickupWeapon();
 
             }else if (Input.GetButtonDown("Drop")) { // q Droping weapon 
                 if (activeWeapons[currentWeaponIndex] != null) {
-                    dropWeapon(); // Throws weapon away
-                    switchWeapon(1);
+                    dropWeapon(activeWeapons[currentWeaponIndex].GetComponent<Weapon>().DropForce); // Throws weapon away
                     activeWeapons[currentWeaponIndex].SetActive(true);
                 }
             }
@@ -118,7 +118,7 @@ public class WeaponManager : NetworkBehaviour
 
     private bool putWeaponInArray(int index, RaycastHit hit) {
         if (activeWeapons[currentWeaponIndex] != null) {
-            dropWeapon(); // Throws weapon away
+            dropWeapon(activeWeapons[currentWeaponIndex].GetComponent<Weapon>().DropForce); // Throws weapon away
         }
         activeWeapons[index] = hit.transform.gameObject;
         activeWeapons[index].SetActive(true);
@@ -131,7 +131,7 @@ public class WeaponManager : NetworkBehaviour
         return true;
     }
 
-    private bool dropWeapon() {
+    public bool dropWeapon(float dropForce) {
         if(currentWeaponIndex != 2) {
             GameObject currentWeapon = activeWeapons[currentWeaponIndex];
             currentWeapon.SetActive(true);
@@ -142,7 +142,7 @@ public class WeaponManager : NetworkBehaviour
             currentWeapon.GetComponent<BoxCollider>().enabled = true;
             currentWeapon.gameObject.transform.SetParent(null);
             activeWeapons[currentWeaponIndex] = null;
-
+            switchWeapon(1);
             return true;
         }
         else {
