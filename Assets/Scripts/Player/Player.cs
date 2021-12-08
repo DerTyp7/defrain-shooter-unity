@@ -109,8 +109,6 @@ public class Player : NetworkBehaviour
     }
     public void RemoveHealth(int value)
     {
-
-        
         if (isAlive)
         {
             ShowHit();
@@ -121,7 +119,6 @@ public class Player : NetworkBehaviour
                 Die();
             }
         }
-        
     }
 
     [ClientRpc]

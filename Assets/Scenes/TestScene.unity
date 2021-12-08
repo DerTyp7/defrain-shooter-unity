@@ -1415,10 +1415,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 0}
-      propertyPath: explodeParticle
-      value: 
-      objectReference: {fileID: 1541885955888442623}
     - target: {fileID: 732033708985862910, guid: bd217f9f85ce78e46a925776562625e8, type: 3}
       propertyPath: m_RootOrder
       value: 12
@@ -1472,12 +1468,16 @@ PrefabInstance:
       value: Grenade
       objectReference: {fileID: 0}
     - target: {fileID: 5204381087217674634, guid: bd217f9f85ce78e46a925776562625e8, type: 3}
+      propertyPath: damage
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 5204381087217674634, guid: bd217f9f85ce78e46a925776562625e8, type: 3}
       propertyPath: dropForce
       value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 5204381087217674634, guid: bd217f9f85ce78e46a925776562625e8, type: 3}
       propertyPath: grenadeRadius
-      value: 10
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5204381087217674634, guid: bd217f9f85ce78e46a925776562625e8, type: 3}
       propertyPath: hasBeenThrown
@@ -1556,6 +1556,36 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1323619077 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5071598280516985511, guid: bd217f9f85ce78e46a925776562625e8, type: 3}
+  m_PrefabInstance: {fileID: 1243110492}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1323619081 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5204381087217674634, guid: bd217f9f85ce78e46a925776562625e8, type: 3}
+  m_PrefabInstance: {fileID: 1243110492}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1323619077}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c98f5c47a8b7dd64f86fd6f42c4d6e5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1323619084
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1323619077}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efa52c67441299049b2e2634d9e3e534, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  explodeParticle: {fileID: 1541885955888442623}
+  weapon: {fileID: 1323619081}
 --- !u!1 &1351784389
 GameObject:
   m_ObjectHideFlags: 0

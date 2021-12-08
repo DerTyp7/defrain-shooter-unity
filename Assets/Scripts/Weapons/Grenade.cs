@@ -37,8 +37,8 @@ public class Grenade : MonoBehaviour
         Collider[] colliders = Physics.OverlapSphere(transform.position, weapon.GrenadeRadius);
         // Iterate over all colliders found in radius
         foreach(Collider nearbyObject in colliders) {
-            // Check if nearby object is a Player
-            if (nearbyObject.transform.gameObject.GetComponent<Player>()) {
+            // Check if nearby object is a Player and if Collider is not a CharacterController (can be changed to CapsuleCollider)
+            if (nearbyObject.transform.gameObject.GetComponent<Player>() && nearbyObject.GetType() != typeof(UnityEngine.CharacterController)) {
                 // Remove health from player
                 nearbyObject.transform.gameObject.GetComponent<Player>().RemoveHealth(weapon.Damage);
             } else {
