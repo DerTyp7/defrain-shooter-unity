@@ -122,6 +122,7 @@ public class WeaponManager : NetworkBehaviour
         }
         activeWeapons[index] = hit.transform.gameObject;
         activeWeapons[index].SetActive(true);
+        // \/ Same as in switchWeapon()
         currentWeaponIndex = index;
         procedualAnimationController.OnSwitchWeapon(activeWeapons[currentWeaponIndex]);
         shoot.setWeapon(activeWeapons[currentWeaponIndex]);

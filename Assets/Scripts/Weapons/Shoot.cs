@@ -46,7 +46,6 @@ public class Shoot : NetworkBehaviour
             }
             if (Input.GetButtonDown("Fire")) { 
                 updateCanvas = true;
-                
                 // If current weapon kind is a rifle or pistole
                 string weaponKindString = weapon.WeaponKind.ToString();
                 if(weaponKindString == "Rifle" || weaponKindString == "Pistole") {
