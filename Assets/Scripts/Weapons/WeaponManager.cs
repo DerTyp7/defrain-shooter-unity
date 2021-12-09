@@ -104,7 +104,7 @@ public class WeaponManager : NetworkBehaviour
                 hit.transform.parent = gunHolster.transform; // Parent weapon to gunHolster
                 hit.rigidbody.isKinematic = true;
                 hit.rigidbody.useGravity = false;
-                hit.transform.GetComponent<BoxCollider>().enabled = false; // Disable Boxcollider 
+                SetAllColliderStatus(hit.transform.gameObject, false); // Disable all Collider
                 switch (hit.transform.GetComponent<Weapon>().WeaponKind.ToString()) { // Adding weapon to inventory slot
                     case "Rifle": putWeaponInArray(0, hit); break;
                     case "Pistole": putWeaponInArray(1, hit); break;
@@ -139,7 +139,7 @@ public class WeaponManager : NetworkBehaviour
             rigid.useGravity = true;
             rigid.isKinematic = false;
             rigid.velocity = cam.transform.forward * dropForce + cam.transform.up * 2;
-            currentWeapon.GetComponent<BoxCollider>().enabled = true;
+            SetAllColliderStatus(currentWeapon, true); // Activate all Collider
             currentWeapon.gameObject.transform.SetParent(null);
             activeWeapons[currentWeaponIndex] = null;
             return true;
@@ -147,7 +147,15 @@ public class WeaponManager : NetworkBehaviour
         else {
             return false;
         }
-        
+    }
+    
+    // Set status to all colliders on a gameobject
+    private void SetAllColliderStatus(GameObject obj, bool newStatus) {
+        // For every collider on gameobject 
+        foreach(Collider col in obj.GetComponents<Collider>()) {
+            // set newStatus (enable, disable)
+            col.enabled = newStatus;
+        }
     }
 
 }

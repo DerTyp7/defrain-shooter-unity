@@ -46,10 +46,7 @@ public class Shoot : NetworkBehaviour
             }
             if (Input.GetButtonDown("Fire")) { 
                 updateCanvas = true;
-                if(weapon.GetComponent<BoxCollider>().enabled == true) // NACH ANDERE LÖSUNG SUCHEN
-                {
-                    weapon.GetComponent<BoxCollider>().enabled = false;
-                }
+                
                 // If current weapon kind is a rifle or pistole
                 string weaponKindString = weapon.WeaponKind.ToString();
                 if(weaponKindString == "Rifle" || weaponKindString == "Pistole") {
@@ -89,7 +86,7 @@ public class Shoot : NetworkBehaviour
         }
     }
 
-   [Command]
+    // [Command]
     // This code will be executed on the Server.
     private void CmdFireBullet() {
         ray = new Ray(mCamera.transform.position, mCamera.transform.forward); // Raycast from Camera
