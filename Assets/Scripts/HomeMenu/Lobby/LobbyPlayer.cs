@@ -18,7 +18,7 @@ public class LobbyPlayer : NetworkBehaviour
     [SyncVar(hook = "ChangeReadyState")]
     [SerializeField] bool ready = false;
 
-    [SyncVar]
+    [SyncVar(hook = "ChangeDisplayTeam")]
     [SerializeField] int teamId = 0;
 
     Lobby lobby;
@@ -26,14 +26,6 @@ public class LobbyPlayer : NetworkBehaviour
     {
         lobby = GameObject.Find("LobbyManager").GetComponent<Lobby>();
         lobby.RegisterPlayer(this);
-
-        if(teamId == 0)
-        {
-            gameObject.transform.parent = GameObject.FindGameObjectWithTag("Team1").transform;
-        }else if(teamId == 1)
-        {
-            gameObject.transform.parent = GameObject.FindGameObjectWithTag("Team2").transform;
-        }
     }
 
     public void Start()
@@ -45,6 +37,10 @@ public class LobbyPlayer : NetworkBehaviour
             rdyBtn.onClick.AddListener(CmdChangeReady);
             CmdSendName(vs.username);
             lobby.SetTitle(this, "Game Of\n" + username);
+            team1Btn = GameObject.Find("Team1Btn").GetComponent<Button>();
+            team2Btn = GameObject.Find("Team2Btn").GetComponent<Button>();
+            team1Btn.onClick.AddListener(delegate { SelectTeam(1); });
+            team2Btn.onClick.AddListener(delegate { SelectTeam(2); });
         }
     }
 
@@ -82,5 +78,16 @@ public class LobbyPlayer : NetworkBehaviour
             rdyText.text = "Not Ready";
         }
         
+    }
+    
+    public void ChangeDisplayTeam(int oldTeamId, int newTeamId)
+    {
+        if(newTeamId == 1)
+        {
+            gameObject.transform.parent = GameObject.FindGameObjectWithTag("Team1List").transform;
+        }else if(newTeamId == 2)
+        {
+            gameObject.transform.parent = GameObject.FindGameObjectWithTag("Team2List").transform;
+        }
     }
 }
