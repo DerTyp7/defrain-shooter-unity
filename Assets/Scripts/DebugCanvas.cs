@@ -26,10 +26,11 @@ public class DebugCanvas : MonoBehaviour
             try
             {
                 Player = GameObject.FindGameObjectWithTag("Player").gameObject;
+                Debug.Log("Player Found");
             }
             catch
             {
-                Debug.Log("DEBUG CANVAS PLAYER NOT YET FOUND");
+                //Debug.Log("DEBUG CANVAS PLAYER NOT YET FOUND");
             }
             
         }

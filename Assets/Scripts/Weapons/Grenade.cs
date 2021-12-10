@@ -10,6 +10,8 @@ public class Grenade : MonoBehaviour
     [SerializeField] float explosionForce = 500f;
     [SerializeField] float grenadeRadius = 3f;
     [SerializeField] bool hasExploded = false;
+    [Tooltip("After how many seconds the explosion Gameobject gets deleted!")]
+    [SerializeField] float lengthOfExplosion = 1;
     private float countdown;
 
     [Header("Explosion GameObject")]
@@ -46,7 +48,7 @@ public class Grenade : MonoBehaviour
             // Spawns explosion particle
             GameObject spawnedExplosion = Instantiate(explodeParticle, transform.position, transform.rotation);
             // Destroys explosion particle after on second
-            Destroy(spawnedExplosion, 1);
+            Destroy(spawnedExplosion, lengthOfExplosion);
         }
         
 
