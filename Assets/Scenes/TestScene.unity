@@ -656,15 +656,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 732033708985862910, guid: bd217f9f85ce78e46a925776562625e8, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5.871
+      value: 4.213
       objectReference: {fileID: 0}
     - target: {fileID: 732033708985862910, guid: bd217f9f85ce78e46a925776562625e8, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.885
+      value: 0.835
       objectReference: {fileID: 0}
     - target: {fileID: 732033708985862910, guid: bd217f9f85ce78e46a925776562625e8, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -5.008
+      value: 2.009
       objectReference: {fileID: 0}
     - target: {fileID: 732033708985862910, guid: bd217f9f85ce78e46a925776562625e8, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1556,6 +1556,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2100000, guid: 7e832beb11d0b11499c8a1b3b4e52e78, type: 2}
     - target: {fileID: 1672832146417829139, guid: 6f5ccb6e55f1676429c170257dc7a411, type: 3}
+      propertyPath: hitForce
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 1672832146417829139, guid: 6f5ccb6e55f1676429c170257dc7a411, type: 3}
       propertyPath: gunLeftREF
       value: 
       objectReference: {fileID: 37969951}
@@ -1589,7 +1593,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8797726366404580855, guid: 6f5ccb6e55f1676429c170257dc7a411, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 4.47
       objectReference: {fileID: 0}
     - target: {fileID: 8797726366404580855, guid: 6f5ccb6e55f1676429c170257dc7a411, type: 3}
       propertyPath: m_LocalPosition.y
@@ -3496,6 +3500,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DebugTextGrounded: {fileID: 987854205}
   DebugTextClientServer: {fileID: 0}
+  DebugAmmunition: {fileID: 1430445133}
   Player: {fileID: 6272346181302961293, guid: a14d876ac00bdf6498e30b3e58b68fdf, type: 3}
   GameManager: {fileID: 0}
   fpsText: {fileID: 72243808}

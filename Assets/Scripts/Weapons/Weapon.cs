@@ -11,6 +11,7 @@ public class Weapon : MonoBehaviour
     [Header("Weapon Info")]
     [SerializeField] weaponKinds weaponKind;
     [SerializeField] float dropForce = 10f;
+    [SerializeField] float hitForce = 100f;
     [SerializeField] int damage = 0;
     [SerializeField] float firerate = 0;
     [SerializeField] float recoilStrength = 0;
@@ -23,6 +24,7 @@ public class Weapon : MonoBehaviour
     [SerializeField] Animator weaponAnimator;
     [SerializeField] Transform gunRightREF;
     [SerializeField] Transform gunLeftREF;
+
     //[Header("Grenade")]
     private bool hasBeenThrown = false;
 
@@ -40,6 +42,7 @@ public class Weapon : MonoBehaviour
     public Transform GunLeftREF { get => gunLeftREF; }
     public Transform GunRightREF { get => gunRightREF; }
     public bool HasBeenThrown { get => hasBeenThrown; set => hasBeenThrown = value; }
+    public float HitForce { get => hitForce; set => hitForce = value; }
 
     private void Start() {
         CurrentAmmunition = MagazinSize;

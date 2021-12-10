@@ -9,10 +9,13 @@ public class DebugCanvas : MonoBehaviour
 {
     public TextMeshProUGUI DebugTextGrounded;
     public TextMeshProUGUI DebugTextClientServer;
+    public TextMeshProUGUI DebugAmmunition;
     public GameObject Player;
     public GameObject GameManager;
     public TextMeshProUGUI fpsText;
     public float deltaTime;
+
+    private Shoot shoot;
 
     private void Start()
     {
@@ -26,6 +29,7 @@ public class DebugCanvas : MonoBehaviour
             try
             {
                 Player = GameObject.FindGameObjectWithTag("Player").gameObject;
+                shoot = Player.GetComponent<Shoot>();
                 Debug.Log("Player Found");
             }
             catch
@@ -37,6 +41,10 @@ public class DebugCanvas : MonoBehaviour
         else
         {
             DebugTextGrounded.text = "isGrounded: " + Player.GetComponent<PlayerController>().isGrounded.ToString();
+            if (Player)
+            {
+                DebugAmmunition.text = shoot.CurAmmo + " / " + shoot.TotalAmmo;
+            }
             deltaTime += (Time.deltaTime - deltaTime) * 0.1f;
             float fps = 1.0f / deltaTime;
             fpsText.text = Mathf.Ceil(fps).ToString() + "FPS";

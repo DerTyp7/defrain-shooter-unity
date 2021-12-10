@@ -591,6 +591,8 @@ MonoBehaviour:
   weaponHolder: {fileID: 5071598280516985511, guid: bd217f9f85ce78e46a925776562625e8, type: 3}
   mCamera: {fileID: 6272346181657429395}
   limitAmmunition: 1
+  showBullethole: 1
+  bulletholeRadius: 0.1
 --- !u!114 &320375778840406984
 MonoBehaviour:
   m_ObjectHideFlags: 0

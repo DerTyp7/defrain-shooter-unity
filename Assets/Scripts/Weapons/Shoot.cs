@@ -12,7 +12,10 @@ public class Shoot : NetworkBehaviour
     [SerializeField] GameObject weaponHolder;
     [SerializeField] Camera mCamera;
     [SerializeField] bool limitAmmunition = true;
-    
+    [Header("Debug")]
+    [SerializeField] bool showBullethole = true;
+    [SerializeField] float bulletholeRadius = 0.2f;
+
     private Weapon weapon;
     private RaycastHit crosshairHitPoint;
     private Vector3 _pointDirection;
@@ -23,8 +26,8 @@ public class Shoot : NetworkBehaviour
     private bool updateCanvas = true;
     private int curAmmo = 1, totalAmmo = 1;
 
-    public int CurAmmo { get => curAmmo; set => curAmmo = value; }
-    public int TotalAmmo { get => totalAmmo; set => totalAmmo = value; }
+    public int CurAmmo { get => curAmmo; set => curAmmo = value; } // For DebugCanvas
+    public int TotalAmmo { get => totalAmmo; set => totalAmmo = value; } // For DebugCanvas
 
     private void Start() {
         if (isServer) { 
@@ -100,7 +103,11 @@ public class Shoot : NetworkBehaviour
         
         if (weapon.AllowAction) { // If not reloading etc.
             if (Physics.Raycast(muzzle.transform.position, muzzle.transform.forward, out hit) && weapon.CurrentAmmunition > 0) { // Raycast from Bullet Exit Point to camera raycast 
-                bulletHole(GameObject.CreatePrimitive(PrimitiveType.Sphere), hit); // Creates bullethole where raycast hits
+                if (showBullethole) { bulletHole(GameObject.CreatePrimitive(PrimitiveType.Sphere), hit); } // Creates bullethole where raycast hits
+                if (hit.transform.gameObject.GetComponent<Rigidbody>())
+                {
+                    hit.transform.gameObject.GetComponent<Rigidbody>().AddForce(mCamera.transform.forward * weapon.HitForce);
+                }
                 if (hit.transform.gameObject.GetComponent<Player>() != null) { // If hit object is a player
                     Debug.Log("-->HIT PLAYER: " + hit.transform.name);
                     hit.transform.gameObject.GetComponent<Player>().RemoveHealth(weapon.Damage); 
@@ -115,7 +122,7 @@ public class Shoot : NetworkBehaviour
 
     void bulletHole(GameObject holeObject, RaycastHit hit) // Nur zum testen da
     {
-        holeObject.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
+        holeObject.transform.localScale = new Vector3(bulletholeRadius, bulletholeRadius, bulletholeRadius);
         holeObject.transform.position = hit.point;
     }
 
@@ -129,6 +136,7 @@ public class Shoot : NetworkBehaviour
     private bool subtractAmmunition(Weapon weapon) { // Subtracts Ammunition from weapon 
         if (weapon.CurrentAmmunition > 0) {
             weapon.CurrentAmmunition -= 1;
+            Debug.Log(weapon.CurrentAmmunition + " / " + weapon.TotalAmmunition);
             return true;
         }
         return false;
