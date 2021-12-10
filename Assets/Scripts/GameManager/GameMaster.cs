@@ -87,7 +87,6 @@ public class GameMaster : NetworkBehaviour
                 break;
             case 3:
                 gameState = 0;
-                Debug.Log("Team died");
                 break;
             default:
                 break;

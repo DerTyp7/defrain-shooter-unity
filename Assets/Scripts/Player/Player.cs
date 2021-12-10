@@ -95,7 +95,6 @@ public class Player : NetworkBehaviour
     {
         isAlive = false;
         AddDeaths(1);
-        Debug.Log("DIE");
     }
 
     //Health

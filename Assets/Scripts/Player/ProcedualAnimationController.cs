@@ -244,7 +244,8 @@ public class ProcedualAnimationController : NetworkBehaviour
     }
     void AimDownSights() 
     {
-        aimVal = gravityValue(aimVal, aimSpeed, 1, 0, isAiming);
+        //aimVal = gravityValue(aimVal, aimSpeed, 1, 0, isAiming);
+        aimVal = gravityValue(aimVal, aimSpeed, 1, 0, true);
         positionMod[2] = Vector3.Lerp(HoldPoint.transform.localPosition, AimPoint.transform.localPosition, Mathf.Pow(aimVal, 1.3f));
     }
     void calcRecoilOffset() 
