@@ -17,7 +17,6 @@ public class WeaponManager : NetworkBehaviour
     [SerializeField] Camera cam;
 
 
-
     private void Awake()
     {
         procedualAnimationController = GetComponent<ProcedualAnimationController>();
@@ -48,24 +47,28 @@ public class WeaponManager : NetworkBehaviour
             }
         }
     }
-    
 
     public bool switchWeapon(int direction) {
         // Get next active weapon index
         int nextActive = searchForNext(activeWeapons, lastWeaponIndex, direction);
-
         currentWeaponIndex = nextActive;
-            
         procedualAnimationController.OnSwitchWeapon(activeWeapons[currentWeaponIndex]);
         shoot.setWeapon(activeWeapons[currentWeaponIndex]);
         Weapon weaponData = activeWeapons[currentWeaponIndex].GetComponent<Weapon>();
         procedualAnimationController.GunRightHandREF = weaponData.GunRightREF;
         procedualAnimationController.GunLeftHandREF = weaponData.GunLeftREF;
-        // play weapon switch animation
+        switchAnimation(weaponData.WeaponKind.ToString()); // play weapon switch animation
 
         return false;
     }
-
+    private void switchAnimation(string weaponType) {
+        switch (weaponType) {
+            case "Rifle": procedualAnimationController.changeRifle(true); break;
+            case "Pistole": procedualAnimationController.changePistole(true); break;
+            case "Knife": ; procedualAnimationController.changePistole(true); break;
+            case "Grenade": ; procedualAnimationController.changePistole(true); break;
+        }
+    }
     private int searchForNext(List<GameObject> l, int lastActive = 0, int direction = 1)
     {
         int current = lastActive + direction;

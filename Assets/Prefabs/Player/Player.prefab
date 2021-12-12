@@ -519,6 +519,7 @@ MonoBehaviour:
   impulsForce: 0.01
   maxRecoil: 0.1
   playerAnimator: {fileID: 1978909962}
+  switchVal: 0
   aimSpeed: 0.06
   aimVal: 0
   AimPoint: {fileID: 2992488853448454767}
@@ -571,6 +572,8 @@ MonoBehaviour:
   username: 
   usernameTextObj: {fileID: 0}
   health: 0
+  playerNeck: {fileID: 7061967201775281134}
+  playerCamera: {fileID: 6272346181657429395}
 --- !u!114 &1258077278480047560
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -812,7 +815,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6272346181657429393}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.15, z: 0}
+  m_LocalPosition: {x: 0, y: 0.14999998, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

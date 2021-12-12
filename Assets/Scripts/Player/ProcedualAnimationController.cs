@@ -91,6 +91,8 @@ public class ProcedualAnimationController : NetworkBehaviour
     float zVelocity = 0f;
 
     int recoilCounter = 0;
+    [Header("Switch Settings")]
+    [Range(0, 1)] public float switchVal = 0;
 
     [Header("Aiming Settings")]
     [SerializeField] float aimSpeed = 0.01f;
@@ -99,8 +101,8 @@ public class ProcedualAnimationController : NetworkBehaviour
     [SerializeField] GameObject HoldPoint;
     public bool isAiming = false;
 
-    Vector3[] positionMod = new Vector3[3];
-    public Quaternion[] rotationMod = new Quaternion[3];
+    Vector3[] positionMod = new Vector3[4];
+    public Quaternion[] rotationMod = new Quaternion[4];
 
     public Transform GunRightHandREF { get => gunRightHandREF; set => gunRightHandREF = value; }
     public Transform GunLeftHandREF { get => gunLeftHandREF; set => gunLeftHandREF = value; }
@@ -185,8 +187,8 @@ public class ProcedualAnimationController : NetworkBehaviour
     {
         if (isServer)
         {
-            positionMod = new Vector3[3];
-            rotationMod = new Quaternion[3];
+            positionMod = new Vector3[4];
+            rotationMod = new Quaternion[4];
             /*-----Recoil-----*/
             calcRecoilOffset();
             /*-----Position Recoil-----*/
@@ -247,6 +249,21 @@ public class ProcedualAnimationController : NetworkBehaviour
         aimVal = gravityValue(aimVal, aimSpeed, 1, 0, isAiming);
         positionMod[2] = Vector3.Lerp(HoldPoint.transform.localPosition, AimPoint.transform.localPosition, Mathf.Pow(aimVal, 1.3f));
     }
+
+    public void changePistole(bool isSwitching) { // Moves hands doooown ;) and up again NOT WORKING
+        //aimVal = gravityValue(aimVal, aimSpeed, 1, 0, isSwitching);
+        Vector3 b = new Vector3(HoldPoint.transform.localPosition.x, 1, HoldPoint.transform.localPosition.z);
+        //Debug.Log("HALLO: " + positionMod[3]); 
+        positionMod[3] = Vector3.Lerp(HoldPoint.transform.localPosition, b, 0.5f);
+        //Debug.Log("HALLO: " + positionMod[3]);
+    }
+    public void changeRifle(bool isSwitching) { // Moves hands up and doooown again ;)
+        //aimVal = gravityValue(aimVal, aimSpeed, 1, 0, isSwitching);
+        Vector3 b = new Vector3(HoldPoint.transform.localPosition.x, HoldPoint.transform.localPosition.y + 1, HoldPoint.transform.localPosition.z);
+        positionMod[3] = Vector3.Lerp(HoldPoint.transform.localPosition, b, 0);
+        //Debug.Log("HALLO2");
+    }
+
     void calcRecoilOffset() 
     {
         for (int i = 0; i < recoilCounter; i++)

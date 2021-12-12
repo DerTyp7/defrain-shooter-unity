@@ -24,26 +24,19 @@ public class DebugCanvas : MonoBehaviour
     }
     private void Update()
     {
-        if(Player == null)
-        {
-            try
-            {
+        if(Player == null) {
+            try {
                 Player = GameObject.FindGameObjectWithTag("Player").gameObject;
                 shoot = Player.GetComponent<Shoot>();
                 Debug.Log("Player Found");
             }
-            catch
-            {
+            catch {
                 //Debug.Log("DEBUG CANVAS PLAYER NOT YET FOUND");
             }
-            
-        }
-        else
-        {
+        } else {
             DebugTextGrounded.text = "isGrounded: " + Player.GetComponent<PlayerController>().isGrounded.ToString();
-            if (Player)
-            {
-                DebugAmmunition.text = shoot.CurAmmo + " / " + shoot.TotalAmmo;
+            if (Player) {
+                DebugAmmunition.text = shoot.CurAmmo.ToString() + " / " + shoot.TotalAmmo.ToString();
             }
             deltaTime += (Time.deltaTime - deltaTime) * 0.1f;
             float fps = 1.0f / deltaTime;

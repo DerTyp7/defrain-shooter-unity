@@ -8,13 +8,10 @@ public class Player : NetworkBehaviour
     public bool isAlive = true;
     public Team team;
 
-
-
-    [SerializeField]PlayerUIController playerUIController;
+    [SerializeField] PlayerUIController playerUIController;
     [SerializeField] private const int defaultHp = 100;
     GameObject GameManager;
     GameMaster gameMaster;
-
 
     public ulong clientId;
 
@@ -23,9 +20,14 @@ public class Player : NetworkBehaviour
 
     [SerializeField] GameObject usernameTextObj;
 
-    [SerializeField] [SyncVar]public int health = 100;
+    [SerializeField] [SyncVar] public int health = 100;
     private int kills;
     private int deaths;
+
+    [SerializeField] GameObject playerNeck;
+    [SerializeField] Camera playerCamera;
+    public GameObject PlayerNeck { get => playerNeck; set => playerNeck = value; }
+    public Camera PlayerCamera { get => playerCamera; }
 
     private void Start()
     {
