@@ -101,11 +101,40 @@ public class ProcedualAnimationController : NetworkBehaviour
     [SerializeField] GameObject HoldPoint;
     public bool isAiming = false;
 
+    [Header("Camera Shake Info")]
+    [SerializeField] bool cameraShakeActive = true;
+    [SerializeField] Camera objectToMove;
+    [SerializeField] float cameraShakeDuration = 1f;
+    [SerializeField] AnimationCurve cameraShakeCurve;
+
     Vector3[] positionMod = new Vector3[4];
     public Quaternion[] rotationMod = new Quaternion[4];
 
     public Transform GunRightHandREF { get => gunRightHandREF; set => gunRightHandREF = value; }
     public Transform GunLeftHandREF { get => gunLeftHandREF; set => gunLeftHandREF = value; }
+
+    public void cameraShake() {
+        // If camera shake is not disabled 
+        if (cameraShakeActive) {
+            // Start coroutine that shakes the camera
+            StartCoroutine(shaking());
+        }
+    }
+
+    private IEnumerator shaking() {
+        float elapsedTime = 0f;
+        while (elapsedTime < cameraShakeDuration) {
+            // Time increment
+            elapsedTime += Time.deltaTime;
+            // Getting strength value from curve at current time
+            float strength = cameraShakeCurve.Evaluate(elapsedTime / cameraShakeDuration);
+            // Move object
+            objectToMove.transform.localPosition = objectToMove.transform.localPosition + Random.insideUnitSphere * strength;
+            // Wait
+            yield return new WaitForSeconds(Time.deltaTime);
+        }
+        yield return null;
+    }
 
     public void walkAnimation() 
     {

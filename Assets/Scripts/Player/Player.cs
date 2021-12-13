@@ -24,10 +24,6 @@ public class Player : NetworkBehaviour
     private int kills;
     private int deaths;
 
-    [SerializeField] GameObject playerNeck;
-    [SerializeField] Camera playerCamera;
-    public GameObject PlayerNeck { get => playerNeck; set => playerNeck = value; }
-    public Camera PlayerCamera { get => playerCamera; }
 
     private void Start()
     {

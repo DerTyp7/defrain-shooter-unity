@@ -13,23 +13,15 @@ public class Grenade : MonoBehaviour
     [Tooltip("After how many seconds the explosion Gameobject gets deleted!")]
     [SerializeField] float lengthOfExplosion = 1;
     private float countdown;
-    [Header("Camera Shake Info")] // NOT WOKRING BECAUSE THE CAMERA IS FIXED IN PLACE
-    [SerializeField] bool cameraShakeActive = true;
-    [SerializeField] float cameraShakeRadius = 6f;
-    [SerializeField] float cameraShakeDuration = 1f;
-    [SerializeField] AnimationCurve cameraShakeCurve;
 
-    [Header("Explosion GameObject")]
+    [SerializeField] float cameraShakeRadius = 6f;
+
     [SerializeField] GameObject explodeParticle;
     
-    [Header("Scripts")]
     [SerializeField] Weapon weapon;
 
     [Header("Debug")]
     [SerializeField] bool showExplosion = true;
-
-    // To change it from other scripts
-    public bool CameraShakeActive { get => cameraShakeActive; set => cameraShakeActive = value; }
 
     void Start() {
         countdown = timer;
@@ -57,11 +49,7 @@ public class Grenade : MonoBehaviour
             // Destroys explosion particle after on second
             Destroy(spawnedExplosion, lengthOfExplosion);
         }
-
-        if (cameraShakeActive) {
-            // Coroutine for camera shake to nearby Players
-            StartCoroutine(cameraShake());
-        }
+        StartCoroutine(cameraShake());
         // Coroutine for adding explosion force to nearby objects
         StartCoroutine(addExplosionForce());
         
@@ -70,27 +58,17 @@ public class Grenade : MonoBehaviour
     }
 
     IEnumerator cameraShake() {
+        // Gets all collider that are in a sphere around the grenade
         Collider[] colliders = Physics.OverlapSphere(transform.position, cameraShakeRadius);
-        foreach(Collider nearbyObject in colliders){
+        // Iterate over all colliders found in radius
+        foreach (Collider nearbyObject in colliders) {
+            // Check if nearby object is a Player and if Collider is not a CharacterController (can be changed to CapsuleCollider)
             if (nearbyObject.GetComponent<Player>() && nearbyObject.GetType() != typeof(UnityEngine.CharacterController)) {
-                // Start coroutine that shakes the camera
-                StartCoroutine(shaking(nearbyObject));
+                // Starts camera shake on player
+                float distance = Vector3.Distance(transform.position, nearbyObject.transform.position);
+                nearbyObject.GetComponent<ProcedualAnimationController>().cameraShake();
             }
         }
-        yield return null;
-    }
-
-    IEnumerator shaking(Collider obj) {
-        // Getting neck from player
-        GameObject neck = obj.GetComponent<Player>().PlayerNeck;
-        Vector3 startPos = neck.transform.position;
-        float elapsedTime = 0f;
-        while(elapsedTime < cameraShakeDuration) {
-            elapsedTime += Time.deltaTime;
-            float strength = cameraShakeCurve.Evaluate(elapsedTime / cameraShakeDuration);
-            neck.transform.position = startPos + Random.insideUnitSphere * strength;
-        }
-        neck.transform.position = startPos;
         yield return null;
     }
 

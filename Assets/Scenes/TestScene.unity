@@ -5590,7 +5590,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 732033708985862910, guid: bd217f9f85ce78e46a925776562625e8, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.347
+      value: 1.44
       objectReference: {fileID: 0}
     - target: {fileID: 732033708985862910, guid: bd217f9f85ce78e46a925776562625e8, type: 3}
       propertyPath: m_LocalPosition.z
@@ -5718,11 +5718,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9082234699677627348, guid: bd217f9f85ce78e46a925776562625e8, type: 3}
       propertyPath: cameraShakeCurve.m_Curve.Array.data[1].time
-      value: 0.47748455
+      value: 0.7053975
       objectReference: {fileID: 0}
     - target: {fileID: 9082234699677627348, guid: bd217f9f85ce78e46a925776562625e8, type: 3}
       propertyPath: cameraShakeCurve.m_Curve.Array.data[2].time
-      value: 3.651196
+      value: 3.7575498
       objectReference: {fileID: 0}
     - target: {fileID: 9082234699677627348, guid: bd217f9f85ce78e46a925776562625e8, type: 3}
       propertyPath: cameraShakeCurve.m_Curve.Array.data[0].value
@@ -5730,15 +5730,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9082234699677627348, guid: bd217f9f85ce78e46a925776562625e8, type: 3}
       propertyPath: cameraShakeCurve.m_Curve.Array.data[1].value
-      value: 3.9823725
+      value: 2.779751
       objectReference: {fileID: 0}
     - target: {fileID: 9082234699677627348, guid: bd217f9f85ce78e46a925776562625e8, type: 3}
       propertyPath: cameraShakeCurve.m_Curve.Array.data[2].value
-      value: 1.3784328
+      value: 0.2894435
       objectReference: {fileID: 0}
     - target: {fileID: 9082234699677627348, guid: bd217f9f85ce78e46a925776562625e8, type: 3}
       propertyPath: cameraShakeCurve.m_Curve.Array.data[0].inSlope
-      value: 8.401682
+      value: 3.9536607
       objectReference: {fileID: 0}
     - target: {fileID: 9082234699677627348, guid: bd217f9f85ce78e46a925776562625e8, type: 3}
       propertyPath: cameraShakeCurve.m_Curve.Array.data[1].inSlope
@@ -5746,7 +5746,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9082234699677627348, guid: bd217f9f85ce78e46a925776562625e8, type: 3}
       propertyPath: cameraShakeCurve.m_Curve.Array.data[2].inSlope
-      value: -0.82047147
+      value: -0.81591856
       objectReference: {fileID: 0}
     - target: {fileID: 9082234699677627348, guid: bd217f9f85ce78e46a925776562625e8, type: 3}
       propertyPath: cameraShakeCurve.m_Curve.Array.data[0].inWeight
@@ -5754,7 +5754,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9082234699677627348, guid: bd217f9f85ce78e46a925776562625e8, type: 3}
       propertyPath: cameraShakeCurve.m_Curve.Array.data[0].outSlope
-      value: 8.401682
+      value: 3.9536607
       objectReference: {fileID: 0}
     - target: {fileID: 9082234699677627348, guid: bd217f9f85ce78e46a925776562625e8, type: 3}
       propertyPath: cameraShakeCurve.m_Curve.Array.data[1].inWeight
@@ -5770,7 +5770,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9082234699677627348, guid: bd217f9f85ce78e46a925776562625e8, type: 3}
       propertyPath: cameraShakeCurve.m_Curve.Array.data[2].outSlope
-      value: -0.82047147
+      value: -0.81591856
       objectReference: {fileID: 0}
     - target: {fileID: 9082234699677627348, guid: bd217f9f85ce78e46a925776562625e8, type: 3}
       propertyPath: cameraShakeCurve.m_Curve.Array.data[0].outWeight
