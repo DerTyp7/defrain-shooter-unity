@@ -760,7 +760,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9082234699677627348, guid: bd217f9f85ce78e46a925776562625e8, type: 3}
       propertyPath: explosionForce
-      value: 600
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 9082234699677627348, guid: bd217f9f85ce78e46a925776562625e8, type: 3}
       propertyPath: explodeParticle
@@ -768,7 +768,7 @@ PrefabInstance:
       objectReference: {fileID: 842071826}
     - target: {fileID: 9082234699677627348, guid: bd217f9f85ce78e46a925776562625e8, type: 3}
       propertyPath: cameraShakeRadius
-      value: 200
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 9082234699677627348, guid: bd217f9f85ce78e46a925776562625e8, type: 3}
       propertyPath: lengthOfExplosion
@@ -2557,7 +2557,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9082234699677627348, guid: bd217f9f85ce78e46a925776562625e8, type: 3}
       propertyPath: explosionForce
-      value: 600
+      value: 850
       objectReference: {fileID: 0}
     - target: {fileID: 9082234699677627348, guid: bd217f9f85ce78e46a925776562625e8, type: 3}
       propertyPath: explodeParticle
@@ -2569,7 +2569,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9082234699677627348, guid: bd217f9f85ce78e46a925776562625e8, type: 3}
       propertyPath: cameraShakeRadius
-      value: 200
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 9082234699677627348, guid: bd217f9f85ce78e46a925776562625e8, type: 3}
       propertyPath: lengthOfExplosion
@@ -4257,7 +4257,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -8.740173, y: 68.40698}
+  m_AnchoredPosition: {x: -8.740234, y: 68.40698}
   m_SizeDelta: {x: 182.68939, y: 68.40671}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &1430445133
@@ -5690,7 +5690,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9082234699677627348, guid: bd217f9f85ce78e46a925776562625e8, type: 3}
       propertyPath: explosionForce
-      value: 600
+      value: 900
       objectReference: {fileID: 0}
     - target: {fileID: 9082234699677627348, guid: bd217f9f85ce78e46a925776562625e8, type: 3}
       propertyPath: explodeParticle
@@ -5698,7 +5698,7 @@ PrefabInstance:
       objectReference: {fileID: 842071826}
     - target: {fileID: 9082234699677627348, guid: bd217f9f85ce78e46a925776562625e8, type: 3}
       propertyPath: cameraShakeRadius
-      value: 200
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 9082234699677627348, guid: bd217f9f85ce78e46a925776562625e8, type: 3}
       propertyPath: lengthOfExplosion

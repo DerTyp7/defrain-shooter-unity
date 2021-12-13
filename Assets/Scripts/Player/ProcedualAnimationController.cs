@@ -105,7 +105,13 @@ public class ProcedualAnimationController : NetworkBehaviour
     [SerializeField] bool cameraShakeActive = true;
     [SerializeField] Camera objectToMove;
     [SerializeField] float cameraShakeDuration = 1f;
-    [SerializeField] AnimationCurve cameraShakeCurve;
+    [SerializeField] int nearDistance = 5;
+    [SerializeField] AnimationCurve nearCameraShakeCurve;
+    [SerializeField] int mediumDistance = 15;
+    [SerializeField] AnimationCurve mediumCameraShakeCurve;
+    [SerializeField] int farDistance = 25;
+    [SerializeField] AnimationCurve farCameraShakeCurve;
+    private AnimationCurve cameraShakeCurve;
 
     Vector3[] positionMod = new Vector3[4];
     public Quaternion[] rotationMod = new Quaternion[4];
@@ -113,26 +119,44 @@ public class ProcedualAnimationController : NetworkBehaviour
     public Transform GunRightHandREF { get => gunRightHandREF; set => gunRightHandREF = value; }
     public Transform GunLeftHandREF { get => gunLeftHandREF; set => gunLeftHandREF = value; }
 
-    public void cameraShake() {
+    public void cameraShake(float distance) {
         // If camera shake is not disabled 
         if (cameraShakeActive) {
             // Start coroutine that shakes the camera
-            StartCoroutine(shaking());
+            StartCoroutine(shaking(distance));
         }
     }
 
-    private IEnumerator shaking() {
+    private IEnumerator shaking(float distance) {
         float elapsedTime = 0f;
-        while (elapsedTime < cameraShakeDuration) {
-            // Time increment
-            elapsedTime += Time.deltaTime;
-            // Getting strength value from curve at current time
-            float strength = cameraShakeCurve.Evaluate(elapsedTime / cameraShakeDuration);
-            // Move object
-            objectToMove.transform.localPosition = objectToMove.transform.localPosition + Random.insideUnitSphere * strength;
-            // Wait
-            yield return new WaitForSeconds(Time.deltaTime);
+        bool cameraShake = true;
+        // Getting right camera shake curve
+        if(distance < nearDistance) {
+            cameraShakeCurve = nearCameraShakeCurve; // high camera shake
+            Debug.Log("NEAR EXPLOSION: " + distance);
+        } else if(distance < mediumDistance){
+            cameraShakeCurve = mediumCameraShakeCurve; // medium camera shake
+            Debug.Log("MEDIUM EXPLOSION: " + distance);
+        } else if(distance < farDistance) {
+            cameraShakeCurve = farCameraShakeCurve; // little camera shake
+            Debug.Log("FAR EXPLOSION: " + distance);
+        } else { // If distance is even further than far then no camera shake
+            cameraShake = false;
         }
+
+        if (cameraShake) {
+            while (elapsedTime < cameraShakeDuration) {
+                // Time increment
+                elapsedTime += Time.deltaTime;
+                // Getting strength value from curve at current time
+                float strength = cameraShakeCurve.Evaluate(elapsedTime / cameraShakeDuration);
+                // Move object
+                objectToMove.transform.localPosition = objectToMove.transform.localPosition + Random.insideUnitSphere * strength;
+                // Wait
+                yield return new WaitForSeconds(Time.deltaTime);
+            }
+        }
+        
         yield return null;
     }
 

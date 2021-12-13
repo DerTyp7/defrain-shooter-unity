@@ -529,26 +529,104 @@ MonoBehaviour:
   cameraShakeActive: 1
   objectToMove: {fileID: 6272346181657429395}
   cameraShakeDuration: 1
-  cameraShakeCurve:
+  nearDistance: 8
+  nearCameraShakeCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: -0.4614612
-      value: 0.028004631
-      inSlope: -0.015037956
-      outSlope: -0.015037956
+      time: 0.025429735
+      value: 0.19971195
+      inSlope: -0.030253958
+      outSlope: -0.030253958
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
-      outWeight: 0.28070113
+      outWeight: 0.24073574
     - serializedVersion: 3
-      time: 1.4633081
-      value: -0.037871435
-      inSlope: -0.011502813
-      outSlope: -0.011502813
+      time: 0.49595714
+      value: 0.049771994
+      inSlope: -0.14560473
+      outSlope: -0.14560473
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.23245634
+      inWeight: 0.33333334
+      outWeight: 0.294024
+    - serializedVersion: 3
+      time: 1.0253906
+      value: -0.004508972
+      inSlope: -0.10252651
+      outSlope: -0.10252651
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  mediumDistance: 20
+  mediumCameraShakeCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: -0.0071792603
+      value: 0.09154791
+      inSlope: -0.12938052
+      outSlope: -0.12938052
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.46580023
+      value: 0.030353572
+      inSlope: -0.067838416
+      outSlope: -0.067838416
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.27531913
+    - serializedVersion: 3
+      time: 0.9916687
+      value: 0.009421289
+      inSlope: -0.03980517
+      outSlope: -0.03980517
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  farDistance: 32
+  farCameraShakeCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: -0.0015304685
+      value: 0.033563316
+      inSlope: -0.05884709
+      outSlope: -0.05884709
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.48366547
+      value: 0.0050109476
+      inSlope: -0.02547526
+      outSlope: -0.02547526
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.5573828
+    - serializedVersion: 3
+      time: 1.0192597
+      value: -0.000051796436
+      inSlope: -0.009452574
+      outSlope: -0.009452574
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2

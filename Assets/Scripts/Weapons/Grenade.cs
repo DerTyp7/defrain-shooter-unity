@@ -66,7 +66,7 @@ public class Grenade : MonoBehaviour
             if (nearbyObject.GetComponent<Player>() && nearbyObject.GetType() != typeof(UnityEngine.CharacterController)) {
                 // Starts camera shake on player
                 float distance = Vector3.Distance(transform.position, nearbyObject.transform.position);
-                nearbyObject.GetComponent<ProcedualAnimationController>().cameraShake();
+                nearbyObject.GetComponent<ProcedualAnimationController>().cameraShake(distance);
             }
         }
         yield return null;
