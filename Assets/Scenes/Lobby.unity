@@ -993,6 +993,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 8076035533974620946, guid: a973691757099224ca132b32daabf67c, type: 3}
+      propertyPath: m_Name
+      value: RdyBtnText
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a973691757099224ca132b32daabf67c, type: 3}
 --- !u!224 &594583494 stripped
@@ -1000,6 +1004,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 2454942472495841689, guid: a973691757099224ca132b32daabf67c, type: 3}
   m_PrefabInstance: {fileID: 594583493}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &594583495 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1513820883277351791, guid: a973691757099224ca132b32daabf67c, type: 3}
+  m_PrefabInstance: {fileID: 594583493}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &949082596
 GameObject:
   m_ObjectHideFlags: 0
@@ -1238,6 +1253,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1185775522}
   m_CullTransparentMesh: 1
+--- !u!1 &1197550804 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 759482234963316101, guid: a973691757099224ca132b32daabf67c, type: 3}
+  m_PrefabInstance: {fileID: 594583493}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1234182190
 GameObject:
   m_ObjectHideFlags: 0
@@ -2330,6 +2350,14 @@ PrefabInstance:
       propertyPath: sceneId
       value: 2342159728
       objectReference: {fileID: 0}
+    - target: {fileID: 7129514368576730103, guid: af2b86e6ca1c8404a857e6bfa4294f3c, type: 3}
+      propertyPath: rdyButton
+      value: 
+      objectReference: {fileID: 1197550804}
+    - target: {fileID: 7129514368576730103, guid: af2b86e6ca1c8404a857e6bfa4294f3c, type: 3}
+      propertyPath: rdyButtonText
+      value: 
+      objectReference: {fileID: 594583495}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: af2b86e6ca1c8404a857e6bfa4294f3c, type: 3}
 --- !u!1001 &7946605864942981377
