@@ -133,13 +133,13 @@ public class ProcedualAnimationController : NetworkBehaviour
         // Getting right camera shake curve
         if(distance < nearDistance) {
             cameraShakeCurve = nearCameraShakeCurve; // high camera shake
-            Debug.Log("NEAR EXPLOSION: " + distance);
+            //Debug.Log("NEAR EXPLOSION: " + distance);
         } else if(distance < mediumDistance){
             cameraShakeCurve = mediumCameraShakeCurve; // medium camera shake
-            Debug.Log("MEDIUM EXPLOSION: " + distance);
+            //Debug.Log("MEDIUM EXPLOSION: " + distance);
         } else if(distance < farDistance) {
             cameraShakeCurve = farCameraShakeCurve; // little camera shake
-            Debug.Log("FAR EXPLOSION: " + distance);
+            //Debug.Log("FAR EXPLOSION: " + distance);
         } else { // If distance is even further than far then no camera shake
             cameraShake = false;
         }

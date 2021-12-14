@@ -28,21 +28,18 @@ public class WeaponManager : NetworkBehaviour
                 lastWeaponIndex = currentWeaponIndex;
                 activeWeapons[currentWeaponIndex].SetActive(false);
                 switchWeapon(-1);
-                activeWeapons[currentWeaponIndex].SetActive(true);
             }
             else if (Input.GetAxis("Mouse ScrollWheel") < 0f) { // Scroll down
                 lastWeaponIndex = currentWeaponIndex;
                 activeWeapons[currentWeaponIndex].SetActive(false);
                 switchWeapon(1);
-                activeWeapons[currentWeaponIndex].SetActive(true);
             }
             if (Input.GetButtonDown("Interact")) { // e 
                     PickupWeapon();
             }else if (Input.GetButtonDown("Drop")) { // q Droping weapon 
                 if (activeWeapons[currentWeaponIndex] != null) {
-                    dropWeapon(activeWeapons[currentWeaponIndex].GetComponent<Weapon>().DropForce); // Throws weapon away
+                    dropWeapon(activeWeapons[currentWeaponIndex].GetComponent<Weapon>().DropForce, currentWeaponIndex); // Throws weapon away
                     switchWeapon(1);
-                    activeWeapons[currentWeaponIndex].SetActive(true);
                 }
             }
         }
@@ -57,8 +54,10 @@ public class WeaponManager : NetworkBehaviour
         Weapon weaponData = activeWeapons[currentWeaponIndex].GetComponent<Weapon>();
         procedualAnimationController.GunRightHandREF = weaponData.GunRightREF;
         procedualAnimationController.GunLeftHandREF = weaponData.GunLeftREF;
-        switchAnimation(weaponData.WeaponKind.ToString()); // play weapon switch animation
+        // Play weapon switch animation
+        switchAnimation(weaponData.WeaponKind.ToString()); 
 
+        activeWeapons[currentWeaponIndex].SetActive(true);
         return false;
     }
     private void switchAnimation(string weaponType) {
@@ -99,16 +98,21 @@ public class WeaponManager : NetworkBehaviour
     private void PickupWeapon() {
         if (Physics.Raycast(cam.transform.position, cam.transform.forward, out RaycastHit hit)) 
         {
-            if (hit.transform.tag == "Weapon") // If Object is a weapon and the weapon is not in the current active weapons
-            {
-                foreach (GameObject obj in activeWeapons) { // Disable all weapons
+            // If Object is a weapon and the weapon is not in the current active weapons
+            if (hit.transform.tag == "Weapon") 
+            { 
+                // Disable all weapons
+                foreach (GameObject obj in activeWeapons) {
                     if (obj != null) { obj.SetActive(false); }
                 }
-                hit.transform.parent = gunHolster.transform; // Parent weapon to gunHolster
+                // Parent weapon to gunHolster
+                hit.transform.parent = gunHolster.transform; 
                 hit.rigidbody.isKinematic = true;
                 hit.rigidbody.useGravity = false;
-                SetAllColliderStatus(hit.transform.gameObject, false); // Disable all Collider
-                switch (hit.transform.GetComponent<Weapon>().WeaponKind.ToString()) { // Adding weapon to inventory slot
+                // Disable all Collider
+                SetAllColliderStatus(hit.transform.gameObject, false);
+                // Adding weapon to inventory slot
+                switch (hit.transform.GetComponent<Weapon>().WeaponKind.ToString()) { 
                     case "Rifle": putWeaponInArray(0, hit); break;
                     case "Pistole": putWeaponInArray(1, hit); break;
                     case "Knife": putWeaponInArray(2, hit); break;
@@ -121,7 +125,8 @@ public class WeaponManager : NetworkBehaviour
 
     private bool putWeaponInArray(int index, RaycastHit hit) {
         if (activeWeapons[index] != null) {
-            dropWeapon(activeWeapons[currentWeaponIndex].GetComponent<Weapon>().DropForce); // Throws weapon away
+            // Throws weapon away
+            dropWeapon(activeWeapons[index].GetComponent<Weapon>().DropForce, index); 
         }
         activeWeapons[index] = hit.transform.gameObject;
         activeWeapons[index].SetActive(true);
@@ -135,17 +140,18 @@ public class WeaponManager : NetworkBehaviour
         return true;
     }
 
-    public bool dropWeapon(float dropForce) {
-        if(currentWeaponIndex != 2) {
-            GameObject currentWeapon = activeWeapons[currentWeaponIndex];
+    public bool dropWeapon(float dropForce, int index) {
+        if(index != 2) {
+            GameObject currentWeapon = activeWeapons[index];
             currentWeapon.SetActive(true);
             Rigidbody rigid = currentWeapon.GetComponent<Rigidbody>();
             rigid.useGravity = true;
             rigid.isKinematic = false;
             rigid.velocity = cam.transform.forward * dropForce + cam.transform.up * 2;
-            SetAllColliderStatus(currentWeapon, true); // Activate all Collider
+            // Activate all Collider
+            SetAllColliderStatus(currentWeapon, true); 
             currentWeapon.gameObject.transform.SetParent(null);
-            activeWeapons[currentWeaponIndex] = null;
+            activeWeapons[index] = null;
             return true;
         }
         else {

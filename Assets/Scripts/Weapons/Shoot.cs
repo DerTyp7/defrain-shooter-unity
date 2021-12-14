@@ -77,7 +77,8 @@ public class Shoot : NetworkBehaviour
         Debug.Log("ThrowGrenade!");
         // Throws grenade with dropForce
         weapon.HasBeenThrown = true;
-        weaponManager.dropWeapon(weapon.DropForce);
+        // 3 -> Grenade index
+        weaponManager.dropWeapon(weapon.DropForce, 3);
         weaponManager.switchWeapon(1);
     }
 
