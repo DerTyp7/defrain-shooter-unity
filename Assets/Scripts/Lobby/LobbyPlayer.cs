@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI; // For <Button>
 using Mirror;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 /* 
  * This class manages the LobbyPlayer, which is the player object while the player is connected only to the lobby
@@ -37,12 +38,20 @@ public class LobbyPlayer : NetworkBehaviour
     public override void OnStartClient()
     {
         lobby = GameObject.Find("LobbyManager").GetComponent<Lobby>(); // Get the Lobby Object in Scene
-        lobby.RegisterPlayer(this); // Register the LobbyPlayer, so the lobby can store him in a list for future use
+        if (SceneManager.GetActiveScene().name == "Lobby")
+        {
+            lobby.RegisterLobbyPlayer(this); // Register the LobbyPlayer, so the lobby can store him in a list for future use
+        }
+        else
+        {
+            lobby.ChangeToPlayer(this);            
+        }
+        
     }
 
     public void Start()
     {
-        if (isLocalPlayer)
+        if (isLocalPlayer && SceneManager.GetActiveScene().name == "Lobby") // Needs to check Scene for itself -> it starts faster than the lobby
         {
             /*
              * The Varaible Saver is used to store vars across different scenes and Player-Objects(LobbyPlayer/GamePlayer).
@@ -72,7 +81,7 @@ public class LobbyPlayer : NetworkBehaviour
 
     void Update()
     {
-        if (isLocalPlayer)
+        if (isLocalPlayer && lobby.isLobbyScene)
         {
             /*
              * Update the "Ready-Button":

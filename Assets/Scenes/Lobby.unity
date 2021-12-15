@@ -2351,6 +2351,10 @@ PrefabInstance:
       value: 2342159728
       objectReference: {fileID: 0}
     - target: {fileID: 7129514368576730103, guid: af2b86e6ca1c8404a857e6bfa4294f3c, type: 3}
+      propertyPath: gameScene
+      value: Assets/Scenes/TestScene.unity
+      objectReference: {fileID: 0}
+    - target: {fileID: 7129514368576730103, guid: af2b86e6ca1c8404a857e6bfa4294f3c, type: 3}
       propertyPath: rdyButton
       value: 
       objectReference: {fileID: 1197550804}
@@ -2358,6 +2362,10 @@ PrefabInstance:
       propertyPath: rdyButtonText
       value: 
       objectReference: {fileID: 594583495}
+    - target: {fileID: 7129514368576730103, guid: af2b86e6ca1c8404a857e6bfa4294f3c, type: 3}
+      propertyPath: GamePlayerPrefab
+      value: 
+      objectReference: {fileID: 6272346181302961293, guid: a14d876ac00bdf6498e30b3e58b68fdf, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: af2b86e6ca1c8404a857e6bfa4294f3c, type: 3}
 --- !u!1001 &7946605864942981377

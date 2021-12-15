@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7086846156459211593}
   - component: {fileID: 7086846156459211639}
-  - component: {fileID: 8462299686178468946}
+  - component: {fileID: 7346916175116586392}
   m_Layer: 0
   m_Name: NetManager
   m_TagString: NetManager
@@ -58,7 +58,7 @@ MonoBehaviour:
   debugLog: 0
   statisticsGUI: 0
   statisticsLog: 0
---- !u!114 &8462299686178468946
+--- !u!114 &7346916175116586392
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -67,7 +67,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7086846156459211638}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8aab4c8111b7c411b9b92cf3dbc5bd4e, type: 3}
+  m_Script: {fileID: 11500000, guid: 1d8236d3922ab424d9f006270667d7a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   dontDestroyOnLoad: 1
@@ -84,4 +84,5 @@ MonoBehaviour:
   playerPrefab: {fileID: 9010945563893975427, guid: fc0476cecf5ea1047aeb1f4981bfc16f, type: 3}
   autoCreatePlayer: 1
   playerSpawnMethod: 0
-  spawnPrefabs: []
+  spawnPrefabs:
+  - {fileID: 6272346181302961293, guid: a14d876ac00bdf6498e30b3e58b68fdf, type: 3}
