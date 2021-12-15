@@ -6,11 +6,11 @@ using Mirror;
 
 public class WeaponManager : NetworkBehaviour
 {
-    public int currentWeaponIndex = 0;
+    public int currentWeaponIndex = 2; // Hand
     private int lastWeaponIndex = 0;
-    private int counter = 0;
     public List<GameObject> activeWeapons = new List<GameObject>();
     private ProcedualAnimationController procedualAnimationController;
+    private Weapon weaponData;
 
     [SerializeField] Shoot shoot;
     [SerializeField] GameObject gunHolster;
@@ -20,6 +20,8 @@ public class WeaponManager : NetworkBehaviour
     private void Awake()
     {
         procedualAnimationController = GetComponent<ProcedualAnimationController>();
+        currentWeaponIndex = 2; // Hand
+        weaponData = activeWeapons[currentWeaponIndex].GetComponent<Weapon>(); // Hand
     }
 
     void Update() {
@@ -45,13 +47,23 @@ public class WeaponManager : NetworkBehaviour
         }
     }
 
+    private void FixedUpdate() {
+        /*if(currentWeaponIndex != 2) {
+            if (weaponData.ToCloseToWall) {
+                procedualAnimationController.weaponToCloseToWall(true);
+            } else {
+                procedualAnimationController.weaponToCloseToWall(false);
+            }
+        }*/
+    }
+
     public bool switchWeapon(int direction) {
         // Get next active weapon index
         int nextActive = searchForNext(activeWeapons, lastWeaponIndex, direction);
         currentWeaponIndex = nextActive;
         procedualAnimationController.OnSwitchWeapon(activeWeapons[currentWeaponIndex]);
         shoot.setWeapon(activeWeapons[currentWeaponIndex]);
-        Weapon weaponData = activeWeapons[currentWeaponIndex].GetComponent<Weapon>();
+        weaponData = activeWeapons[currentWeaponIndex].GetComponent<Weapon>();
         procedualAnimationController.GunRightHandREF = weaponData.GunRightREF;
         procedualAnimationController.GunLeftHandREF = weaponData.GunLeftREF;
         // Play weapon switch animation
@@ -111,7 +123,7 @@ public class WeaponManager : NetworkBehaviour
                 hit.rigidbody.useGravity = false;
                 // Disable all Collider
                 SetAllColliderStatus(hit.transform.gameObject, false);
-                // Adding weapon to inventory slot
+                // Adding weapon to correct inventory slot
                 switch (hit.transform.GetComponent<Weapon>().WeaponKind.ToString()) { 
                     case "Rifle": putWeaponInArray(0, hit); break;
                     case "Pistole": putWeaponInArray(1, hit); break;

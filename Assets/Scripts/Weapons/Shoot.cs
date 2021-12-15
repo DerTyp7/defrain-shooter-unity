@@ -144,7 +144,7 @@ public class Shoot : NetworkBehaviour
     }
 
     public bool setWeapon(GameObject newWeapon) {
-        Debug.Log("Switch weapon to: " + newWeapon.transform.name);
+        //Debug.Log("Switch weapon to: " + newWeapon.transform.name);
         weapon = newWeapon.GetComponent<Weapon>();
         curAmmo = weapon.CurrentAmmunition;
         totalAmmo = weapon.TotalAmmunition;

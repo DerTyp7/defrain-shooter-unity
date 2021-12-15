@@ -259,6 +259,8 @@ public class ProcedualAnimationController : NetworkBehaviour
             {
                 if (positionMod[i] != null)
                     totalPosition += positionMod[i];
+                //if (i == 3)
+                    //Debug.Log(positionMod[i]);
             }
 
             /*-----Apply Gun Rotation-----*/
@@ -302,18 +304,21 @@ public class ProcedualAnimationController : NetworkBehaviour
         aimVal = gravityValue(aimVal, aimSpeed, 1, 0, isAiming);
         positionMod[2] = Vector3.Lerp(HoldPoint.transform.localPosition, AimPoint.transform.localPosition, Mathf.Pow(aimVal, 1.3f));
     }
-
+    public void weaponToCloseToWall(bool state) {
+        int lineNumber = (new System.Diagnostics.StackFrame(0, true)).GetFileLineNumber(); // Only for debugging
+        //Debug.Log("PAC.cs (function at line:" + (lineNumber-1) +  "): Weapon is to close to wall: Weapon should get upright or to normal position now depending on state!");
+    }
     public void changePistole(bool isSwitching) { // Moves hands doooown ;) and up again NOT WORKING
         //aimVal = gravityValue(aimVal, aimSpeed, 1, 0, isSwitching);
         Vector3 b = new Vector3(HoldPoint.transform.localPosition.x, 1, HoldPoint.transform.localPosition.z);
-        //Debug.Log("HALLO: " + positionMod[3]); 
+        //Debug.Log("PositionMod[3]: " + positionMod[3]); 
         positionMod[3] = Vector3.Lerp(HoldPoint.transform.localPosition, b, 0.5f);
-        //Debug.Log("HALLO: " + positionMod[3]);
+        //Debug.Log("PositionMod[3]: " + positionMod[3]);
     }
     public void changeRifle(bool isSwitching) { // Moves hands up and doooown again ;)
         //aimVal = gravityValue(aimVal, aimSpeed, 1, 0, isSwitching);
-        Vector3 b = new Vector3(HoldPoint.transform.localPosition.x, HoldPoint.transform.localPosition.y + 1, HoldPoint.transform.localPosition.z);
-        positionMod[3] = Vector3.Lerp(HoldPoint.transform.localPosition, b, 0);
+        //Vector3 b = new Vector3(HoldPoint.transform.localPosition.x, HoldPoint.transform.localPosition.y + 1, HoldPoint.transform.localPosition.z);
+        //positionMod[3] = Vector3.Lerp(HoldPoint.transform.localPosition, b, 0);
         //Debug.Log("HALLO2");
     }
 

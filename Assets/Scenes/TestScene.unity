@@ -760,7 +760,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9082234699677627348, guid: bd217f9f85ce78e46a925776562625e8, type: 3}
       propertyPath: explosionForce
-      value: 1000
+      value: 800
       objectReference: {fileID: 0}
     - target: {fileID: 9082234699677627348, guid: bd217f9f85ce78e46a925776562625e8, type: 3}
       propertyPath: explodeParticle
@@ -1727,7 +1727,8 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 7e832beb11d0b11499c8a1b3b4e52e78, type: 2}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 724190973095527901, guid: 6f5ccb6e55f1676429c170257dc7a411, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 6f5ccb6e55f1676429c170257dc7a411, type: 3}
 --- !u!1 &589432432 stripped
 GameObject:
@@ -2557,7 +2558,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9082234699677627348, guid: bd217f9f85ce78e46a925776562625e8, type: 3}
       propertyPath: explosionForce
-      value: 1000
+      value: 800
       objectReference: {fileID: 0}
     - target: {fileID: 9082234699677627348, guid: bd217f9f85ce78e46a925776562625e8, type: 3}
       propertyPath: explodeParticle
@@ -5690,7 +5691,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9082234699677627348, guid: bd217f9f85ce78e46a925776562625e8, type: 3}
       propertyPath: explosionForce
-      value: 1000
+      value: 800
       objectReference: {fileID: 0}
     - target: {fileID: 9082234699677627348, guid: bd217f9f85ce78e46a925776562625e8, type: 3}
       propertyPath: explodeParticle

@@ -19,6 +19,7 @@ public class Weapon : MonoBehaviour
     [SerializeField] int magazinSize = 0;
     [SerializeField] int totalAmmunition = 0;
     [SerializeField] GameObject bulletExit;
+    [SerializeField] bool toCloseToWall = false;
     [SerializeField] bool allowAction = true;
     [Header("")]
     [SerializeField] Animator weaponAnimator;
@@ -37,6 +38,7 @@ public class Weapon : MonoBehaviour
     public int MagazinSize { get => magazinSize; set => magazinSize = value; }
     public int TotalAmmunition { get => totalAmmunition; set => totalAmmunition = value; }
     public GameObject BulletExit { get => bulletExit; }
+    public bool ToCloseToWall { get => toCloseToWall; set => toCloseToWall = value; }
     public bool AllowAction { get => allowAction; set => allowAction = value; }
     public Animator WeaponAnimator { get => weaponAnimator; }
     public Transform GunLeftREF { get => gunLeftREF; }
@@ -47,5 +49,14 @@ public class Weapon : MonoBehaviour
     private void Start() {
         CurrentAmmunition = MagazinSize;
     }
+
+    // When to close to a wall, the player puts the weapon upright (Change size on weapon collider where isTrigger == true)
+    /*private void OnCollisionEnter(Collision collision) {
+        toCloseToWall = true;
+        Debug.Log(collision.transform.name);
+    }
+    private void OnCollisionExit(Collision collision) {
+        toCloseToWall = false;
+    }*/
 
 }
