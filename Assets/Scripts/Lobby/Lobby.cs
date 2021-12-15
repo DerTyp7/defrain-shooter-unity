@@ -19,21 +19,24 @@ using TMPro;
 public class Lobby : NetworkBehaviour
 {
     NetManagerScript networkManager;
-    List<Player> Players = new List<Player>();
+    public bool isLobbyScene;
+
+    //Player Lists
+    [SyncVar]
+    public List<Player> Players = new List<Player>();
+    [SyncVar]
+    public List<LobbyPlayer> LobbyPlayers = new List<LobbyPlayer>(); // All player a register themselves when they join (LobbyPlayer.cs)
+
+    //Scene switch to in-game
     [SerializeField] GameObject GamePlayerPrefab;
     [SerializeField] [Scene] string gameScene;
 
-    // Sync Vars
-    [SyncVar] //A list of all connected player
-    public List<LobbyPlayer> LobbyPlayers = new List<LobbyPlayer>(); // All player a register themselves when they join (LobbyPlayer.cs)
-
+    //Lobby Scene
     [SyncVar(hook = "ChangeTitle")]
     [SerializeField] string lobbyTitle;  // Title/Name of the Lobby; Can only be changed by the host, because of "AuthHost"
 
     [SyncVar]
     public bool allReady = false; // All players are ready?
-
-    public bool isLobbyScene;
 
     void Start()
     {
@@ -55,12 +58,12 @@ public class Lobby : NetworkBehaviour
         }
         else
         {
-            CheckPlayers();
+            CheckPlayers();// Checking the Player List
         }
     }
 
  
-    public void ChangeToPlayer(LobbyPlayer lobbyPlayer)
+    public void ChangeToPlayer(LobbyPlayer lobbyPlayer) //Convert/Change the LobbyPlayer to a Player
     {
         Debug.Log("Change");
         var conn = lobbyPlayer.connectionToClient;
@@ -73,14 +76,24 @@ public class Lobby : NetworkBehaviour
         NetworkServer.ReplacePlayerForConnection(conn, newPlayerInstance.gameObject);
         LobbyPlayers.Remove(lobbyPlayer);
         Players.Add(newPlayerInstance.gameObject.GetComponent<Player>());
-        //NetworkServer.Spawn(newPlayerInstance.gameObject, conn);
     }
 
-    public void StartGame() // initializes the In-Game Scene and converts LobbyPlayers to GamePlayers
-    {
-        Debug.Log("START");
-        // https://youtu.be/HZIzGLe-2f4?t=586
+    
 
+    void CheckPlayers()
+    {
+        foreach (Player player in Players)
+        {
+            if (player == null)
+            {
+                Players.Remove(player);
+            }
+        }
+    }
+
+    #region InLobbyScene
+    public void StartGame() // initializes the In-Game Scene
+    {
         networkManager.ServerChangeScene(gameScene);
     }
 
@@ -102,19 +115,15 @@ public class Lobby : NetworkBehaviour
         }
     }
 
-    public void RegisterLobbyPlayer(LobbyPlayer player) // Where a Player can register himself
+    public void RegisterLobbyPlayer(LobbyPlayer player) // Where a LobbyPlayer can register himself
     {
         LobbyPlayers.Add(player);
     }
-
-    public void RegisterPlayer(Player player) // Where a Player can register himself
+    public void UnregisterLobbyPlayer(LobbyPlayer player) // Where a LobbyPlayer can unregister himself
     {
-        Players.Add(player);
+        LobbyPlayers.Remove(player);
     }
 
-
-
-    #region checks
     /* Checks */
     bool CheckAllReady() // Checks if all players are ready
     {
@@ -140,19 +149,6 @@ public class Lobby : NetworkBehaviour
         }
     }
 
-    void CheckPlayers()
-    {
-        foreach (Player player in Players)
-        {
-            if (player == null)
-            {
-                Players.Remove(player);
-            }
-        }
-    }
-    #endregion
-
-    #region hooks
     /* HOOKS */
     void ChangeTitle(string oldTitle, string newTitle) // Changes the Title Object
     {

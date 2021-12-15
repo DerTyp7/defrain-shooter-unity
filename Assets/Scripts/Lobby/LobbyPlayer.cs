@@ -49,7 +49,7 @@ public class LobbyPlayer : NetworkBehaviour
         
     }
 
-    public void Start()
+    void Start()
     {
         if (isLocalPlayer && SceneManager.GetActiveScene().name == "Lobby") // Needs to check Scene for itself -> it starts faster than the lobby
         {
@@ -78,7 +78,6 @@ public class LobbyPlayer : NetworkBehaviour
             lobby.SetTitle(this, "Game Of\n" + username);
         }
     }
-
     void Update()
     {
         if (isLocalPlayer && lobby.isLobbyScene)
@@ -108,7 +107,7 @@ public class LobbyPlayer : NetworkBehaviour
             }
         }
     }
-
+    
     #region hooks
     /* HOOKS */
     public void DisplayPlayerName(string oldName, string newName) // Changes the text value of the Player-Username-GameObject

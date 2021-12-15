@@ -31,7 +31,6 @@ public class Player : NetworkBehaviour
     private void Start()
     {
         lobby = GameObject.Find("LobbyManager").GetComponent<Lobby>();
-        lobby.RegisterPlayer(this);
 
         /*GameManager = GameObject.Find("MatchController");
         gameMaster = GameManager.GetComponent<GameMaster>();

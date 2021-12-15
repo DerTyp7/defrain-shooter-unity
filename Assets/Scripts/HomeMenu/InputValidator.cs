@@ -34,6 +34,7 @@ public class InputValidator : MonoBehaviour
 
     private void ValueChangeCheck()
     {
+        //IP
         if(InputType == TypeOfInput.IP)
         {
             int counter = 0;
@@ -98,6 +99,7 @@ public class InputValidator : MonoBehaviour
            
         }
 
+        // USERNAME
         if (InputType == TypeOfInput.Username)
         {
             
