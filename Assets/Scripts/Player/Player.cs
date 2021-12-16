@@ -5,6 +5,7 @@ using Mirror;
 
 public class Player : NetworkBehaviour
 {
+    Lobby lobby;
     public bool isAlive = true;
     public Team team;
 
@@ -27,15 +28,16 @@ public class Player : NetworkBehaviour
 
     private void Start()
     {
-        
-        GameManager = GameObject.Find("MatchController");
+        lobby = GameObject.Find("LobbyManager").GetComponent<Lobby>();
+
+        /*GameManager = GameObject.Find("MatchController");
         gameMaster = GameManager.GetComponent<GameMaster>();
         if (isServer) 
         {
             health = defaultHp;
             gameMaster.RegisterPlayer(GetComponent<Player>());
             //respawnPos(gameMaster.RespawnRequest(this.gameObject, team.teamID));
-        }
+        }*/
         
 
     }
