@@ -1,22 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Mirror;
 
-public class TeamManager : NetworkBehaviour
+public class TeamManager : MonoBehaviour
 {
-    [SerializeField]
+
     public List<Team> Teams = new List<Team>();
     int teamIdCount = 0;
-
-    public void Start()
-    {
-        //Create Speactator Team with index 0
-        Team specTeam = new Team("Spectators", 0, -1);
-       
-        Teams.Add(specTeam);
-
-    }
 
     public Team AddTeam(string name = "Team") 
     {
