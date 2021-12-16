@@ -640,7 +640,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 732033708985862910, guid: bd217f9f85ce78e46a925776562625e8, type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 732033708985862910, guid: bd217f9f85ce78e46a925776562625e8, type: 3}
       propertyPath: m_LocalScale.x
@@ -1681,7 +1681,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 105f5600c1c7ff94d8ca2684d69fdf99, type: 2}
     - target: {fileID: 8797726366404580855, guid: 6f5ccb6e55f1676429c170257dc7a411, type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 8797726366404580855, guid: 6f5ccb6e55f1676429c170257dc7a411, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2438,7 +2438,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 732033708985862910, guid: bd217f9f85ce78e46a925776562625e8, type: 3}
       propertyPath: m_RootOrder
-      value: 11
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 732033708985862910, guid: bd217f9f85ce78e46a925776562625e8, type: 3}
       propertyPath: m_LocalScale.x
@@ -3196,7 +3196,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1035340512 stripped
 GameObject:
@@ -3716,7 +3716,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1333060837
 GameObject:
@@ -5571,7 +5571,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 732033708985862910, guid: bd217f9f85ce78e46a925776562625e8, type: 3}
       propertyPath: m_RootOrder
-      value: 12
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 732033708985862910, guid: bd217f9f85ce78e46a925776562625e8, type: 3}
       propertyPath: m_LocalScale.x
@@ -5977,7 +5977,7 @@ Transform:
   - {fileID: 1214958239}
   - {fileID: 1375350133}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1909595876 stripped
 GameObject:
@@ -6339,67 +6339,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2102916400}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1001 &1496806602367600913
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 3365311783543717598, guid: 5cd2e2b44dc49ae44b48fc76a1e09712, type: 3}
-      propertyPath: m_RootOrder
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 3365311783543717598, guid: 5cd2e2b44dc49ae44b48fc76a1e09712, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 3.4827125
-      objectReference: {fileID: 0}
-    - target: {fileID: 3365311783543717598, guid: 5cd2e2b44dc49ae44b48fc76a1e09712, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 2.271285
-      objectReference: {fileID: 0}
-    - target: {fileID: 3365311783543717598, guid: 5cd2e2b44dc49ae44b48fc76a1e09712, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 6.642964
-      objectReference: {fileID: 0}
-    - target: {fileID: 3365311783543717598, guid: 5cd2e2b44dc49ae44b48fc76a1e09712, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3365311783543717598, guid: 5cd2e2b44dc49ae44b48fc76a1e09712, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3365311783543717598, guid: 5cd2e2b44dc49ae44b48fc76a1e09712, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3365311783543717598, guid: 5cd2e2b44dc49ae44b48fc76a1e09712, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3365311783543717598, guid: 5cd2e2b44dc49ae44b48fc76a1e09712, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3365311783543717598, guid: 5cd2e2b44dc49ae44b48fc76a1e09712, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3365311783543717598, guid: 5cd2e2b44dc49ae44b48fc76a1e09712, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4561035003361653274, guid: 5cd2e2b44dc49ae44b48fc76a1e09712, type: 3}
-      propertyPath: m_Name
-      value: NetworkManager
-      objectReference: {fileID: 0}
-    - target: {fileID: 5784756223373504909, guid: 5cd2e2b44dc49ae44b48fc76a1e09712, type: 3}
-      propertyPath: playerPrefab
-      value: 
-      objectReference: {fileID: 6272346181302961293, guid: 2935eead9a075fd489d6a6dc273a5999, type: 3}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 5cd2e2b44dc49ae44b48fc76a1e09712, type: 3}
 --- !u!1001 &1541885955888442622
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6409,7 +6348,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3147283493333612388, guid: a8150377575143e4ba9ff51ba16504aa, type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3147283493333612388, guid: a8150377575143e4ba9ff51ba16504aa, type: 3}
       propertyPath: m_LocalPosition.x
@@ -6486,7 +6425,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2849906635484503724, guid: f0c1bca3291086d449266d9ed8942180, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2849906635484503724, guid: f0c1bca3291086d449266d9ed8942180, type: 3}
       propertyPath: m_LocalPosition.x
