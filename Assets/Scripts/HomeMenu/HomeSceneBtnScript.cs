@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
 
-public class HomeSceneBtnScript : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class HomeSceneBtnScript : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
     [SerializeField] Color onHoverColor;
     [SerializeField] Color onPressedColor;
@@ -73,4 +73,10 @@ public class HomeSceneBtnScript : MonoBehaviour, IPointerEnterHandler, IPointerE
     {
         isHovering = false;
     }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        isHovering = false;
+    }
+
 }

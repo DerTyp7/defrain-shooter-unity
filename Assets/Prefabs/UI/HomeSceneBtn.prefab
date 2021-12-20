@@ -348,7 +348,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e69f5ca575cd164aa893c1f9673916d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onHoverColor: {r: 1, g: 1, b: 1, a: 0.05882353}
+  onHoverColor: {r: 1, g: 1, b: 1, a: 0.019607844}
   onPressedColor: {r: 0, g: 0, b: 0, a: 0}
   hoverBgTransitionTime: 0.4
   exitBgTransitionTime: 0.2
