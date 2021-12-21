@@ -13,7 +13,8 @@ public class HomeSceneInputField : MonoBehaviour, IPointerClickHandler
     GameObject underline;
 
     bool isFocused = false;
-    bool transitionDone = false;
+    bool transitionStartDone = false;
+    bool transitionEndDone = false;
 
     void Start()
     {
@@ -29,10 +30,15 @@ public class HomeSceneInputField : MonoBehaviour, IPointerClickHandler
         if (!gameObject.GetComponent<TMP_InputField>().isFocused)
         {
             isFocused = false;
+
+            if (transitionEndDone)
+            {
+                transitionEndDone = false;
+            }
         }
 
 
-        if (isFocused)
+        if (!transitionStartDone)
         {
             marker.SetActive(true);
             focusText.SetActive(true);
@@ -49,5 +55,6 @@ public class HomeSceneInputField : MonoBehaviour, IPointerClickHandler
     public void OnPointerClick(PointerEventData eventData)
     {
         isFocused = true;
+        transitionStartDone = false;
     }
 }
