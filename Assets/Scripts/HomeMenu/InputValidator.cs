@@ -26,7 +26,16 @@ public class InputValidator : MonoBehaviour
 
         if(InputType == TypeOfInput.Port)
         {
+            inputField.contentType = TMP_InputField.ContentType.IntegerNumber;
             inputField.text = "7777";
+        }else if(InputType == TypeOfInput.Username)
+        {
+            inputField.contentType = TMP_InputField.ContentType.Alphanumeric;
+            inputField.characterLimit = 25;
+        }
+        else if(InputType== TypeOfInput.IP)
+        {
+            inputField.contentType = TMP_InputField.ContentType.Alphanumeric;
         }
 
         inputField.onValueChanged.AddListener(delegate { ValueChangeCheck(); });
@@ -84,54 +93,54 @@ public class InputValidator : MonoBehaviour
         
         if(InputType == TypeOfInput.Port)
         {//0  - 65535
-            foreach (char c in inputField.text)
+            
+            if (inputField.text[0] == '0')
             {
-                if (!Char.IsDigit(c))
-                {
-                    inputField.text = inputField.text.Remove(inputField.text.LastIndexOf(c));
-                }
-                else if (int.Parse(inputField.text) > 65535)
-                {
-                    inputField.text = "65535";
-                }
+                inputField.text = "";
             }
 
-           
+            if (int.Parse(inputField.text) > 65535)
+            {
+                inputField.text = "65535";
+            }
         }
+    }
+    
+    public string GetHelpText()
+    {
+        string helpText = "no help text defined";
 
-        // USERNAME
-        if (InputType == TypeOfInput.Username)
+        if(InputType == TypeOfInput.IP)
         {
-            
-            foreach (char c in inputField.text)
-            {
-                if (!Char.IsLetter(c))
-                {
-                    if (!Char.IsDigit(c))
-                    {
-                        inputField.text = inputField.text.Remove(inputField.text.LastIndexOf(c));
-                    }
-                }
-            }
-            
-
-            if(inputField.text.Length > 25)
-            {
-                string tempText = "";
-
-                
-                for(int c = 0; c < inputField.text.Length; c++)
-                {
-                    if(c < 25)
-                    {
-                        tempText += inputField.text[c];
-                    }
-                }
-
-                inputField.text = tempText;
-
-
-            }
+            helpText = "Only numeric IP-Addresses";
+        }else if(InputType == TypeOfInput.Username)
+        {
+            helpText = "Only Numbers and Letters";
+        }else if(InputType == TypeOfInput.Port)
+        {
+            helpText = "Only Numbers (max: 65535)";
         }
+
+        return helpText;
+    }
+
+    public string GetValidatorTypeName()
+    {
+        string name = "text";
+
+        if (InputType == TypeOfInput.IP)
+        {
+            name = "IP-Address";
+        }
+        else if (InputType == TypeOfInput.Username)
+        {
+            name = "Username";
+        }
+        else if (InputType == TypeOfInput.Port)
+        {
+            name = "Port";
+        }
+
+        return name;
     }
 }
