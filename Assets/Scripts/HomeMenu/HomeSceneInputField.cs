@@ -1,18 +1,53 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.EventSystems;
+using TMPro;
 
-public class HomeSceneInputField : MonoBehaviour
+public class HomeSceneInputField : MonoBehaviour, IPointerClickHandler
 {
-    // Start is called before the first frame update
+    GameObject marker;
+    GameObject focusText;
+    GameObject helpText;
+    GameObject underline;
+
+    bool isFocused = false;
+    bool transitionDone = false;
+
     void Start()
     {
+        marker = gameObject.transform.Find("Marker").gameObject;
+        focusText = gameObject.transform.Find("FocusText").gameObject;
+        helpText = gameObject.transform.Find("HelpText").gameObject;
+        underline = gameObject.transform.Find("Underline").gameObject;
         
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        if (!gameObject.GetComponent<TMP_InputField>().isFocused)
+        {
+            isFocused = false;
+        }
+
+
+        if (isFocused)
+        {
+            marker.SetActive(true);
+            focusText.SetActive(true);
+            helpText.SetActive(true);
+        }
+        else
+        {
+            marker.SetActive(false);
+            focusText.SetActive(false);
+            helpText.SetActive(false);
+        }
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        isFocused = true;
     }
 }
