@@ -35,7 +35,7 @@ public class InputValidator : MonoBehaviour
         }
         else if(InputType== TypeOfInput.IP)
         {
-            inputField.contentType = TMP_InputField.ContentType.Alphanumeric;
+            inputField.contentType = TMP_InputField.ContentType.Standard;
         }
 
         inputField.onValueChanged.AddListener(delegate { ValueChangeCheck(); });
