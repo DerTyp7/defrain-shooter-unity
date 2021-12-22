@@ -16,6 +16,8 @@ public class HomeSceneBackBtnScript : MonoBehaviour, IPointerEnterHandler, IPoin
     float exitingTimePassed = 0.0f;
 
     bool isHovering = false;
+    bool preventHoverOnStartUp = true;
+
 
     void Update()
     {
@@ -33,9 +35,9 @@ public class HomeSceneBackBtnScript : MonoBehaviour, IPointerEnterHandler, IPoin
             arrow1RectTransform.anchoredPosition = new Vector2(Mathf.Lerp(0, 15, hoveringTimePassed / hoverTransitionTime), arrow1RectTransform.anchoredPosition.y);
             arrow2RectTransform.anchoredPosition = new Vector2(Mathf.Lerp(10, 30, hoveringTimePassed / hoverTransitionTime), arrow2RectTransform.anchoredPosition.y);
 
-
+            preventHoverOnStartUp = false;
         }
-        else
+        else if(!preventHoverOnStartUp)
         {
             hoveringTimePassed = 0.0f;
             exitingTimePassed += Time.deltaTime;

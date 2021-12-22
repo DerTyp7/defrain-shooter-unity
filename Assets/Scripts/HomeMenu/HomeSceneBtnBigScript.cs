@@ -15,6 +15,7 @@ public class HomeSceneBtnBigScript : MonoBehaviour, IPointerEnterHandler, IPoint
     float exitingTimePassed = 0.0f;
 
     bool isHovering = false;
+    bool preventHoverOnStartUp = true;
 
     void Update()
     {
@@ -31,9 +32,9 @@ public class HomeSceneBtnBigScript : MonoBehaviour, IPointerEnterHandler, IPoint
                 
             backgroundRectTranform.sizeDelta = new Vector2(Mathf.Lerp(0, rectTransform.rect.width, hoveringTimePassed / hoverTransitionTime), rectTransform.rect.height);
 
-
+            preventHoverOnStartUp = false;
         }
-        else
+        else if(!preventHoverOnStartUp)
         {
             hoveringTimePassed = 0.0f;
             exitingTimePassed += Time.deltaTime;
