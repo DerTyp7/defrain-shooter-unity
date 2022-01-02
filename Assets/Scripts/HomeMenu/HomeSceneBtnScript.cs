@@ -67,6 +67,7 @@ public class HomeSceneBtnScript : MonoBehaviour, IPointerEnterHandler, IPointerE
     public void OnPointerEnter(PointerEventData eventData)
     {
         isHovering = true;
+        FindObjectOfType<AudioManager>().Play("test");
     }
 
     public void OnPointerExit(PointerEventData eventData)
