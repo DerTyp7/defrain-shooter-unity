@@ -8,13 +8,13 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/TestOfflineScene.unity
     guid: 20dba395f2cd9824288c340124ce9d6f
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/HomeScene.unity
     guid: 68e95db5b9c629148994409c6c7f814a
   - enabled: 1
     path: Assets/Scenes/TestScene.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/Lobby.unity
     guid: 33f487c6a0f179a4cb0f9cd2f080aca8
   m_configObjects: {}
