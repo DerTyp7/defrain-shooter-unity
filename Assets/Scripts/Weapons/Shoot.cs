@@ -62,7 +62,8 @@ public class Shoot : NetworkBehaviour
                     // Throw Grenade
                     throwGrenade(); 
                 } // If current weapon kind is kinfe
-                else { 
+                else {
+                    Debug.Log("Throw Hands");
                     // Throw hands (punch)
                 }       
             }
