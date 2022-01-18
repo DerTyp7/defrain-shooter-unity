@@ -523,7 +523,6 @@ GameObject:
   - component: {fileID: 4927034121091652283}
   - component: {fileID: 4927034121091652285}
   - component: {fileID: 4927034121091652284}
-  - component: {fileID: 4927034121091652286}
   m_Layer: 5
   m_Name: FocusText
   m_TagString: Untagged
@@ -648,32 +647,6 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!114 &4927034121091652286
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4927034121091652282}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3b73e2bcfc623314cbd9352da494f1f9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  markerHeight: 20
-  transitionStartTime: 0.1
-  transitionEndTime: 0.1
-  helpTextOriginColor: {r: 0, g: 0, b: 0, a: 0}
-  helpTextColor: {r: 0, g: 0, b: 0, a: 0}
-  focusTextOriginColor: {r: 0, g: 0, b: 0, a: 0}
-  focusTextColor: {r: 0, g: 0, b: 0, a: 0}
-  helpTextEndPosition: -25
-  focusTextEndPosition: 20
-  marker: {fileID: 0}
-  focusText: {fileID: 0}
-  helpText: {fileID: 0}
-  underline: {fileID: 0}
-  placeholder: {fileID: 0}
 --- !u!1 &4927034121194567461
 GameObject:
   m_ObjectHideFlags: 0

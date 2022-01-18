@@ -62,7 +62,7 @@ public class HomeSceneInputField : MonoBehaviour, IPointerClickHandler
     void Update()
     {
         //UnFocus && isActive
-        if (!inputField.isFocused)
+        if (inputField && !inputField.isFocused)
         {
             isFocused = false;
 
