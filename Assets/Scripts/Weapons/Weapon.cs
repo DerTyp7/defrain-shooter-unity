@@ -19,6 +19,7 @@ public class Weapon : Gun
     // Allow action of weapon (shoot, reload, aim, drop, ...)
     private bool allowAction;
 
+
     // Getter
     
 
