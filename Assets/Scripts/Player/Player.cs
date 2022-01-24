@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 
-public struct WeaponItem
+public struct Item
 {
     public string name;
     public int ammo;
@@ -31,7 +31,7 @@ public class Player : NetworkBehaviour
     private int kills;
     private int deaths;
 
-    public readonly SyncList<WeaponItem> weaponInventory = new SyncList<WeaponItem>();
+    public readonly SyncList<Item> inventory = new SyncList<Item>();
 
     private void Start()
     {
@@ -50,7 +50,7 @@ public class Player : NetworkBehaviour
 
             if (Input.GetKeyDown(KeyCode.O))
             {
-                CmdAddWeaponItem(new WeaponItem());
+                CmdAddWeaponItem(new Item());
             }
         }
     }
@@ -60,15 +60,21 @@ public class Player : NetworkBehaviour
         
     }
 
+
     #region INVENTORY
     
     [Command]
-    public void CmdAddWeaponItem(WeaponItem weaponItem)
+    public void CmdAddWeaponItem(Item item)
     {
-        weaponInventory.Add(weaponItem);
+        inventory.Add(item);
     }
 
     #endregion
+
+
+
+
+
     public void SetName(string oldName, string newName)
     {
         username = newName;
