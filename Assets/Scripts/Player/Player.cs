@@ -3,6 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 
+public struct WeaponItem
+{
+    public string name;
+    public int ammo;
+}
+
 public class Player : NetworkBehaviour
 {
     Lobby lobby;
@@ -25,21 +31,11 @@ public class Player : NetworkBehaviour
     private int kills;
     private int deaths;
 
+    public readonly SyncList<WeaponItem> weaponInventory = new SyncList<WeaponItem>();
 
     private void Start()
     {
         lobby = GameObject.Find("LobbyManager").GetComponent<Lobby>();
-
-        /*GameManager = GameObject.Find("MatchController");
-        gameMaster = GameManager.GetComponent<GameMaster>();
-        if (isServer) 
-        {
-            health = defaultHp;
-            gameMaster.RegisterPlayer(GetComponent<Player>());
-            //respawnPos(gameMaster.RespawnRequest(this.gameObject, team.teamID));
-        }*/
-        
-
     }
 
     private void Update()
@@ -51,6 +47,11 @@ public class Player : NetworkBehaviour
                 playerUIController.showHit();
                 
             }
+
+            if (Input.GetKeyDown(KeyCode.O))
+            {
+                CmdAddWeaponItem(new WeaponItem());
+            }
         }
     }
     public override void OnStartLocalPlayer()
@@ -59,6 +60,15 @@ public class Player : NetworkBehaviour
         
     }
 
+    #region INVENTORY
+    
+    [Command]
+    public void CmdAddWeaponItem(WeaponItem weaponItem)
+    {
+        weaponInventory.Add(weaponItem);
+    }
+
+    #endregion
     public void SetName(string oldName, string newName)
     {
         username = newName;
