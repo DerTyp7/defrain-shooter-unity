@@ -1,8 +1,6 @@
 # Defrain
 A round based 3D-Shooter with a simple realistic design.
 
-## It's not a city build and not a 2d game
-
 
 
 
